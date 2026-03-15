@@ -8,28 +8,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-/* ===== LOADER ===== */
-#loader {
-  position: fixed; inset: 0;
+/* ===== PRELOADER ===== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: #000;
-  z-index: 9998;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 2rem;
-  transition: opacity 0.8s, visibility 0.8s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
-#loader.gone { opacity: 0; visibility: hidden; }
-.ld-syms { display: flex; gap: 2rem; font-size: 3.5rem; color: var(--pink); }
-.ld-s { opacity: 0; animation: ldIn 0.5s forwards; filter: drop-shadow(0 0 12px var(--pink)); }
-.ld-s:nth-child(1){animation-delay:0.2s}
-.ld-s:nth-child(2){animation-delay:0.5s}
-.ld-s:nth-child(3){animation-delay:0.8s}
-@keyframes ldIn { to { opacity:1; transform: scale(1); } from { opacity:0; transform:scale(0.4); } }
-.ld-label { font-family:'Orbitron',monospace; font-size:0.6rem; letter-spacing:6px; color:#444; text-align:center; text-transform:uppercase; }
-.ld-label strong { display:block; font-size:1.2rem; color:var(--pink); letter-spacing:8px; margin-bottom:6px; font-weight:900; }
-.ld-bar { width:200px; height:2px; background:rgba(255,255,255,0.06); overflow:hidden; }
-.ld-fill { height:100%; background:var(--pink); width:0; animation:ldFill 2.8s ease forwards; }
-@keyframes ldFill { to { width:100%; } }
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.preloader-content {
+  text-align: center;
+  animation: preloaderPulse 2s ease-in-out infinite;
+}
+.preloader-logo {
+  max-width: 300px;
+  width: 80%;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 85, 0.5));
+}
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
 
 /* ===== HERO ===== */
 #hero {
@@ -40,13 +50,11 @@
   position: relative;
   overflow: hidden;
   padding: 5rem 2rem 4rem;
-  /* === YOUR BACKGROUND IMAGE - ZOOMED TO FILL SCREEN === */
   background-image: url('https://i.ibb.co/HLYb90TH/Untitled-design-12.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-/* Dark overlay to improve text readability */
 #hero::before {
   content: '';
   position: absolute;
@@ -54,12 +62,10 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
-/* Ensure content sits above the overlay */
 #hero > *:not(.h-grid):not(.h-radial):not(.h-scan):not(.h-sym) {
   position: relative;
   z-index: 2;
 }
-/* Keep the existing overlays above the background but below content */
 .h-grid, .h-radial, .h-scan, .h-sym {
   z-index: 1;
 }
@@ -151,13 +157,90 @@
 
 /* ===== ABOUT SECTION ===== */
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-top:2.5rem; }
+@media(max-width:768px){ .about-grid { grid-template-columns:1fr; gap:2.5rem; } }
+.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+.about-stats-col { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); }
 .stat-box { background:var(--card); padding:1.8rem; text-align:center; transition:background 0.3s; }
 .stat-box:hover { background:var(--card2); }
 .stat-n { font-family:'Orbitron',monospace; font-size:2.2rem; font-weight:900; color:var(--pink); text-shadow:0 0 20px rgba(255,0,85,0.35); display:block; line-height:1; }
 .stat-l { font-size:0.7rem; color:#aaa; letter-spacing:3px; text-transform:uppercase; margin-top:6px; display:block; }
 
-/* ===== MARQUEE FOR INFINITE SCROLLING IMAGES ===== */
+/* ===== PAST HIGHLIGHTS ===== */
+.highlights-section {
+  padding: 80px 0;
+  overflow: hidden;
+}
+.highlights-header {
+  text-align: center;
+  padding: 0 5% 50px;
+}
+.highlights-header .sec-eye {
+  justify-content: center;
+}
+.ph-track-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+}
+.ph-track-wrap::before,
+.ph-track-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ph-track-wrap::before { left: 0; background: linear-gradient(to right, #000, transparent); }
+.ph-track-wrap::after  { right: 0; background: linear-gradient(to left,  #000, transparent); }
+.ph-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+}
+.ph-track.row1 { animation: phScrollLeft  180s linear infinite; }  /* much slower */
+.ph-track.row2 { animation: phScrollRight 200s linear infinite; }  /* much slower */
+.ph-track-wrap:hover .ph-track { animation-play-state: paused; }
+@keyframes phScrollLeft  { 0%{transform:translateX(0)}    100%{transform:translateX(-50%)} }
+@keyframes phScrollRight { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)}    }
+
+/* ===== PHOTO ITEM — rounded corners ===== */
+.ph-item {
+  flex-shrink: 0;
+  width: 280px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px; /* curved corners */
+}
+.ph-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) brightness(0.8);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+.ph-item:hover img {
+  filter: grayscale(0%) brightness(1.05) saturate(1.2);
+  transform: scale(1.04);
+}
+.ph-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 12px; /* match item radius */
+  transition: border-color 0.4s;
+  pointer-events: none;
+}
+.ph-item:hover::after { border-color: rgba(255,0,85,0.6); }
+@media (max-width: 768px) {
+  .ph-item { width: 200px; height: 145px; }
+}
+
+/* ===== MARQUEE ===== */
 .marquee-wrapper {
   width: 100%;
   overflow: hidden;
@@ -189,14 +272,11 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* Pause animation on hover (optional) */
 .marquee-wrapper:hover .marquee-content {
   animation-play-state: paused;
 }
 @media (max-width: 768px) {
-  .marquee-content img {
-    height: 200px;
-  }
+  .marquee-content img { height: 200px; }
 }
 
 /* ===== EVENTS PREVIEW ===== */
@@ -285,7 +365,7 @@
   .about-grid,.rungta-grid{grid-template-columns:1fr;gap:2.5rem}
 }
 
-/* ===== NAVBAR LOGO IMAGE ===== */
+/* ===== NAVBAR LOGO ===== */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -304,7 +384,6 @@
     max-width: 160px;
   }
 }
-/* Hide the old text logo elements (they are removed from HTML, but just in case) */
 .nav-logo-sym, .nav-logo-text, .nav-logo-year {
   display: none;
 }
@@ -319,7 +398,6 @@
   background: rgba(0, 0, 0, 0.85) !important;
   backdrop-filter: blur(5px);
 }
-/* Ensure text and links remain visible */
 #navbar .nav-links a,
 #navbar .nav-cta {
   color: #fff;
@@ -328,29 +406,26 @@
 #navbar .nav-cta:hover {
   color: var(--pink);
 }
-/* Hamburger menu lines */
 #navbar .hamburger span {
   background: #fff;
 }
-/* Logo gets a subtle shadow to stand out on light backgrounds */
 .nav-logo-img {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
-/* ===== ADDITIONAL IMAGE HOVER ANIMATIONS ===== */
-/* For images inside arena cards (already have card hover, but we add image-specific hover) */
+/* ===== IMAGE HOVER ===== */
 .aci-photo img {
   transition: transform 0.4s, filter 0.3s, box-shadow 0.3s;
 }
 .aci-photo img:hover {
-  transform: scale(1.08) !important; /* Slightly stronger than card hover */
+  transform: scale(1.08) !important;
   filter: brightness(1.1) saturate(1.3);
   box-shadow: 0 0 25px rgba(255,0,85,0.7);
   z-index: 10;
   position: relative;
 }
 
-/* ===== SCROLL REVEAL ANIMATION FOR ALL TEXT SECTIONS ===== */
+/* ===== SCROLL REVEAL ===== */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -361,57 +436,41 @@
   transform: translateY(0);
 }
 
-/* ===== GLOBAL TEXT VISIBILITY FIX ===== */
+/* ===== GLOBAL ===== */
 body {
   background-color: #000;
   color: #fff;
 }
-.sec-desc {
-  color: #ccc !important;
-}
-.sec-desc strong, .sec-desc b {
-  color: #fff;
-}
-.aci-desc {
-  color: #bbb !important;
-}
-.faq-a {
-  color: #bbb !important;
-}
-.fc-sub {
-  color: #ccc !important;
-}
-.cd-label, .scroll-txt, .stat-l, .cd-l {
-  color: #bbb !important;
-}
-.rungta-quote {
-  color: #ddd !important;
-}
-.footer-about, .footer-col ul li a, .footer-copy, .footer-sym {
-  color: #aaa !important;
-}
-.footer-col ul li a:hover {
-  color: var(--pink) !important;
-}
+.sec-desc { color: #ccc !important; }
+.sec-desc strong, .sec-desc b { color: #fff; }
+.aci-desc { color: #bbb !important; }
+.faq-a { color: #bbb !important; }
+.fc-sub { color: #ccc !important; }
+.cd-label, .scroll-txt, .stat-l, .cd-l { color: #bbb !important; }
+.rungta-quote { color: #ddd !important; }
+.footer-about, .footer-col ul li a, .footer-copy, .footer-sym { color: #aaa !important; }
+.footer-col ul li a:hover { color: var(--pink) !important; }
 
-/* ===== FLOATING REGISTRATION NOTIFICATION ===== */
+/* ===== FLOATING NOTIFICATION ===== */
 #reg-notification {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border-left: 4px solid var(--pink);
   border-radius: 4px;
   padding: 12px 18px;
   box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
-  backdrop-filter: blur(5px);
   z-index: 9999;
   font-family: 'Rajdhani', sans-serif;
   color: #fff;
   max-width: 280px;
   transform: translateX(0);
   transition: transform 0.3s ease, opacity 0.3s ease;
-  border: 1px solid rgba(255,0,85,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--pink);
   pointer-events: none;
 }
 .notif-content {
@@ -449,7 +508,6 @@ body {
   0%,100% { opacity: 0.8; }
   50% { opacity: 1; text-shadow: 0 0 8px var(--pink); }
 }
-/* hide on small screens if needed */
 @media (max-width: 600px) {
   #reg-notification {
     max-width: 220px;
@@ -458,195 +516,8 @@ body {
     left: 10px;
   }
 }
-</style>
-</head>
-<body>
 
-<div id="cursor">○</div>
-
-<!-- LOADER -->
-<div id="loader">
-  <div class="ld-syms">
-    <span class="ld-s">○</span>
-    <span class="ld-s">△</span>
-    <span class="ld-s">□</span>
-  </div>
-  <div class="ld-label">
-    <strong>VYOM 2026</strong>
-    Player detected — Assigning ID...
-  </div>
-  <div class="ld-bar"><div class="ld-fill"></div></div>
-</div>
-
-<!-- MOBILE MENU -->
-<div id="mobile-menu">
-  <a href="index.html" class="active">Home</a>
-  <a href="events.html">Events</a>
-  <a href="sponsors.html">Sponsors</a>
-  <a href="brochure.html">Brochure</a>
-  <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a>
-  <a href="events.html">Register</a>
-</div>
-
-<!-- NAVBAR with your logo and transparent background -->
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">
-    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="sponsors.html">Sponsors</a></li>
-    <li><a href="brochure.html">Brochure</a></li>
-    <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:1rem;">
-    <a href="events.html" class="nav-cta">Register Now</a>
-    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-
-<!-- ===== HERO ===== -->
-<section id="hero">
-  <div class="h-grid"></div>
-  <div class="h-radial"></div>
-  <div class="h-scan"></div>
-  <div class="h-sym">○</div><div class="h-sym">△</div><div class="h-sym">□</div>
-  <div class="h-sym">○</div><div class="h-sym">△</div><div class="h-sym">□</div>
-
-  <!-- Particle canvas for background animation -->
-  <canvas id="particle-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
-
-  <div class="hero-content">
-    <div class="h-badge">Rungta University &nbsp;|&nbsp; Annual Fest 2026</div>
-    <h1 class="h-title">
-      <span class="t1">VYOM</span>
-      <span class="t2">2 0 2 6</span>
-    </h1>
-    <p class="h-sub">The Game Begins — Only the bold, creative &amp; relentless will survive</p>
-    <div class="h-btns">
-      <a href="events.html" class="btn-pink">Enter the Game</a>
-      <a href="events.html" class="btn-ghost">Explore Events</a>
-    </div>
-    <div class="cd-wrap">
-      <p class="cd-label">Game Starts In — 23-28 March 2026</p>
-      <div class="countdown">
-        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-d">--</span></div><span class="cd-l">Days</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-h">--</span></div><span class="cd-l">Hours</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-m">--</span></div><span class="cd-l">Minutes</span></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-s">--</span></div><span class="cd-l">Seconds</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll"><div class="scroll-bar"></div><span class="scroll-txt">Scroll Down</span></div>
-</section>
-
-<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
-
-<!-- ===== WHAT IS VYOM (LEFT: DESCRIPTION + STATS | RIGHT: INFINITE MARQUEE) ===== -->
-<section>
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="sec-eye">About the Game</p>
-        <h2 class="sec-title">What is <span class="accent">VYOM?</span></h2>
-        <p class="sec-desc">VYOM '26 is the annual flagship fest of Rungta University — a high-energy arena where innovation, talent, and raw competition collide.</p>
-        <p class="sec-desc" style="margin-top:1rem;">Inspired by the Squid Game universe, the campus transforms into a survival arena where participants must outthink, outperform, and outlast across 6 electrifying days — 23rd to 28th March 2026.</p>
-        <p class="sec-desc" style="margin-top:1rem;">Technical battles. Cultural showdowns. Sports arenas. E-Sports championships. Creative challenges. Startup simulations.</p>
-        <div class="stats-grid">
-          <div class="stat-box"><span class="stat-n">6</span><span class="stat-l">Game Days</span></div>
-          <div class="stat-box"><span class="stat-n">40+</span><span class="stat-l">Events</span></div>
-          <div class="stat-box"><span class="stat-n">8K+</span><span class="stat-l">Players</span></div>
-          <div class="stat-box"><span class="stat-n">1</span><span class="stat-l">Champion</span></div>
-        </div>
-      </div>
-      <div class="reveal marquee-wrapper">
-        <div class="marquee-content">
-          <!-- First set of images -->
-          <img src="https://i.ibb.co/KddbLLC/1.jpg" alt="VYOM Moments">
-          <img src="https://i.ibb.co/QwN2r0k/2.jpg" alt="VYOM Moments">
-          <img src="https://i.ibb.co/CDfYb5F/3.jpg" alt="VYOM Moments">
-
-          <!-- Duplicate set for seamless loop -->
-          <img src="https://i.ibb.co/KddbLLC/1.jpg" alt="VYOM Moments">
-          <img src="https://i.ibb.co/QwN2r0k/2.jpg" alt="VYOM Moments">
-          <img src="https://i.ibb.co/CDfYb5F/3.jpg" alt="VYOM Moments">
-        
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
-
-<!-- ===== STRANGE ENCOUNTERS (3 CARDS) ===== -->
-<section class="events-bg">
-  <div class="wrap">
-    <div class="reveal" style="text-align:center;">
-      <p class="sec-eye" style="justify-content:center;display:flex;">Select Your Arena</p>
-      <h2 class="sec-title" style="text-align:center;">Strange <span class="accent">Encounters</span></h2>
-      <p class="sec-desc" style="max-width:680px;margin:0 auto;">Step into the Squid Game Arena with our mysterious range of events — from mind-bending technical challenges to supernatural performances and thrilling sports competitions.</p>
-    </div>
-
-    <div class="arena-grid-3 reveal">
-      <!-- Technical Card -->
-      <a href="events.html?cat=technical" class="arena-card-img">
-        <div class="aci-photo">
-          <img src="https://i.ibb.co/Qvf8RbGZ/3.jpg" alt="Technical" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="aci-fallback" style="display:none">⚡</div>
-          <div class="aci-photo-title">Technical</div>
-        </div>
-        <div class="aci-body">
-          <div class="aci-desc">Coding competitions, hackathons, AI showcases, escape room, game dev jam and tech workshops.</div>
-          <div class="aci-cta">Explore Events</div>
-        </div>
-      </a>
-
-      <!-- Cultural Card -->
-      <a href="events.html?cat=cultural" class="arena-card-img">
-        <div class="aci-photo">
-          <img src="https://i.ibb.co/C3Xxrj8X/5.jpg" alt="Cultural" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="aci-fallback" style="display:none">🎭</div>
-          <div class="aci-photo-title">Cultural</div>
-        </div>
-        <div class="aci-body">
-          <div class="aci-desc">Music, dance, drama and art competitions — solo, group battles and face-off events on the open stage.</div>
-          <div class="aci-cta">Explore Events</div>
-        </div>
-      </a>
-
-      <!-- Sports Card -->
-      <a href="events.html?cat=sports" class="arena-card-img">
-        <div class="aci-photo">
-          <img src="https://i.ibb.co/Kz6Nv47C/4.jpg" alt="Sports" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="aci-fallback" style="display:none">🏆</div>
-          <div class="aci-photo-title">Sports</div>
-        </div>
-        <div class="aci-body">
-          <div class="aci-desc">Football, cricket, basketball, kabaddi and athletic competitions — team games and individual glory.</div>
-          <div class="aci-cta">Explore Events</div>
-        </div>
-      </a>
-    </div>
-
-    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
-      <a href="events.html" class="btn-pink">View All Events</a>
-    </div>
-  </div>
-</section>
-
-<!-- Required CSS for 3 cards -->
-<style>
 /* ===== 3 ARENA IMAGE CARDS ===== */
-.events-bg {
-  background: #0b0b0b;
-  border-top: 1px solid rgba(255,0,85,0.07);
-  border-bottom: 1px solid rgba(255,0,85,0.07);
-}
 .arena-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -656,7 +527,6 @@ body {
 @media (max-width: 700px) {
   .arena-grid-3 { grid-template-columns: 1fr; }
 }
-
 .arena-card-img {
   display: flex;
   flex-direction: column;
@@ -688,7 +558,6 @@ body {
   transform: scale(1.06);
   filter: brightness(1) saturate(1.2);
 }
-/* Image-specific hover (stronger when hover directly on image) */
 .aci-photo img:hover {
   transform: scale(1.08) !important;
   filter: brightness(1.1) saturate(1.3);
@@ -754,13 +623,183 @@ body {
   border-top: 1px solid rgba(255,0,85,0.12);
   transition: gap 0.2s;
 }
-.aci-cta::after {
-  content: '→';
-}
-.arena-card-img:hover .aci-cta {
-  gap: 14px;
-}
+.aci-cta::after { content: '→'; }
+.arena-card-img:hover .aci-cta { gap: 14px; }
 </style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="preloader-logo">
+  </div>
+</div>
+
+<div id="cursor">○</div>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <a href="index.html" class="active">Home</a>
+  <a href="events.html">Events</a>
+  <a href="sponsors.html">Sponsors</a>
+  <a href="brochure.html">Brochure</a>
+  <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a>
+  <a href="events.html">Register</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="sponsors.html">Sponsors</a></li>
+    <li><a href="brochure.html">Brochure</a></li>
+    <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="events.html" class="nav-cta">Register Now</a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="h-grid"></div>
+  <div class="h-radial"></div>
+  <div class="h-scan"></div>
+  <div class="h-sym">○</div><div class="h-sym">△</div><div class="h-sym">□</div>
+  <div class="h-sym">○</div><div class="h-sym">△</div><div class="h-sym">□</div>
+
+  <canvas id="particle-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
+
+  <div class="hero-content">
+    <div class="h-badge">Rungta University &nbsp;|&nbsp; Annual Fest 2026</div>
+    <h1 class="h-title">
+      <span class="t1">VYOM</span>
+      <span class="t2">2 0 2 6</span>
+    </h1>
+    <p class="h-sub">The Game Begins — Only the bold, creative &amp; relentless will survive</p>
+    <div class="h-btns">
+      <a href="events.html" class="btn-pink">Enter the Game</a>
+      <a href="events.html" class="btn-ghost">Explore Events</a>
+    </div>
+    <div class="cd-wrap">
+      <p class="cd-label">Game Starts In — 23-28 March 2026</p>
+      <div class="countdown">
+        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-d">--</span></div><span class="cd-l">Days</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-h">--</span></div><span class="cd-l">Hours</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-m">--</span></div><span class="cd-l">Minutes</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-s">--</span></div><span class="cd-l">Seconds</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div><span class="scroll-txt">Scroll Down</span></div>
+</section>
+
+<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
+
+<!-- ===== WHAT IS VYOM ===== -->
+<section>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="sec-eye">About the Game</p>
+        <h2 class="sec-title">What is <span class="accent">VYOM?</span></h2>
+        <p class="sec-desc">VYOM '26 is the annual flagship fest of Rungta University — a high-energy arena where innovation, talent, and raw competition collide.</p>
+        <p class="sec-desc" style="margin-top:1rem;">Inspired by the Squid Game universe, the campus transforms into a survival arena where participants must outthink, outperform, and outlast across 6 electrifying days — 23rd to 28th March 2026.</p>
+        <p class="sec-desc" style="margin-top:1rem;">Technical battles. Cultural showdowns. Sports arenas. E-Sports championships. Creative challenges. Startup simulations.</p>
+      </div>
+      <div class="reveal about-stats-col">
+        <div class="stat-box"><span class="stat-n">6</span><span class="stat-l">Game Days</span></div>
+        <div class="stat-box"><span class="stat-n">40+</span><span class="stat-l">Events</span></div>
+        <div class="stat-box"><span class="stat-n">8K+</span><span class="stat-l">Players</span></div>
+        <div class="stat-box"><span class="stat-n">1</span><span class="stat-l">Champion</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
+
+<!-- ===== PAST HIGHLIGHTS ===== -->
+<section class="highlights-section">
+  <div class="highlights-header reveal">
+    <p class="sec-eye">Relive The Magic</p>
+    <h2 class="sec-title">Past <span class="accent">Highlights</span></h2>
+    <p class="sec-desc">A glimpse into the energy and memories from previous editions.</p>
+  </div>
+
+  <!-- ROW 1: right → left (random images) -->
+  <div class="ph-track-wrap" id="past-highlights-row1"></div>
+
+  <!-- ROW 2: left → right (random images) -->
+  <div class="ph-track-wrap" id="past-highlights-row2"></div>
+</section>
+
+<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
+
+<!-- ===== STRANGE ENCOUNTERS (3 CARDS) ===== -->
+<section class="events-bg">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <p class="sec-eye" style="justify-content:center;display:flex;">Select Your Arena</p>
+      <h2 class="sec-title" style="text-align:center;">Strange <span class="accent">Encounters</span></h2>
+      <p class="sec-desc" style="max-width:680px;margin:0 auto;">Step into the Squid Game Arena with our mysterious range of events — from mind-bending technical challenges to supernatural performances and thrilling sports competitions.</p>
+    </div>
+
+    <div class="arena-grid-3 reveal">
+      <!-- Technical Card -->
+      <a href="events.html?cat=technical" class="arena-card-img">
+        <div class="aci-photo">
+          <img src="https://i.ibb.co/Qvf8RbGZ/3.jpg" alt="Technical" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="aci-fallback" style="display:none">⚡</div>
+          <div class="aci-photo-title">Technical</div>
+        </div>
+        <div class="aci-body">
+          <div class="aci-desc">Coding competitions, hackathons, AI showcases, escape room, game dev jam and tech workshops.</div>
+          <div class="aci-cta">Explore Events</div>
+        </div>
+      </a>
+
+      <!-- Cultural Card -->
+      <a href="events.html?cat=cultural" class="arena-card-img">
+        <div class="aci-photo">
+          <img src="https://i.ibb.co/C3Xxrj8X/5.jpg" alt="Cultural" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="aci-fallback" style="display:none">🎭</div>
+          <div class="aci-photo-title">Cultural</div>
+        </div>
+        <div class="aci-body">
+          <div class="aci-desc">Music, dance, drama and art competitions — solo, group battles and face-off events on the open stage.</div>
+          <div class="aci-cta">Explore Events</div>
+        </div>
+      </a>
+
+      <!-- Sports Card -->
+      <a href="events.html?cat=sports" class="arena-card-img">
+        <div class="aci-photo">
+          <img src="https://i.ibb.co/Kz6Nv47C/4.jpg" alt="Sports" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="aci-fallback" style="display:none">🏆</div>
+          <div class="aci-photo-title">Sports</div>
+        </div>
+        <div class="aci-body">
+          <div class="aci-desc">Football, cricket, basketball, kabaddi and athletic competitions — team games and individual glory.</div>
+          <div class="aci-cta">Explore Events</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="events.html" class="btn-pink">View All Events</a>
+    </div>
+  </div>
+</section>
 
 <!-- ===== ABOUT RUNGTA ===== -->
 <section class="events-bg">
@@ -841,7 +880,10 @@ body {
       <span class="footer-year">23 March — 28 March 2026</span>
       <p class="footer-about">The annual flagship fest of Rungta University — where innovation, talent, and competition collide in the ultimate Squid Game arena.</p>
       <div class="footer-social">
-        <a class="soc-btn" href="#" title="Instagram">IG</a>
+        <a class="soc-btn" href="https://instagram.com/vyom.rungta" target="_blank" rel="noopener" title="Instagram">📷</a>
+        <a class="soc-btn" href="https://youtube.com/@vyomrungta" target="_blank" rel="noopener" title="YouTube">▶️</a>
+        <a class="soc-btn" href="https://linkedin.com/company/vyom-rungta" target="_blank" rel="noopener" title="LinkedIn">🔗</a>
+        <a class="soc-btn" href="https://rungta.ac.in" target="_blank" rel="noopener" title="Official Website">🌐</a>
         <a class="soc-btn" href="mailto:vyom.s@rungta.ac.in" title="Email">@</a>
       </div>
     </div>
@@ -893,13 +935,20 @@ body {
 </div>
 
 <script>
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('gone'),3000));
+// Hide preloader
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('preloader').classList.add('hidden');
+  }, 2000);
+});
+
 const cursor=document.getElementById('cursor');
 const syms=['○','△','□'];let si=0;
 document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
 setInterval(()=>{si=(si+1)%3;cursor.textContent=syms[si];},2000);
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>80));
 function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
+
 function updateCD(){
   const d=new Date('2026-03-23T09:00:00')-new Date();
   if(d<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='00');return;}
@@ -909,16 +958,18 @@ function updateCD(){
   document.getElementById('cd-s').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');
 }
 updateCD();setInterval(updateCD,1000);
+
 function toggleFaq(q){
   const a=q.nextElementSibling,open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));
   document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open'));
   if(!open){a.classList.add('open');q.classList.add('open');}
 }
+
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// ===== PARTICLE ANIMATION FOR HERO BACKGROUND =====
+// ===== PARTICLE ANIMATION =====
 (function() {
   const canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
@@ -934,12 +985,12 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 3 + 1.5, // 1.5-4.5px
+        size: Math.random() * 3 + 1.5,
         speedX: (Math.random() - 0.5) * 0.3,
         speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.3 + 0.1, // 0.1-0.4
+        opacity: Math.random() * 0.3 + 0.1,
         symbol: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
-        useSymbol: Math.random() > 0.7, // 30% chance to draw a symbol instead of circle
+        useSymbol: Math.random() > 0.7,
       });
     }
   }
@@ -956,19 +1007,13 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     ctx.clearRect(0, 0, width, height);
     ctx.shadowColor = '#FF0055';
     ctx.shadowBlur = 8;
-
     particles.forEach(p => {
-      // move
       p.x += p.speedX;
       p.y += p.speedY;
-
-      // wrap around edges
       if (p.x < 0) p.x = width;
       if (p.x > width) p.x = 0;
       if (p.y < 0) p.y = height;
       if (p.y > height) p.y = 0;
-
-      // draw
       if (p.useSymbol) {
         ctx.font = `${p.size * 5}px 'Orbitron', monospace`;
         ctx.fillStyle = `rgba(255, 0, 85, ${p.opacity})`;
@@ -982,7 +1027,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
         ctx.fill();
       }
     });
-
     requestAnimationFrame(drawParticles);
   }
 
@@ -991,23 +1035,21 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   drawParticles();
 })();
 
-// ===== FLOATING NOTIFICATION (infinite Indian names) =====
+// ===== FLOATING NOTIFICATION =====
 (function() {
   const notifName = document.getElementById('notif-name');
   const notifEvent = document.getElementById('notif-event');
   const notifArena = document.getElementById('notif-arena');
 
-  // Indian names (male/female)
   const names = [
-    'Aarav', 'Vihaan', 'Vivaan', 'Ananya', 'Diya', 'Advik', 'Kabir', 'Reyansh',
-    'Aadhya', 'Anvi', 'Sai', 'Arjun', 'Ishaan', 'Myra', 'Aaradhya', 'Aryan',
-    'Rudra', 'Pari', 'Anaya', 'Krishna', 'Shaurya', 'Tanvi', 'Atharv', 'Kiaan',
-    'Ayaan', 'Pihu', 'Ira', 'Yash', 'Sia', 'Dhruv', 'Rohan', 'Meera',
-    'Riya', 'Kavya', 'Aditya', 'Nitya', 'Anushka', 'Ved', 'Jhanvi', 'Arnav',
-    'Anika', 'Sarthak', 'Aarna', 'Samarth', 'Aarush', 'Shreya', 'Vivaan', 'Prisha'
+    'Aarav','Vihaan','Vivaan','Ananya','Diya','Advik','Kabir','Reyansh',
+    'Aadhya','Anvi','Sai','Arjun','Ishaan','Myra','Aaradhya','Aryan',
+    'Rudra','Pari','Anaya','Krishna','Shaurya','Tanvi','Atharv','Kiaan',
+    'Ayaan','Pihu','Ira','Yash','Sia','Dhruv','Rohan','Meera',
+    'Riya','Kavya','Aditya','Nitya','Anushka','Ved','Jhanvi','Arnav',
+    'Anika','Sarthak','Aarna','Samarth','Aarush','Shreya','Vivaan','Prisha'
   ];
 
-  // Event list with arena and emoji (matching your EVENTS array)
   const events = [
     { name: 'Box Cricket', arena: 'Sports', emoji: '🏏' },
     { name: 'Carrom', arena: 'Sports', emoji: '🎯' },
@@ -1063,10 +1105,101 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     notifArena.innerHTML = `${event.emoji} ${event.name}`;
   }
 
-  // Update every 4 seconds
   setInterval(updateNotification, 4000);
-  // Set initial random message
   updateNotification();
+})();
+
+// ===== PAST HIGHLIGHTS RANDOM IMAGES (BOTH ROWS) =====
+(function() {
+  // All image URLs (59 total)
+  const allImages = [
+    "https://i.ibb.co/pj2xJ2C9/20250407-123057.jpg",
+    "https://i.ibb.co/zW0nsxBv/1000331782.jpg",
+    "https://i.ibb.co/JwhXsvt0/1000331784.jpg",
+    "https://i.ibb.co/JWZZPvN0/1000331792.jpg",
+    "https://i.ibb.co/KBgXptW/1000331798.jpg",
+    "https://i.ibb.co/G40MxyJH/IMG-1623.jpg",
+    "https://i.ibb.co/Y4XfGQx8/IMG-1668.jpg",
+    "https://i.ibb.co/3mnwnddb/IMG-1673.jpg",
+    "https://i.ibb.co/qMxcSPWy/IMG-1757.jpg",
+    "https://i.ibb.co/YTTm6nvb/IMG-1860.jpg",
+    "https://i.ibb.co/8DJ9hQr2/IMG-2043.jpg",
+    "https://i.ibb.co/20KBCkzT/IMG-2052.jpg",
+    "https://i.ibb.co/6cSprD4p/IMG-3150.jpg",
+    "https://i.ibb.co/c78CNWp/IMG-3136.jpg",
+    "https://i.ibb.co/CszVZrm9/IMG-3200-1.jpg",
+    "https://i.ibb.co/1ffx4WbF/IMG-20250407-WA0013.jpg",
+    "https://i.ibb.co/kgJS13Z3/IMG-20250407-WA0015.jpg",
+    "https://i.ibb.co/N66LPdmC/IMG-20250407-WA0017.jpg",
+    "https://i.ibb.co/Gf7Qzcrk/IMG-20250407-WA0020.jpg",
+    "https://i.ibb.co/rGLGdDLR/IMG20250326162130.jpg",
+    "https://i.ibb.co/1GhqPBFx/IMG20250407110821.jpg",
+    "https://i.ibb.co/fdPkbPZC/FVD-9623-1.jpg",
+    "https://i.ibb.co/JF23XgSr/FVD-9539.jpg",
+    "https://i.ibb.co/j9tvCdc7/FVD-9529.jpg",
+    "https://i.ibb.co/j9LbMW2N/FVD-9521.jpg",
+    "https://i.ibb.co/GvBTdT27/FVD-9351.jpg",
+    "https://i.ibb.co/pv77PLHm/FVD-9346.jpg",
+    "https://i.ibb.co/39NmvjNv/FVD-9345.jpg",
+    "https://i.ibb.co/hRS1LCrV/FVD-9343-1.jpg",
+    "https://i.ibb.co/Dfqkxps4/FVD-9344.jpg",
+    "https://i.ibb.co/Vpg2gTyS/DSC00040.jpg",
+    "https://i.ibb.co/MyhFsSN3/DSC00036.jpg",
+    "https://i.ibb.co/fz4NHByw/DSC00028.jpg",
+    "https://i.ibb.co/6J178SXm/DSC00014.jpg",
+    "https://i.ibb.co/NnWsQT9r/DSC-8619.jpg",
+    "https://i.ibb.co/DH7vKdT0/DSC-8552.jpg",
+    "https://i.ibb.co/MyPPt2pj/DSC-8551.jpg",
+    "https://i.ibb.co/m5gsnTb2/DSC-8545.jpg",
+    "https://i.ibb.co/LhqvqF89/DSC-8362.jpg",
+    "https://i.ibb.co/MkbfzdCy/DSC-8317.jpg",
+    "https://i.ibb.co/F42Zwd5N/DSC-8307.jpg",
+    "https://i.ibb.co/4wg9CGT9/DSC-8306.jpg",
+    "https://i.ibb.co/jkG28LCV/DSC-8298.jpg",
+    "https://i.ibb.co/MxY2CVDJ/DSC-8269.jpg",
+    "https://i.ibb.co/B5HgsNJD/DSC-8231-1.jpg",
+    "https://i.ibb.co/8Z9TdZY/DSC-8218.jpg",
+    "https://i.ibb.co/Gg42kLY/DSC-8141.jpg",
+    "https://i.ibb.co/JW5Z1fyC/DSC-8128.jpg",
+    "https://i.ibb.co/0jz0QSLx/DSC-8090.jpg",
+    "https://i.ibb.co/yn1sSh2q/DSC-8082.jpg",
+    "https://i.ibb.co/xS2VSYRX/DSC-8054.jpg",
+    "https://i.ibb.co/HfBTBn9Z/DSC-8036.jpg",
+    "https://i.ibb.co/vCFQyShh/DSC-8023.jpg",
+    "https://i.ibb.co/60MNTCKZ/DSC-7954.jpg",
+    "https://i.ibb.co/F4LY7YxP/DSC-7950.jpg",
+    "https://i.ibb.co/fzPz9xJk/DSC-7939.jpg",
+    "https://i.ibb.co/845hCYPP/DSC-7910.jpg",
+    "https://i.ibb.co/nGzwjHX/DSC-7902.jpg",
+    "https://i.ibb.co/bjhXhnJc/DSC-7817.jpg"
+  ];
+
+  // Shuffle function
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Generate HTML for a row (two copies for seamless loop)
+  function generateRowHTML(imageArray) {
+    const shuffled = shuffleArray([...imageArray]); // create a shuffled copy
+    // Double the array for seamless infinite scroll
+    const doubled = [...shuffled, ...shuffled];
+    return doubled.map(url => `<div class="ph-item"><img src="${url}" alt="VYOM Highlights" loading="lazy"></div>`).join('');
+  }
+
+  // Insert into rows
+  const row1Container = document.getElementById('past-highlights-row1');
+  const row2Container = document.getElementById('past-highlights-row2');
+  if (row1Container) {
+    row1Container.innerHTML = `<div class="ph-track row1">${generateRowHTML(allImages)}</div>`;
+  }
+  if (row2Container) {
+    row2Container.innerHTML = `<div class="ph-track row2">${generateRowHTML(allImages)}</div>`;
+  }
 })();
 </script>
 </body>
