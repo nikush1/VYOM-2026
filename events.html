@@ -8,6 +8,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
+/* ===== PRELOADER ===== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.preloader-content {
+  text-align: center;
+  animation: preloaderPulse 2s ease-in-out infinite;
+}
+.preloader-logo {
+  max-width: 300px;
+  width: 80%;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 85, 0.5));
+}
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
 /* ===== FILTER BAR ===== */
 .filter-bar {
   display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem;
@@ -221,24 +254,25 @@ body {
   border-color: var(--pink) !important;
 }
 
-/* ===== FLOATING REGISTRATION NOTIFICATION ===== */
+/* ===== FLOATING REGISTRATION NOTIFICATION (GLASSY STYLE) ===== */
 #reg-notification {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(20, 20, 20, 0.4); /* More transparent */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border-left: 4px solid var(--pink);
   border-radius: 4px;
   padding: 12px 18px;
   box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
-  backdrop-filter: blur(5px);
   z-index: 9999;
   font-family: 'Rajdhani', sans-serif;
   color: #fff;
   max-width: 280px;
   transform: translateX(0);
   transition: transform 0.3s ease, opacity 0.3s ease;
-  border: 1px solid rgba(255,0,85,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   pointer-events: none;
 }
 .notif-content {
@@ -287,6 +321,13 @@ body {
 </style>
 </head>
 <body>
+<!-- ===== PRELOADER ===== -->
+<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="preloader-logo">
+  </div>
+</div>
+
 <div id="cursor">○</div>
 <div id="mobile-menu">
   <a href="index.html">Home</a>
@@ -408,6 +449,15 @@ body {
 </div>
 
 <script>
+// Hide preloader after page load
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('preloader').classList.add('hidden');
+    // Also fade in main content if not already visible
+    document.getElementById('main-content').classList.add('visible');
+  }, 1500); // 1.5s delay for animation to be visible
+});
+
 const cursor=document.getElementById('cursor');
 const syms=['○','△','□'];let si=0;
 document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
