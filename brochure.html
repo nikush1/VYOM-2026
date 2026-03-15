@@ -41,10 +41,10 @@
 .bp-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,0,85,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,0,85,0.04) 1px,transparent 1px); background-size:40px 40px; }
 .bp-content { position:relative; z-index:1; text-align:center; padding:2rem; }
 .bp-logo { font-family:'Orbitron',monospace; font-size:4rem; font-weight:900; color:var(--pink); letter-spacing:6px; text-shadow:0 0 40px rgba(255,0,85,0.5); line-height:1; }
-.bp-year { font-family:'Orbitron',monospace; font-size:0.75rem; color:#444; letter-spacing:8px; margin-top:6px; }
+.bp-year { font-family:'Orbitron',monospace; font-size:0.75rem; color:#ccc; letter-spacing:8px; margin-top:6px; }
 .bp-syms { display:flex; gap:16px; justify-content:center; margin:2rem 0; font-size:2rem; color:rgba(255,0,85,0.3); }
-.bp-title { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; color:#888; letter-spacing:4px; margin-bottom:8px; }
-.bp-date { font-size:0.85rem; color:#444; letter-spacing:2px; }
+.bp-title { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; color:#ddd; letter-spacing:4px; margin-bottom:8px; }
+.bp-date { font-size:0.85rem; color:#aaa; letter-spacing:2px; }
 
 .brochure-info { display:flex; flex-direction:column; gap:2rem; }
 .br-item { background:var(--card); border:1px solid var(--border-w); padding:1.8rem; transition:border-color 0.3s; }
@@ -52,7 +52,7 @@
 .br-item-head { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
 .br-icon { width:40px;height:40px; border:1px solid rgba(255,0,85,0.25); display:flex;align-items:center;justify-content:center; font-size:1.2rem; flex-shrink:0; }
 .br-item-title { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:700; color:#fff; letter-spacing:2px; text-transform:uppercase; }
-.br-item-desc { font-size:0.9rem; color:#555; line-height:1.6; }
+.br-item-desc { font-size:0.9rem; color:#ccc; line-height:1.6; }
 
 .download-cta {
   background:var(--card); border:1px solid var(--border);
@@ -62,10 +62,33 @@
 .download-cta > * { position:relative; z-index:1; }
 .dc-title { font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; color:#fff; margin-bottom:0.8rem; }
 .dc-title span { color:var(--pink); }
-.dc-sub { font-size:0.95rem; color:#555; margin-bottom:2rem; line-height:1.6; max-width:500px; margin-left:auto;margin-right:auto; }
+.dc-sub { font-size:0.95rem; color:#ccc; margin-bottom:2rem; line-height:1.6; max-width:500px; margin-left:auto;margin-right:auto; }
 .dc-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-.file-info { display:flex; align-items:center; gap:8px; margin-top:1rem; justify-content:center; font-size:0.78rem; color:#333; letter-spacing:2px; }
+.file-info { display:flex; align-items:center; gap:8px; margin-top:1rem; justify-content:center; font-size:0.78rem; color:#aaa; letter-spacing:2px; }
 @media(max-width:768px){.brochure-layout{grid-template-columns:1fr;gap:2.5rem}}
+
+/* ===== GLOBAL TEXT VISIBILITY FIX (FOOTER AND ALL TEXT) ===== */
+body {
+  background-color: #000;
+  color: #fff;
+}
+.page-sub, p {
+  color: #ccc !important;
+}
+.footer-about, .footer-col ul li a, .footer-copy, .footer-sym {
+  color: #ddd !important;
+}
+.footer-col ul li a:hover {
+  color: var(--pink) !important;
+}
+.soc-btn {
+  color: #fff !important;
+  border-color: #444 !important;
+}
+.soc-btn:hover {
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+}
 </style>
 </head>
 <body>
@@ -73,12 +96,12 @@
 <div id="mobile-menu">
   <a href="index.html">Home</a><a href="events.html">Events</a><a href="sponsors.html">Sponsors</a>
   <a href="brochure.html" class="active">Brochure</a>
-  <a href="https://rungta.campusmall.in/">Merchandise</a><a href="register.html">Register</a>
+  <a href="https://rungta.campusmall.in/">Merchandise</a><a href="events.html">Register</a>
 </div>
 <nav id="navbar">
   <!-- UPDATED: Logo image replaces text -->
   <a href="index.html" class="nav-logo">
-    <img src="https://i.ibb.co/7xMHV71b/651529152-18097996783949045-6752410534880380238-n.jpg" alt="VYOM Logo" class="nav-logo-img">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="sponsors.html">Sponsors</a></li>
@@ -86,7 +109,7 @@
     <li><a href="https://rungta.campusmall.in/">Merchandise</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
-    <a href="register.html" class="nav-cta">Register Now</a>
+    <a href="events.html" class="nav-cta">Register Now</a>
     <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -152,7 +175,7 @@
 <footer>
   <div class="footer-grid">
     <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="mailto:vyom.s@rungta.ac.in">@</a></div></div>
-    <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="register.html">Register</a></li></ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="events.html">Register</a></li></ul></div>
     <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li></ul></div>
     <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:vyom.s@rungta.ac.in">vyom.s@rungta.ac.in</a></li><li><a href="tel:9798274596">Vipul: 9798274596</a></li></ul></div>
   </div>
