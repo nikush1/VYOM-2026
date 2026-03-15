@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — VYOM 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display:flex; gap:0; flex-wrap:wrap; margin-bottom:2.5rem;
+  background:#0c0c0c; border:1px solid rgba(255,0,85,0.15); overflow:hidden;
+}
+.fb {
+  flex:1; min-width:90px; background:transparent; color:#555; border:none;
+  border-right:1px solid rgba(255,0,85,0.1);
+  padding:14px 8px; font-family:'Orbitron',monospace; font-size:0.57rem;
+  font-weight:700; letter-spacing:2px; cursor:pointer; text-transform:uppercase; transition:all 0.2s;
+}
+.fb:last-child { border-right:none; }
+.fb:hover { color:#ccc; background:rgba(255,0,85,0.06); }
+.fb.active { background:var(--pink); color:#fff; }
+
+/* ===== SEARCH ===== */
+.search-wrap { position:relative; margin-bottom:2.5rem; }
+.s-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#444; font-size:1rem; }
+.s-input {
+  width:100%; background:#0c0c0c; border:1px solid rgba(255,255,255,0.07); color:#fff;
+  padding:16px 16px 16px 46px; font-family:'Rajdhani',sans-serif; font-size:1rem; font-weight:500; outline:none; transition:border-color 0.2s;
+}
+.s-input:focus { border-color:rgba(255,0,85,0.4); }
+.s-input::placeholder { color:#2a2a2a; }
+
+/* ===== EVENTS GRID ===== */
+.events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+
+/* ===== EVENT CARD ===== */
+.ev-card {
+  background:#0c0c0c; border:1px solid rgba(255,255,255,0.05);
+  overflow:hidden; cursor:pointer; transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  display:flex; flex-direction:column;
+}
+.ev-card:hover {
+  transform:translateY(-6px) scale(1.01);
+  border-color:rgba(255,0,85,0.5);
+  box-shadow:0 12px 24px rgba(255,0,85,0.2);
+}
+
+.ev-img { position:relative; height:200px; overflow:hidden; background:#111; }
+.ev-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s; }
+.ev-card:hover .ev-img img { transform:scale(1.07); }
+
+/* fallback */
+.ev-fallback {
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  font-size:5rem; background:linear-gradient(135deg,#0d0d0d 0%,#1a0a0f 60%,#200808 100%);
+  position:relative;
+}
+.ev-fallback::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at center,rgba(255,0,85,0.07) 0%,transparent 70%);
+}
+
+/* category badge */
+.ev-badge {
+  position:absolute; top:12px; right:12px;
+  background:var(--pink); color:#fff;
+  font-family:'Orbitron',monospace; font-size:0.52rem; font-weight:700;
+  letter-spacing:2px; padding:5px 12px; text-transform:uppercase; z-index:2;
+}
+
+/* image footer watermark */
+.ev-img-bar {
+  position:absolute; bottom:0;left:0;right:0; z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);
+  padding:28px 14px 8px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+}
+.ev-wm { font-family:'Orbitron',monospace; font-size:0.48rem; color:rgba(255,255,255,0.25); letter-spacing:2px; }
+.ev-vyom-tag { font-family:'Orbitron',monospace; font-size:0.75rem; font-weight:900; color:var(--pink); letter-spacing:4px; line-height:1; text-align:right; }
+.ev-vyom-tag span { display:block; font-size:0.48rem; color:rgba(255,0,85,0.55); font-weight:400; letter-spacing:2px; }
+
+/* card body */
+.ev-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+.ev-name { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; color:var(--pink); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.ev-tagline { font-size:0.88rem; color:#4a4a4a; line-height:1.6; margin-bottom:1.2rem; flex:1; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+.ev-metas { display:flex; flex-direction:column; gap:6px; margin-bottom:1.3rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.04); }
+.ev-meta-r { display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#4a4a4a; }
+.ev-meta-r .ico { font-size:0.9rem; flex-shrink:0; }
+
+.ev-view-btn {
+  width:100%; background:var(--pink); color:#fff; border:none;
+  padding:13px; font-family:'Orbitron',monospace; font-size:0.65rem; font-weight:700;
+  letter-spacing:3px; cursor:pointer; text-transform:uppercase; transition:background 0.2s;
+}
+.ev-view-btn:hover { background:#cc0044; }
+
+.no-results { grid-column:1/-1; text-align:center; padding:5rem 2rem; font-family:'Orbitron',monospace; font-size:0.72rem; color:#222; letter-spacing:3px; }
+
+/* ===== DETAIL PAGE ===== */
+#detail-page { display:none; padding-top:70px; }
+.d-back {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--pink); font-family:'Orbitron',monospace; font-size:0.62rem;
+  letter-spacing:2px; cursor:pointer; text-decoration:none;
+  padding:2rem 3rem 0.5rem; transition:gap 0.2s; text-transform:uppercase;
+}
+.d-back:hover { gap:14px; }
+.d-wrap { max-width:1200px; margin:0 auto; padding:1.5rem 3rem 5rem; }
+.d-title { font-family:'Orbitron',monospace; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:var(--pink); text-transform:uppercase; letter-spacing:3px; margin-bottom:1rem; line-height:1.1; }
+.d-cat-pill { display:inline-block; background:var(--pink); color:#fff; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; letter-spacing:3px; padding:6px 16px; text-transform:uppercase; margin-bottom:2rem; }
+
+.d-layout { display:grid; grid-template-columns:1fr 380px; gap:2.5rem; align-items:start; }
+
+/* image area */
+.d-img-box { border:1px solid rgba(255,0,85,0.15); overflow:hidden; background:#111; }
+.d-img-box img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.d-img-fallback { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; font-size:6rem; background:linear-gradient(135deg,#0d0d0d,#1a0a0f 60%,#200808); position:relative; }
+.d-img-fallback::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(255,0,85,0.08),transparent 70%); }
+.d-img-footer {
+  background:rgba(0,0,0,0.5); border-top:1px solid rgba(255,255,255,0.05);
+  padding:10px 16px; display:flex; align-items:center; justify-content:space-between;
+}
+.dif-l { font-family:'Orbitron',monospace; font-size:0.52rem; color:rgba(255,255,255,0.2); letter-spacing:3px; }
+.dif-r { display:flex; align-items:center; gap:14px; }
+.dif-rungta { font-family:'Orbitron',monospace; font-size:0.55rem; color:rgba(255,255,255,0.25); letter-spacing:1px; }
+.dif-vyom { font-family:'Orbitron',monospace; font-size:0.85rem; font-weight:900; color:var(--pink); letter-spacing:4px; line-height:1; }
+.dif-vyom small { display:block; font-size:0.46rem; color:rgba(255,0,85,0.45); font-weight:400; }
+
+/* desc + contact boxes */
+.d-block { background:rgba(255,0,85,0.04); border:1px solid rgba(255,0,85,0.12); padding:2rem; margin-top:1.5rem; }
+.d-block-title { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; color:var(--pink); letter-spacing:3px; text-transform:uppercase; margin-bottom:1rem; }
+.d-desc-txt { font-size:0.95rem; color:#666; line-height:1.85; }
+.contact-row { display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+.contact-row:last-child { border-bottom:none; }
+.c-name { font-weight:700; font-size:1rem; color:#aaa; }
+.c-phone { display:flex; align-items:center; gap:8px; font-family:'Orbitron',monospace; font-size:0.7rem; color:var(--pink); text-decoration:none; letter-spacing:1px; transition:color 0.2s; }
+.c-phone:hover { color:#fff; }
+
+/* sidebar */
+.d-sidebar { position:sticky; top:90px; }
+.d-info-card { background:rgba(180,0,40,0.1); border:1px solid rgba(255,0,85,0.25); padding:2rem; }
+.dic-title { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; color:var(--pink); letter-spacing:3px; text-transform:uppercase; margin-bottom:1.5rem; }
+.dic-r { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,0,85,0.1); }
+.dic-r:last-of-type { border-bottom:none; margin-bottom:1.5rem; }
+.dic-ico { font-size:1.2rem; flex-shrink:0; margin-top:2px; }
+.dic-lbl { font-family:'Orbitron',monospace; font-size:0.58rem; color:var(--pink); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+.dic-val { font-size:0.95rem; color:#ccc; font-weight:600; }
+.dic-btn {
+  width:100%; background:var(--pink); color:#fff; border:none;
+  padding:16px; font-family:'Orbitron',monospace; font-size:0.7rem; font-weight:700;
+  letter-spacing:3px; cursor:pointer; text-transform:uppercase; transition:background 0.2s;
+  animation:glowPulse 2.5s ease-in-out infinite;
+}
+.dic-btn:hover { background:#cc0044; }
+
+@media(max-width:900px){
+  .d-layout { grid-template-columns:1fr; }
+  .d-sidebar { position:static; }
+  .d-wrap { padding:1rem 1.5rem 4rem; }
+  .d-back { padding:1.5rem 1.5rem 0.5rem; }
+  .events-grid { grid-template-columns:1fr; }
+  .filter-bar { background:transparent; border:none; gap:6px; }
+  .fb { flex:none; border:1px solid rgba(255,0,85,0.18); }
+}
+
+/* ===== NAVBAR LOGO IMAGE ===== */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.nav-logo-img {
+  height: 55px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .nav-logo-img {
+    height: 45px;
+    max-width: 160px;
+  }
+}
+/* Hide the old text logo elements (they are removed from HTML, but just in case) */
+.nav-logo-sym, .nav-logo-text, .nav-logo-year {
+  display: none;
+}
+
+/* ===== PAGE LOAD ANIMATION ===== */
+#main-content {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+#main-content.visible {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<div id="cursor">○</div>
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="events.html" class="active">Events</a>
+  <a href="sponsors.html">Sponsors</a>
+  <a href="brochure.html">Brochure</a>
+  <a href="https://rungta.campusmall.in/">Merchandise</a>
+  <a href="register.html">Register</a>
+</div>
+<nav id="navbar">
+  <!-- UPDATED: Logo image replaces text -->
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.ibb.co/7xMHV71b/651529152-18097996783949045-6752410534880380238-n.jpg" alt="VYOM Logo" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="sponsors.html">Sponsors</a></li>
+    <li><a href="brochure.html">Brochure</a></li>
+    <li><a href="https://rungta.campusmall.in/" target="_blank">Merchandise</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="register.html" class="nav-cta">Register Now</a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Main content wrapper for fade-in animation -->
+<div id="main-content">
+  <!-- ===== EVENTS LIST ===== -->
+  <div id="list-page">
+    <div class="page-header">
+      <div class="page-header-bg"></div><div class="page-header-grid"></div>
+      <div class="page-tag">All Events &amp; Challenges</div>
+      <h1 class="page-title">Events <span>&amp; Challenges</span></h1>
+      <p class="page-sub">Embark on an adventure through our diverse range of events. From technical challenges to cultural performances and thrilling sports competitions.</p>
+    </div>
+    <section>
+      <div class="wrap">
+        <div class="filter-bar" id="filter-bar">
+          <button class="fb active" onclick="filterEv('all',this)">All</button>
+          <button class="fb" onclick="filterEv('technical',this)">Technical</button>
+          <button class="fb" onclick="filterEv('cultural',this)">Cultural</button>
+          <button class="fb" onclick="filterEv('sports',this)">Sports</button>
+          <button class="fb" onclick="filterEv('esports',this)">E-Sports</button>
+          <button class="fb" onclick="filterEv('fun',this)">Fun Events</button>
+          <button class="fb" onclick="filterEv('creative',this)">Other</button>
+        </div>
+        <div class="search-wrap">
+          <span class="s-icon">🔍</span>
+          <input type="text" class="s-input" id="s-input" placeholder="Search events..." oninput="searchEv(this.value)">
+        </div>
+        <div class="events-grid" id="ev-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== EVENT DETAIL ===== -->
+  <div id="detail-page">
+    <a class="d-back" onclick="showList()">← Back to Events</a>
+    <div class="d-wrap">
+      <div class="d-title" id="d-title"></div>
+      <div class="d-cat-pill" id="d-cat"></div>
+      <div class="d-layout">
+        <div>
+          <div class="d-img-box" id="d-img-box"></div>
+          <div class="d-img-footer">
+            <span class="dif-l">vyom.rungta.ac.in</span>
+            <div class="dif-r">
+              <span class="dif-rungta">RUNGTA EDUCATIONAL FOUNDATION</span>
+              <div class="dif-vyom">VYOM<small>2026</small></div>
+            </div>
+          </div>
+          <div class="d-block">
+            <div class="d-block-title">Event Description</div>
+            <div class="d-desc-txt" id="d-desc"></div>
+          </div>
+          <div class="d-block">
+            <div class="d-block-title">Contact Information</div>
+            <div class="contact-row"><span class="c-name">Vipul</span><a href="tel:9798274596" class="c-phone">📞 9798274596</a></div>
+            <div class="contact-row"><span class="c-name">Praveen</span><a href="tel:8253075416" class="c-phone">📞 8253075416</a></div>
+            <div class="contact-row"><span class="c-name">Aditya Raj</span><a href="tel:9234578690" class="c-phone">📞 9234578690</a></div>
+          </div>
+        </div>
+        <div class="d-sidebar">
+          <div class="d-info-card">
+            <div class="dic-title">Event Details</div>
+            <div class="dic-r"><span class="dic-ico">📅</span><div><div class="dic-lbl">Date</div><div class="dic-val" id="d-date"></div></div></div>
+            <div class="dic-r"><span class="dic-ico">📍</span><div><div class="dic-lbl">Venue</div><div class="dic-val" id="d-venue"></div></div></div>
+            <div class="dic-r"><span class="dic-ico">👥</span><div><div class="dic-lbl">Team Size</div><div class="dic-val" id="d-team"></div></div></div>
+            <!-- Register Now button will get its URL dynamically from showDetail() -->
+            <button class="dic-btn" id="d-register-btn">Register Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="site-footer">
+    <div class="footer-grid">
+      <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation — the ultimate Squid Game arena.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="mailto:vyom.s@rungta.ac.in">@</a></div></div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="register.html">Register</a></li></ul></div>
+      <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=fun">Fun Events</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:vyom.s@rungta.ac.in">vyom.s@rungta.ac.in</a></li><li><a href="tel:9798274596">Vipul: 9798274596</a></li><li><a href="tel:8253075416">Praveen: 8253075416</a></li><li><a href="tel:9234578690">Aditya: 9234578690</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 VYOM'26 — Rungta Educational Foundation. All rights reserved.</span><span class="footer-sym">○ △ □</span></div>
+  </footer>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor');
+const syms=['○','△','□'];let si=0;
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
+setInterval(()=>{si=(si+1)%3;cursor.textContent=syms[si];},2000);
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>80));
+function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
+
+const EVENTS=[
+  {id:'box-cricket',cat:'sports',catLabel:'Sports',icon:'🏏',name:'Box Cricket',img:'https://i.ibb.co/FbMfX5gx/8.jpg',tagline:'Get ready to hit the ground running at the Vyom \'26 Box Cricket Competition! Lace up your shoes, grab your bat, and join us for an action-packed day of thrilling box cricket matches.',desc:'🏏 Vyom \'26 Box Cricket Competition — Registration Form 🏆\n\nGet ready to hit the ground running at the Vyom \'26 Box Cricket Competition! Lace up your shoes, grab your bat, and join us for an action-packed day of thrilling box cricket matches.\n\nShow off your skills, strategize with your team, and experience the excitement of this offline sporting event. Don\'t miss out on the chance to be part of this unforgettable day of competition and camaraderie!',date:'March 26, 2026',venue:'In front of Central Library',team:'8 Members', formUrl:'#'},
+  {id:'carrom',cat:'sports',catLabel:'Sports',icon:'🎯',name:'Carrom',img:'https://i.ibb.co/gFmGsk4W/6.jpg',tagline:'Test your precision and skills in the Carrom Tournament at Vyom \'26! Compete in an exciting battle of strategy and accuracy.',desc:'🎯 Vyom \'26 Carrom Tournament\n\nTest your precision and skills in the Carrom Tournament at Vyom \'26! Compete in an exciting battle of strategy and accuracy.\n\nShow your mastery of the board and claim victory against the best players at Rungta!',date:'April 7, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'chess',cat:'sports',catLabel:'Sports',icon:'♟️',name:'Chess',img:'https://i.ibb.co/JWvqDgtY/7.jpg',tagline:'Showcase your intellect and strategic thinking in the ultimate battle of wits at Vyom \'26!',desc:'♟️ Vyom \'26 Chess Championship\n\nShowcase your intellect and strategic thinking in the ultimate battle of wits at Vyom \'26! Compete against the best minds and claim victory.\n\nThis is your chance to prove that you are the grandmaster of Rungta!',date:'April 7, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'volleyball',cat:'sports',catLabel:'Sports',icon:'🏐',name:'Volleyball',img:'https://i.ibb.co/tT8S6HQR/9.jpg',tagline:'A high-energy game awaits you at Vyom \'26! Gather your team and take on the challenge.',desc:'🏐 Vyom \'26 Volleyball Tournament!\n\nA high-energy game awaits you at Vyom \'26! Gather your team and take on the challenge.\n\nSpike, block, and dive your way to glory. Both boys and girls are welcome to participate!',date:'April 5, 2026',venue:'Main Volleyball Court',team:'Boys & Girls', formUrl:'#'},
+  {id:'football',cat:'sports',catLabel:'Sports',icon:'⚽',name:'7-a-Side Football',img:'https://i.ibb.co/gbsn2BNV/Brown-and-Light-Brown-Circle-Framed-Instagram-Profile-Picture-You-Tube-Thumbnail.jpg',tagline:'Showcase your footwork and strategy in the 7-a-Side Football Tournament!',desc:'⚽ Vyom \'26 Football Tournament\n\nShowcase your footwork and strategy in the 7-a-Side Football Tournament! Gather your squad of 7 and take the field.\n\nThis event is open to boys only. Form your team, pick your positions, and compete for the trophy!',date:'April 5, 2026',venue:'Football Ground',team:'7 Members (Boys)', formUrl:'#'},
+  {id:'basketball',cat:'sports',catLabel:'Sports',icon:'🏀',name:'Basketball',img:'https://i.ibb.co/Y7pcZ8c6/10.jpg',tagline:'Get ready to dribble, shoot, and score in the Vyom \'26 Basketball Championship!',desc:'🏀 Vyom \'26 Basketball Championship!\n\nGet ready to dribble, shoot, and score in the Vyom \'26 Basketball Tournament. Show your moves on the court and lead your team to victory.\n\nOpen for both boys and girls. Come and dominate the court!',date:'April 5, 2026',venue:'Basketball Court',team:'Boys & Girls', formUrl:'#'},
+  {id:'athletics',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Adventures Sports',img:'https://i.ibb.co/xtbRJ0Xd/33.jpg',tagline:'Push your limits and race towards victory in the Athletics event at Vyom \'26!',desc:'🏃 Vyom \'26 Athletics Meet\n\nPush your limits and race towards victory in the Athletics event at Vyom \'26! Compete in track and field events that test speed, endurance, and strength.\n\nIndividual participation — give it your all and bring home the gold!',date:'April 7–8, 2026',venue:'Athletics Track',team:'Individual', formUrl:'#'},
+  {id:'kabaddi',cat:'sports',catLabel:'Sports',icon:'🤼',name:'Kabaddi',img:'https://i.ibb.co/N62q1D9r/14.jpg',tagline:'Show your strength, agility, and teamwork in the Vyom \'26 Kabaddi challenge!',desc:'🤼 Vyom \'26 Kabaddi Tournament\n\nShow your strength, agility, and teamwork in the Vyom \'26 Kabaddi challenge! This traditional sport demands courage, quick reflexes, and excellent team coordination.\n\nAssemble your team of 7 and prove your dominance on the Kabaddi court!',date:'April 7–8, 2026',venue:'Kabaddi Court',team:'7 Players', formUrl:'#'},
+  {id:'kho-kho',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Kho Kho',img:'',tagline:'Show your strategy and speed in the Vyom \'26 Kho Kho championship!',desc:'Vyom \'26 Kho Kho Championship\n\nShow your strategy and speed in the Vyom \'26 Kho Kho championship! This fast-paced traditional sport requires excellent teamwork, speed, and strategy.\n\nForm your standard team and compete for the ultimate Kho Kho trophy!',date:'April 5, 2026',venue:'Sports Ground',team:'Standard Team', formUrl:'#'},
+  {id:'table-tennis',cat:'sports',catLabel:'Sports',icon:'🏓',name:'Table Tennis',img:'',tagline:'Showcase your precision and reflexes in the Vyom \'26 Table Tennis tournament!',desc:'Vyom \'26 Table Tennis Tournament\n\nShowcase your precision and reflexes in the Vyom \'26 Table Tennis tournament! This individual event tests hand-eye coordination and strategy.\n\nSingle player format — the best will advance to the finals!',date:'April 5, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'shotput',cat:'sports',catLabel:'Sports',icon:'🏋️',name:'Shotput',img:'',tagline:'Test your strength and technique in the Vyom \'26 Shotput competition!',desc:'Vyom \'26 Shotput Competition\n\nTest your strength and technique in the Vyom \'26 Shotput competition! This field event rewards power, form, and precision.\n\nIndividual competition — give your best throw and claim your spot at the top!',date:'April 7–8, 2026',venue:'Ground',team:'Single Player', formUrl:'#'},
+  {id:'arm-wrestling',cat:'sports',catLabel:'Sports',icon:'💪',name:'Arm Wrestling',img:'https://i.ibb.co/7tjGx6VW/29.jpg',tagline:'Challenge your opponents in a test of pure strength at the Arm Wrestling championship!',desc:'Vyom \'26 Arm Wrestling Championship\n\nChallenge your opponents in a test of strength at the Vyom \'26 Arm Wrestling championship! One-on-one battles of pure power and technique.\n\nThis individual event is open to all. Show your strength and dominate the table!',date:'April 7–8, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'bgmi',cat:'esports',catLabel:'E-Sports',icon:'🎮',name:'BGMI',img:'https://i.ibb.co/bM7TqF66/Brown-and-Light-Brown-Circle-Framed-Instagram-Profile-Picture-You-Tube-Thumbnail-1.jpg',tagline:'Compete in Battlegrounds Mobile India at Vyom \'26! Only one squad survives.',desc:'🎮 Vyom \'26 BGMI Tournament\n\nCompete in Battlegrounds Mobile India at Vyom \'26! Bring your own equipment and showcase your battle royale skills.\n\nForm your squad, land strategically, loot efficiently, and eliminate every enemy. Only one squad survives in this high-stakes championship!',date:'April 7–8, 2026',venue:'SB-03',team:'Squad (Own device)', formUrl:'#'},
+  {id:'valorant',cat:'esports',catLabel:'E-Sports',icon:'🎯',name:'Valorant',img:'https://i.ibb.co/rBXM3PP/21.jpg',tagline:'Show your tactical shooter skills in the Vyom \'26 Valorant tournament!',desc:'Vyom \'26 Valorant Tournament\n\nShow your tactical shooter skills in the Vyom \'26 Valorant tournament! Choose your agents, coordinate with your team, and outplay opponents.\n\nBring your own equipment. The best tactical minds will rise to the top!',date:'April 7–8, 2026',venue:'GA-17',team:'Team (Own device)', formUrl:'#'},
+  {id:'free-fire',cat:'esports',catLabel:'E-Sports',icon:'🔥',name:'Free Fire',img:'https://i.ibb.co/Qjdw2sbr/23.jpg',tagline:'Battle it out in the Vyom \'26 Free Fire tournament! Last squad wins.',desc:'🔥 Vyom \'26 Free Fire Tournament\n\nBattle it out in the Vyom \'26 Free Fire tournament! Form a squad of 4 and fight for survival.\n\nBring your own equipment. Last squad standing wins it all in this action-packed championship!',date:'April 7–8, 2026',venue:'SB-02',team:'4 Members', formUrl:'#'},
+  {id:'hopscotch',cat:'fun',catLabel:'Fun Events',icon:'🎪',name:'Hopscotch',img:'https://i.ibb.co/27w79K8X/28.jpg',tagline:'Experience the childhood fun with a twist at Vyom \'26 Hopscotch challenge!',desc:'Vyom \'26 Hopscotch Challenge (With Bricks)\n\nExperience the childhood fun with a twist at Vyom \'26 Hopscotch challenge! This fun event uses bricks instead of the traditional grid.\n\nNavigate the course quickly and accurately — the fastest player wins!',date:'April 7–8, 2026',venue:'Recreation Area',team:'Single Player', formUrl:'#'},
+  {id:'tug-of-war',cat:'fun',catLabel:'Fun Events',icon:'🪢',name:'Tug of War',img:'https://i.ibb.co/0jsFRNcC/12.jpg',tagline:'Gather your team for an exciting test of strength in the Tug of War!',desc:'Vyom \'26 Tug of War\n\nGather your team for an exciting test of strength in the Vyom \'26 Tug of War! This classic team event tests collective power, coordination, and strategy.\n\nPull your way to victory — the strongest team wins!',date:'April 7–8, 2026',venue:'B-Block',team:'Team Event', formUrl:'#'},
+  {id:'pushup',cat:'fun',catLabel:'Fun Events',icon:'💪',name:'Pushup Competition',img:'https://i.ibb.co/3mQpbcqN/30.jpg',tagline:'Test your endurance in the Vyom \'26 Pushup Competition! How many can you do?',desc:'Vyom \'26 Pushup Competition\n\nTest your endurance in the Vyom \'26 Pushup Competition! This individual event tests muscular endurance and willpower.\n\nThe player who does the most proper pushups wins the challenge!',date:'April 7–8, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'bar-hanging',cat:'fun',catLabel:'Fun Events',icon:'🏋️',name:'Bar Hanging Competition',img:'https://i.ibb.co/DDhnmmGQ/31.jpg',tagline:'How long can you hang? Challenge your grip strength at Vyom \'26!',desc:'Vyom \'26 Bar Hanging Competition\n\nHow long can you hang? Challenge your grip strength at the Vyom \'26 Bar Hanging Competition! This event tests grip endurance and mental fortitude.\n\nHold on as long as you can — the last one hanging wins!',date:'April 7–8, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'treasure-hunt',cat:'fun',catLabel:'Fun Events',icon:'🗺️',name:'Treasure Hunt',img:'https://i.ibb.co/HTNmfChJ/20.jpg',tagline:'Put your problem-solving skills to the test in the exciting Treasure Hunt!',desc:'Vyom \'26 Treasure Hunt\n\nPut your problem-solving skills to the test in the exciting Vyom \'26 Treasure Hunt! Navigate clues across the campus, crack codes, and race to find the treasure.\n\nTeam of 4 — think fast, communicate well, and be the first to solve the puzzle!',date:'April 7–8, 2026',venue:'Campus Wide',team:'4 Members', formUrl:'#'},
+  {id:'sack-race',cat:'fun',catLabel:'Fun Events',icon:'🏃',name:'Theme Game',img:'https://i.ibb.co/wryZkGHg/25.jpg',tagline:'Hop your way to victory in the classic Vyom \'26 Sack Race!',desc:'Vyom \'26 Sack Race\n\nHop your way to victory in the classic Vyom \'26 Sack Race! This fun event brings back the joy of childhood sports with competitive excitement.\n\nGet in the sack, hop as fast as you can, and be the first to cross the finish line!',date:'April 7–8, 2026',venue:'In front of B-Block',team:'Single Player', formUrl:'#'},
+  {id:'ball-dribbling',cat:'fun',catLabel:'Fun Events',icon:'⛹️',name:'Throw the Ring',img:'https://i.ibb.co/4nrPm3NX/27.jpg',tagline:'Show your ball control skills in the Vyom \'26 Ball Dribbling challenge!',desc:'Vyom \'26 Ball Dribbling Challenge\n\nShow your ball control skills in the Vyom \'26 Ball Dribbling challenge! Navigate the course while maintaining control of the ball.\n\nThe fastest and most precise player wins this exciting individual challenge!',date:'April 7–8, 2026',venue:'Basketball Court',team:'Single Player', formUrl:'#'},
+  {id:'ai-showcase',cat:'technical',catLabel:'Technical',icon:'🤖',name:'AI Agent Showcase',img:'https://i.ibb.co/gb0Wp7qF/22.jpg',tagline:'Demonstrate your AI innovation at the Vyom \'26 AI Agent Showcase!',desc:'Vyom \'26 AI Agent Showcase\n\nDemonstrate your AI innovation at the Vyom \'26 AI Agent Showcase! Build and present an intelligent AI agent that solves a real-world problem.\n\nTeam of 4 — show your technical skills, creativity, and innovation in this cutting-edge event!',date:'April 7–8, 2026',venue:'FB-19',team:'4 Members', formUrl:'#'},
+  {id:'startup-dilemma',cat:'technical',catLabel:'Technical',icon:'💼',name:'Startup Dilemma',img:'https://i.ibb.co/1G67DN1v/Brown-and-Light-Brown-Circle-Framed-Instagram-Profile-Picture-You-Tube-Thumbnail-2.jpg',tagline:'Step into the Startup Dilemma, where strategy meets suspense! Think like a CEO.',desc:'Vyom \'26 Startup Dilemma\n\nStep into the Startup Dilemma, where strategy meets suspense! You\'re in the hot seat — facing real-world startup crises that demand bold decisions, smart pivots, and fearless leadership!\n\nCan you think like a CEO? Can you handle pressure? Will you emerge as the ultimate startup strategist? Team of 4.',date:'April 5 & 7, 2026',venue:'Auditorium',team:'4 Members', formUrl:'#'},
+  {id:'escape-room',cat:'technical',catLabel:'Technical',icon:'🔐',name:'Escape Room',img:'https://i.ibb.co/whHnZd6R/24.jpg',tagline:'Solve puzzles, find clues and escape within time at the Vyom \'26 Escape Room!',desc:'Vyom \'26 Escape Room Challenge\n\nSolve puzzles, find clues and escape within time at the Vyom \'26 Escape Room challenge! Work as a team to crack codes, solve riddles, and escape before the clock runs out.\n\nTeam of 2 — your logic, observation, and teamwork will be tested to the limit!',date:'April 7–8, 2026',venue:'Google Lab',team:'2 Members', formUrl:'#'},
+  {id:'game-dev-jam',cat:'technical',catLabel:'Technical',icon:'🕹️',name:'Game Development Jam',img:'https://i.ibb.co/RGq3988w/26.jpg',tagline:'Design and build exciting games at the Vyom \'26 Game Development Jam!',desc:'Vyom \'26 Game Development Jam\n\nDesign and build exciting games at the Vyom \'26 Game Development Jam! From concept to playable prototype — create a complete game in limited time.\n\nTeam of 4 — showcase your programming, design, and creativity skills!',date:'April 7–8, 2026',venue:'Microsoft Lab',team:'4 Members', formUrl:'#'},
+  {id:'solo-dance',cat:'cultural',catLabel:'Cultural',icon:'💃',name:'Solo Dance',img:'https://i.ibb.co/2YKKnHS5/15.jpg',tagline:'Express yourself through dance at the Vyom \'26 Solo Dance competition!',desc:'Vyom \'26 Solo Dance Competition\n\nExpress yourself through dance at the Vyom \'26 Solo Dance competition! Showcase your talent, technique, and stage presence.\n\nAny dance style is welcome — classical, contemporary, freestyle, hip-hop, or folk. Own the stage!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Single Player', formUrl:'#'},
+  {id:'solo-singing',cat:'cultural',catLabel:'Cultural',icon:'🎤',name:'Solo Singing',img:'https://i.ibb.co/S41cfzRx/13.jpg',tagline:'Showcase your vocal talent at the Vyom \'26 Solo Singing competition!',desc:'Vyom \'26 Solo Singing Competition\n\nShowcase your vocal talent at the Vyom \'26 Solo Singing competition! Sing your heart out and impress the judges.\n\nAny genre is welcome — Bollywood, classical, pop, or western. Make the stage your own!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Single Player', formUrl:'#'},
+  {id:'group-dance',cat:'cultural',catLabel:'Cultural',icon:'👯',name:'Group Dance',img:'https://i.ibb.co/B2YNDw1c/16.jpg',tagline:'Synchronize and shine in the Vyom \'26 Group Dance competition!',desc:'Vyom \'26 Group Dance Competition\n\nSynchronize and shine in the Vyom \'26 Group Dance competition! Coordinate with your group and deliver a stunning performance.\n\nMinimum 3 and maximum 7 members. Any dance style welcome!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'3–7 Members', formUrl:'#'},
+  {id:'group-singing',cat:'cultural',catLabel:'Cultural',icon:'🎶',name:'Group Singing',img:'https://i.ibb.co/jP97xmfj/17.jpg',tagline:'Harmonize together at the Vyom \'26 Group Singing competition!',desc:'Vyom \'26 Group Singing Competition\n\nHarmonize together at the Vyom \'26 Group Singing competition! Blend your voices and create beautiful music as a team.\n\nMinimum 2 and maximum 5 members. Prove your group has perfect harmony!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'2–5 Members', formUrl:'#'},
+  {id:'dance-face-battle',cat:'cultural',catLabel:'Cultural',icon:'🕺',name:'Dance Face Battle',img:'https://i.ibb.co/60YV1dKt/18.jpg',tagline:'Go head to head in the exciting Vyom \'26 Dance Face Battle!',desc:'Vyom \'26 Dance Face Battle\n\nGo head to head in the exciting Vyom \'26 Dance Face Battle! This on-the-spot competition puts your freestyle skills to the ultimate test.\n\nNo preparation needed — just come, feel the music, and show what you\'ve got!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'On Spot', formUrl:'#'},
+  {id:'song-face-battle',cat:'cultural',catLabel:'Cultural',icon:'🎵',name:'Song Face Battle',img:'https://i.ibb.co/ZRZsvXN2/19.jpg',tagline:'Challenge your opponents in the Vyom \'26 Song Face Battle!',desc:'Vyom \'26 Song Face Battle\n\nChallenge your opponents in the Vyom \'26 Song Face Battle! On-the-spot vocal battles where two singers face off.\n\nNo registration needed — just walk up and challenge someone. Pure vocal talent decides the winner!',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'On Spot', formUrl:'#'},
+  {id:'instrumental',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Instrumental Play',img:'',tagline:'Let your music do the talking in the Instrumental Play Competition!',desc:'Vyom \'26 Instrumental Play Competition\n\nGet ready to showcase your talent, rhythm, and musical skills! Whether it\'s strings, keys, or beats — let your music do the talking!\n\nAny instrument is welcome. Perform a solo piece and show your musical mastery.',date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Single Player', formUrl:'#'},
+  {id:'rangoli',cat:'creative',catLabel:'Other',icon:'🎨',name:'Face Art',img:'https://i.ibb.co/JRdYHTb5/35.jpg',tagline:'Create colorful art in the traditional Vyom \'26 Rangoli competition!',desc:'Vyom \'26 Rangoli Competition\n\nCreate colorful art in the traditional Vyom \'26 Rangoli competition! Express your creativity through this beautiful Indian art form.\n\nSingle player event — design and execute a stunning Rangoli. Prizes for the most creative designs!',date:'March 26, 2026',venue:'Open Area',team:'Single Player', formUrl:'#'},
+  {id:'master-chef-fire',cat:'creative',catLabel:'Other',icon:'🔥',name:'Master Chef with Fire',img:'https://i.ibb.co/k2fwp638/32.jpg',tagline:'Cook up a storm at the Vyom \'26 Master Chef competition!',desc:'Vyom \'26 Master Chef with Fire\n\nCook up a storm at the Vyom \'26 Master Chef competition! Use fire to create delicious dishes within the given time.\n\nMixed team of 4 — plan your menu, cook with skill, and impress the judges!',date:'April 7–8, 2026',venue:'B-Block Corridor',team:'4 Members (Mixed)', formUrl:'#'},
+  {id:'master-chef-no-fire',cat:'creative',catLabel:'Other',icon:'🥗',name:'Master Chef without Fire',img:'https://i.ibb.co/C5mhgFDZ/34.jpg',tagline:'Create delicious no-cook dishes at the Vyom \'26 Master Chef without Fire!',desc:'Vyom \'26 Master Chef without Fire\n\nCreate delicious no-cook dishes! Use your creativity to make the most appealing dish without any heat.\n\nMixed team of 4 — innovate, present beautifully, and wow the judges!',date:'April 7–8, 2026',venue:'B-Block Corridor',team:'4 Members (Mixed)', formUrl:'#'},
+  {id:'mehandi',cat:'creative',catLabel:'Other',icon:'🌺',name:'Art of Tshirt',img:'https://i.ibb.co/fVdLSCLX/36.jpg',tagline:'Showcase your henna art skills at the Vyom \'26 Mehandi competition!',desc:'Vyom \'26 Mehandi Competition\n\nShowcase your henna art skills at the Vyom \'26 Mehandi competition! Create intricate and beautiful designs within the given time.\n\nSingle player event — demonstrate your expertise in traditional and contemporary Mehandi designs!',date:'April 7–8, 2026',venue:'B-Block',team:'Single Player', formUrl:'#'},
+  {id:'reel-making',cat:'creative',catLabel:'Other',icon:'🎬',name:'Reel Making',img:'https://i.ibb.co/PvVJVXcj/38.jpg',tagline:'Create engaging short videos for the Vyom \'26 Reel Making competition!',desc:'Vyom \'26 Reel Making Competition\n\nCreate engaging short videos! Capture the energy, fun, and spirit of VYOM through your creative video lens.\n\nSingle player — film, edit, and post your best reel. The most creative and viral-worthy reel wins!',date:'April 7–8, 2026',venue:'Campus Wide',team:'Single Player', formUrl:'#'},
+  {id:'short-film',cat:'creative',catLabel:'Other',icon:'🎥',name:'Vlog Making',img:'https://i.ibb.co/7JZYkLC9/37.jpg',tagline:'Tell a story through vlog at the Vyom \'26 Short Film Making competition!',desc:'Vyom \'26 Short Film Making\n\nTell a story through film! Create a compelling short film that tells a meaningful story within the festival grounds.\n\nSingle player event — write, direct, and edit a short film that captivates the audience.',date:'April 7–8, 2026',venue:'Campus Wide',team:'Single Player', formUrl:'#'},
+  {id:'photography',cat:'creative',catLabel:'Other',icon:'📸',name:'Photography',img:'https://i.ibb.co/Xr34V7Qj/39.jpg',tagline:'Capture moments at the Vyom \'26 Photography competition!',desc:'Vyom \'26 Photography Competition\n\nCapture moments at the Vyom \'26 Photography competition! Use your camera to tell the story of VYOM through stunning images.\n\nSingle player — submit your best shots taken during the festival. Best composition wins!',date:'April 7–8, 2026',venue:'Campus Wide',team:'Single Player', formUrl:'#'},
+  {id:'digital-poster',cat:'creative',catLabel:'Other',icon:'🖥️',name:'Pittul',img:'https://i.ibb.co/JWTWbt8M/40.jpg',tagline:'Showcase your digital design skills in the Online Digital Poster Making competition!',desc:'Vyom \'26 Online Digital Poster Making\n\nShowcase your digital design skills! Create a visually stunning digital poster on a given theme.\n\nSingle player — virtual submission. Use any design software and submit your poster by the deadline.',date:'April 7–8, 2026',venue:'Virtual / Online',team:'Single Player', formUrl:'#'},
+];
+
+let curFilter='all', curSearch='';
+
+function renderCards(){
+  const grid=document.getElementById('ev-grid');
+  let list=EVENTS;
+  if(curFilter!=='all') list=list.filter(e=>e.cat===curFilter);
+  if(curSearch) list=list.filter(e=>e.name.toLowerCase().includes(curSearch.toLowerCase())||e.tagline.toLowerCase().includes(curSearch.toLowerCase()));
+  if(!list.length){grid.innerHTML='<div class="no-results">No events found. Try a different filter or search term.</div>';return;}
+  grid.innerHTML=list.map(ev=>{
+    const imgHTML=ev.img
+      ?`<img src="${ev.img}" alt="${ev.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ev-fallback" style="display:none">${ev.icon}</div>`
+      :`<div class="ev-fallback">${ev.icon}</div>`;
+    return `<div class="ev-card" onclick="showDetail('${ev.id}')">
+      <div class="ev-img">${imgHTML}<div class="ev-badge">${ev.catLabel}</div><div class="ev-img-bar"><span class="ev-wm">vyom.rungta.ac.in</span><div class="ev-vyom-tag">VYOM<span>2026</span></div></div></div>
+      <div class="ev-body">
+        <div class="ev-name">${ev.name}</div>
+        <div class="ev-tagline">${ev.tagline}</div>
+        <div class="ev-metas">
+          <div class="ev-meta-r"><span class="ico">📅</span>${ev.date}</div>
+          <div class="ev-meta-r"><span class="ico">📍</span>${ev.venue}</div>
+          <div class="ev-meta-r"><span class="ico">👥</span>${ev.team}</div>
+        </div>
+        <button class="ev-view-btn">View Details</button>
+      </div></div>`;
+  }).join('');
+}
+
+function filterEv(cat,btn){
+  curFilter=cat;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function searchEv(v){
+  curSearch=v;
+  renderCards();
+}
+
+function showDetail(id){
+  const ev=EVENTS.find(e=>e.id===id);
+  if(!ev) return;
+  document.getElementById('d-title').textContent=ev.name;
+  document.getElementById('d-cat').textContent=ev.catLabel;
+  document.getElementById('d-date').textContent=ev.date;
+  document.getElementById('d-venue').textContent=ev.venue;
+  document.getElementById('d-team').textContent=ev.team;
+  document.getElementById('d-desc').innerHTML=ev.desc.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  const imgBox=document.getElementById('d-img-box');
+  if(ev.img){
+    imgBox.innerHTML=`<img src="${ev.img}" alt="${ev.name}" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'d-img-fallback\\'>${ev.icon}</div>'">`;
+  } else {
+    imgBox.innerHTML=`<div class="d-img-fallback">${ev.icon}</div>`;
+  }
+  
+  // Set the Register Now button to the event's specific Google Form URL
+  const registerBtn = document.getElementById('d-register-btn');
+  registerBtn.onclick = function() {
+    window.location.href = ev.formUrl || 'register.html'; // fallback to general register page if no URL
+  };
+
+  document.getElementById('list-page').style.display='none';
+  document.getElementById('detail-page').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({page:'detail',id},'',`#${id}`);
+}
+
+function showList(){
+  document.getElementById('list-page').style.display='block';
+  document.getElementById('detail-page').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({page:'list'},'','events.html');
+}
+
+window.addEventListener('popstate',e=>{
+  if(!e.state||e.state.page==='list') showList();
+  else if(e.state.page==='detail') showDetail(e.state.id);
+});
+
+// Init
+const urlCat=new URLSearchParams(location.search).get('cat');
+const urlHash=location.hash.replace('#','');
+if(urlCat){
+  curFilter=urlCat;
+  const btn=document.querySelector(`.fb[onclick*="'${urlCat}'"]`);
+  if(btn){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+}
+renderCards();
+if(urlHash){const ev=EVENTS.find(e=>e.id===urlHash);if(ev) showDetail(urlHash);}
+
+// Fade in main content after loader would have disappeared
+window.addEventListener('load', () => {
+  // Simulate loader disappearance (since there is no actual loader in this file)
+  // If there were a loader, we'd wait for it. Here we just fade in after a short delay.
+  setTimeout(() => {
+    document.getElementById('main-content').classList.add('visible');
+  }, 500); // 0.5s delay for smooth appearance
+});
+</script>
+</body>
+</html>
