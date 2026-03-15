@@ -14,24 +14,24 @@
   background:#0c0c0c; border:1px solid rgba(255,0,85,0.15); overflow:hidden;
 }
 .fb {
-  flex:1; min-width:90px; background:transparent; color:#555; border:none;
+  flex:1; min-width:90px; background:transparent; color:#aaa; border:none;
   border-right:1px solid rgba(255,0,85,0.1);
   padding:14px 8px; font-family:'Orbitron',monospace; font-size:0.57rem;
   font-weight:700; letter-spacing:2px; cursor:pointer; text-transform:uppercase; transition:all 0.2s;
 }
 .fb:last-child { border-right:none; }
-.fb:hover { color:#ccc; background:rgba(255,0,85,0.06); }
+.fb:hover { color:#fff; background:rgba(255,0,85,0.06); }
 .fb.active { background:var(--pink); color:#fff; }
 
 /* ===== SEARCH ===== */
 .search-wrap { position:relative; margin-bottom:2.5rem; }
-.s-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#444; font-size:1rem; }
+.s-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#aaa; font-size:1rem; }
 .s-input {
   width:100%; background:#0c0c0c; border:1px solid rgba(255,255,255,0.07); color:#fff;
   padding:16px 16px 16px 46px; font-family:'Rajdhani',sans-serif; font-size:1rem; font-weight:500; outline:none; transition:border-color 0.2s;
 }
 .s-input:focus { border-color:rgba(255,0,85,0.4); }
-.s-input::placeholder { color:#2a2a2a; }
+.s-input::placeholder { color:#555; }
 
 /* ===== EVENTS GRID ===== */
 .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
@@ -78,16 +78,16 @@
   padding:28px 14px 8px;
   display:flex; align-items:flex-end; justify-content:space-between;
 }
-.ev-wm { font-family:'Orbitron',monospace; font-size:0.48rem; color:rgba(255,255,255,0.25); letter-spacing:2px; }
+.ev-wm { font-family:'Orbitron',monospace; font-size:0.48rem; color:#aaa; letter-spacing:2px; }
 .ev-vyom-tag { font-family:'Orbitron',monospace; font-size:0.75rem; font-weight:900; color:var(--pink); letter-spacing:4px; line-height:1; text-align:right; }
-.ev-vyom-tag span { display:block; font-size:0.48rem; color:rgba(255,0,85,0.55); font-weight:400; letter-spacing:2px; }
+.ev-vyom-tag span { display:block; font-size:0.48rem; color:rgba(255,0,85,0.7); font-weight:400; letter-spacing:2px; }
 
 /* card body */
 .ev-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
 .ev-name { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; color:var(--pink); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
-.ev-tagline { font-size:0.88rem; color:#4a4a4a; line-height:1.6; margin-bottom:1.2rem; flex:1; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+.ev-tagline { font-size:0.88rem; color:#ccc; line-height:1.6; margin-bottom:1.2rem; flex:1; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
 .ev-metas { display:flex; flex-direction:column; gap:6px; margin-bottom:1.3rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.04); }
-.ev-meta-r { display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#4a4a4a; }
+.ev-meta-r { display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#ccc; }
 .ev-meta-r .ico { font-size:0.9rem; flex-shrink:0; }
 
 .ev-view-btn {
@@ -97,7 +97,7 @@
 }
 .ev-view-btn:hover { background:#cc0044; }
 
-.no-results { grid-column:1/-1; text-align:center; padding:5rem 2rem; font-family:'Orbitron',monospace; font-size:0.72rem; color:#222; letter-spacing:3px; }
+.no-results { grid-column:1/-1; text-align:center; padding:5rem 2rem; font-family:'Orbitron',monospace; font-size:0.72rem; color:#888; letter-spacing:3px; }
 
 /* ===== DETAIL PAGE ===== */
 #detail-page { display:none; padding-top:70px; }
@@ -123,19 +123,19 @@
   background:rgba(0,0,0,0.5); border-top:1px solid rgba(255,255,255,0.05);
   padding:10px 16px; display:flex; align-items:center; justify-content:space-between;
 }
-.dif-l { font-family:'Orbitron',monospace; font-size:0.52rem; color:rgba(255,255,255,0.2); letter-spacing:3px; }
+.dif-l { font-family:'Orbitron',monospace; font-size:0.52rem; color:#aaa; letter-spacing:3px; }
 .dif-r { display:flex; align-items:center; gap:14px; }
-.dif-rungta { font-family:'Orbitron',monospace; font-size:0.55rem; color:rgba(255,255,255,0.25); letter-spacing:1px; }
+.dif-rungta { font-family:'Orbitron',monospace; font-size:0.55rem; color:#aaa; letter-spacing:1px; }
 .dif-vyom { font-family:'Orbitron',monospace; font-size:0.85rem; font-weight:900; color:var(--pink); letter-spacing:4px; line-height:1; }
-.dif-vyom small { display:block; font-size:0.46rem; color:rgba(255,0,85,0.45); font-weight:400; }
+.dif-vyom small { display:block; font-size:0.46rem; color:rgba(255,0,85,0.7); font-weight:400; }
 
 /* desc + contact boxes */
 .d-block { background:rgba(255,0,85,0.04); border:1px solid rgba(255,0,85,0.12); padding:2rem; margin-top:1.5rem; }
 .d-block-title { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; color:var(--pink); letter-spacing:3px; text-transform:uppercase; margin-bottom:1rem; }
-.d-desc-txt { font-size:0.95rem; color:#666; line-height:1.85; }
+.d-desc-txt { font-size:0.95rem; color:#ccc; line-height:1.85; }
 .contact-row { display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
 .contact-row:last-child { border-bottom:none; }
-.c-name { font-weight:700; font-size:1rem; color:#aaa; }
+.c-name { font-weight:700; font-size:1rem; color:#ddd; }
 .c-phone { display:flex; align-items:center; gap:8px; font-family:'Orbitron',monospace; font-size:0.7rem; color:var(--pink); text-decoration:none; letter-spacing:1px; transition:color 0.2s; }
 .c-phone:hover { color:#fff; }
 
@@ -147,7 +147,7 @@
 .dic-r:last-of-type { border-bottom:none; margin-bottom:1.5rem; }
 .dic-ico { font-size:1.2rem; flex-shrink:0; margin-top:2px; }
 .dic-lbl { font-family:'Orbitron',monospace; font-size:0.58rem; color:var(--pink); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
-.dic-val { font-size:0.95rem; color:#ccc; font-weight:600; }
+.dic-val { font-size:0.95rem; color:#fff; font-weight:600; }
 .dic-btn {
   width:100%; background:var(--pink); color:#fff; border:none;
   padding:16px; font-family:'Orbitron',monospace; font-size:0.7rem; font-weight:700;
@@ -197,6 +197,93 @@
 #main-content.visible {
   opacity: 1;
 }
+
+/* ===== GLOBAL TEXT VISIBILITY FIX (INCLUDING FOOTER) ===== */
+body {
+  background-color: #000;
+  color: #fff;
+}
+.sec-desc, .aci-desc, .faq-a, .fc-sub, .cd-label, .scroll-txt, .stat-l, .cd-l, .rungta-quote {
+  color: #ccc !important;
+}
+.footer-about, .footer-col ul li a, .footer-copy, .footer-sym {
+  color: #ddd !important;
+}
+.footer-col ul li a:hover {
+  color: var(--pink) !important;
+}
+.soc-btn {
+  color: #fff !important;
+  border-color: #444 !important;
+}
+.soc-btn:hover {
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+}
+
+/* ===== FLOATING REGISTRATION NOTIFICATION ===== */
+#reg-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(10, 10, 10, 0.9);
+  border-left: 4px solid var(--pink);
+  border-radius: 4px;
+  padding: 12px 18px;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  font-family: 'Rajdhani', sans-serif;
+  color: #fff;
+  max-width: 280px;
+  transform: translateX(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border: 1px solid rgba(255,0,85,0.3);
+  pointer-events: none;
+}
+.notif-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.notif-icon {
+  color: var(--pink);
+  font-size: 1.2rem;
+  animation: pulse 2s infinite;
+}
+.notif-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.notif-name {
+  font-weight: 700;
+  color: var(--pink);
+}
+.notif-event {
+  font-weight: 600;
+  color: #fff;
+}
+.notif-arena {
+  display: inline-block;
+  background: rgba(255,0,85,0.2);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  margin-top: 4px;
+  color: #ccc;
+}
+@keyframes pulse {
+  0%,100% { opacity: 0.8; }
+  50% { opacity: 1; text-shadow: 0 0 8px var(--pink); }
+}
+@media (max-width: 600px) {
+  #reg-notification {
+    max-width: 220px;
+    font-size: 0.75rem;
+    bottom: 10px;
+    left: 10px;
+  }
+}
 </style>
 </head>
 <body>
@@ -207,12 +294,12 @@
   <a href="sponsors.html">Sponsors</a>
   <a href="brochure.html">Brochure</a>
   <a href="https://rungta.campusmall.in/">Merchandise</a>
-  <a href="register.html">Register</a>
+  <a href="events.html">Register</a>
 </div>
 <nav id="navbar">
   <!-- UPDATED: Logo image replaces text -->
   <a href="index.html" class="nav-logo">
-    <img src="https://i.ibb.co/7xMHV71b/651529152-18097996783949045-6752410534880380238-n.jpg" alt="VYOM Logo" class="nav-logo-img">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -222,7 +309,7 @@
     <li><a href="https://rungta.campusmall.in/" target="_blank">Merchandise</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
-    <a href="register.html" class="nav-cta">Register Now</a>
+    <a href="events.html" class="nav-cta">Register Now</a>
     <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -301,12 +388,23 @@
   <footer id="site-footer">
     <div class="footer-grid">
       <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation — the ultimate Squid Game arena.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="mailto:vyom.s@rungta.ac.in">@</a></div></div>
-      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="register.html">Register</a></li></ul></div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="events.html">Register</a></li></ul></div>
       <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=fun">Fun Events</a></li></ul></div>
       <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:vyom.s@rungta.ac.in">vyom.s@rungta.ac.in</a></li><li><a href="tel:9798274596">Vipul: 9798274596</a></li><li><a href="tel:8253075416">Praveen: 8253075416</a></li><li><a href="tel:9234578690">Aditya: 9234578690</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span class="footer-copy">© 2026 VYOM'26 — Rungta Educational Foundation. All rights reserved.</span><span class="footer-sym">○ △ □</span></div>
   </footer>
+</div>
+
+<!-- Floating notification -->
+<div id="reg-notification">
+  <div class="notif-content">
+    <div class="notif-icon">◉</div>
+    <div class="notif-text">
+      <span class="notif-name" id="notif-name">Rahul</span> just registered for <span class="notif-event" id="notif-event">Technical Arena</span>
+      <div class="notif-arena" id="notif-arena">⚡ Hackathon</div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -420,7 +518,7 @@ function showDetail(id){
   // Set the Register Now button to the event's specific Google Form URL
   const registerBtn = document.getElementById('d-register-btn');
   registerBtn.onclick = function() {
-    window.location.href = ev.formUrl || 'register.html'; // fallback to general register page if no URL
+    window.location.href = ev.formUrl || 'events.html'; // fallback to general register page if no URL
   };
 
   document.getElementById('list-page').style.display='none';
@@ -460,6 +558,84 @@ window.addEventListener('load', () => {
     document.getElementById('main-content').classList.add('visible');
   }, 500); // 0.5s delay for smooth appearance
 });
+
+// ===== FLOATING NOTIFICATION (infinite Indian names) =====
+(function() {
+  const notifName = document.getElementById('notif-name');
+  const notifEvent = document.getElementById('notif-event');
+  const notifArena = document.getElementById('notif-arena');
+
+  // Indian names (male/female)
+  const names = [
+    'Aarav', 'Vihaan', 'Vivaan', 'Ananya', 'Diya', 'Advik', 'Kabir', 'Reyansh',
+    'Aadhya', 'Anvi', 'Sai', 'Arjun', 'Ishaan', 'Myra', 'Aaradhya', 'Aryan',
+    'Rudra', 'Pari', 'Anaya', 'Krishna', 'Shaurya', 'Tanvi', 'Atharv', 'Kiaan',
+    'Ayaan', 'Pihu', 'Ira', 'Yash', 'Sia', 'Dhruv', 'Rohan', 'Meera',
+    'Riya', 'Kavya', 'Aditya', 'Nitya', 'Anushka', 'Ved', 'Jhanvi', 'Arnav',
+    'Anika', 'Sarthak', 'Aarna', 'Samarth', 'Aarush', 'Shreya', 'Vivaan', 'Prisha'
+  ];
+
+  // Event list with arena and emoji (matching your EVENTS array)
+  const events = [
+    { name: 'Box Cricket', arena: 'Sports', emoji: '🏏' },
+    { name: 'Carrom', arena: 'Sports', emoji: '🎯' },
+    { name: 'Chess', arena: 'Sports', emoji: '♟️' },
+    { name: 'Volleyball', arena: 'Sports', emoji: '🏐' },
+    { name: '7-a-Side Football', arena: 'Sports', emoji: '⚽' },
+    { name: 'Basketball', arena: 'Sports', emoji: '🏀' },
+    { name: 'Adventures Sports', arena: 'Sports', emoji: '🏃' },
+    { name: 'Kabaddi', arena: 'Sports', emoji: '🤼' },
+    { name: 'Kho Kho', arena: 'Sports', emoji: '🏃' },
+    { name: 'Table Tennis', arena: 'Sports', emoji: '🏓' },
+    { name: 'Arm Wrestling', arena: 'Sports', emoji: '💪' },
+    { name: 'BGMI', arena: 'E-Sports', emoji: '🎮' },
+    { name: 'Valorant', arena: 'E-Sports', emoji: '🎯' },
+    { name: 'Free Fire', arena: 'E-Sports', emoji: '🔥' },
+    { name: 'Hopscotch', arena: 'Fun Games', emoji: '🎪' },
+    { name: 'Tug of War', arena: 'Fun Games', emoji: '🪢' },
+    { name: 'Pushup Competition', arena: 'Fun Games', emoji: '💪' },
+    { name: 'Bar Hanging', arena: 'Fun Games', emoji: '🏋️' },
+    { name: 'Treasure Hunt', arena: 'Fun Games', emoji: '🗺️' },
+    { name: 'Sack Race', arena: 'Fun Games', emoji: '🏃' },
+    { name: 'Throw the Ring', arena: 'Fun Games', emoji: '⛹️' },
+    { name: 'AI Agent Showcase', arena: 'Technical', emoji: '🤖' },
+    { name: 'Startup Dilemma', arena: 'Technical', emoji: '💼' },
+    { name: 'Escape Room', arena: 'Technical', emoji: '🔐' },
+    { name: 'Game Development Jam', arena: 'Technical', emoji: '🕹️' },
+    { name: 'Solo Dance', arena: 'Cultural', emoji: '💃' },
+    { name: 'Solo Singing', arena: 'Cultural', emoji: '🎤' },
+    { name: 'Group Dance', arena: 'Cultural', emoji: '👯' },
+    { name: 'Group Singing', arena: 'Cultural', emoji: '🎶' },
+    { name: 'Dance Face Battle', arena: 'Cultural', emoji: '🕺' },
+    { name: 'Song Face Battle', arena: 'Cultural', emoji: '🎵' },
+    { name: 'Instrumental Play', arena: 'Cultural', emoji: '🎸' },
+    { name: 'Face Art', arena: 'Other', emoji: '🎨' },
+    { name: 'Master Chef with Fire', arena: 'Other', emoji: '🔥' },
+    { name: 'Master Chef without Fire', arena: 'Other', emoji: '🥗' },
+    { name: 'Art of Tshirt', arena: 'Other', emoji: '🌺' },
+    { name: 'Reel Making', arena: 'Other', emoji: '🎬' },
+    { name: 'Vlog Making', arena: 'Other', emoji: '🎥' },
+    { name: 'Photography', arena: 'Other', emoji: '📸' },
+    { name: 'Pittul', arena: 'Other', emoji: '🖥️' }
+  ];
+
+  function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function updateNotification() {
+    const name = getRandomItem(names);
+    const event = getRandomItem(events);
+    notifName.textContent = name;
+    notifEvent.textContent = event.arena;
+    notifArena.innerHTML = `${event.emoji} ${event.name}`;
+  }
+
+  // Update every 4 seconds
+  setInterval(updateNotification, 4000);
+  // Set initial random message
+  updateNotification();
+})();
 </script>
 </body>
 </html>
