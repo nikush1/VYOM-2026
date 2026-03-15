@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsors — VYOM 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ===== NAVBAR LOGO IMAGE ===== */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.nav-logo-img {
+  height: 55px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .nav-logo-img {
+    height: 45px;
+    max-width: 160px;
+  }
+}
+/* Hide old text logo elements (they are removed from HTML, but kept as safety) */
+.nav-logo-sym, .nav-logo-text, .nav-logo-year {
+  display: none;
+}
+
+.tier-label {
+  font-family:'Orbitron',monospace; font-size:0.62rem; color:var(--pink);
+  letter-spacing:5px; text-transform:uppercase; margin:3rem 0 1.5rem;
+  display:flex; align-items:center; gap:12px;
+}
+.tier-label::before,.tier-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.sponsors-tier { display:grid; gap:1.5rem; margin-bottom:1rem; }
+.sponsors-tier.title-sp { grid-template-columns:1fr; }
+
+/* Platinum & Gold: exactly two cards per row, equal width & height */
+.sponsors-tier.platinum { grid-template-columns:repeat(2, 1fr); }
+.sponsors-tier.gold     { grid-template-columns:repeat(2, 1fr); }
+
+/* Silver: responsive, min width 180px (usually 3-4 per row) */
+.sponsors-tier.silver   { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
+
+.sp-card {
+  background:var(--card); border:1px solid var(--border-w);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:12px; padding:1.5rem; cursor:pointer; transition:all 0.3s;
+  position:relative; overflow:hidden;
+  height:200px; /* fixed height for uniform boxes in platinum/gold */
+  text-align:center;
+}
+.sp-card.silver-card { height:160px; } /* slightly smaller for silver tier */
+
+.sp-card:hover { border-color:var(--border); background:var(--card2); }
+.sp-card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(255,0,85,0.04), transparent); opacity:0; transition:opacity 0.3s; }
+.sp-card:hover::before { opacity:1; }
+.sp-sym { font-size:2.2rem; color:rgba(255,0,85,0.25); font-family:'Orbitron',monospace; font-weight:900; transition:color 0.3s; }
+.sp-card:hover .sp-sym { color:var(--pink); }
+.sp-name { font-family:'Orbitron',monospace; font-size:0.65rem; color:#333; letter-spacing:3px; text-transform:uppercase; transition:color 0.3s; }
+.sp-card:hover .sp-name { color:#888; }
+.sp-type { font-size:0.75rem; color:#2a2a2a; letter-spacing:1px; transition:color 0.3s; }
+.sp-card:hover .sp-type { color:#555; }
+
+/* title sponsor big card */
+.sp-card.title-big { height:240px; border-color:rgba(255,0,85,0.25); }
+.sp-card.title-big .sp-sym { font-size:4rem; }
+.sp-card.title-big .sp-name { font-size:0.85rem; color:#555; }
+
+/* Become sponsor CTA */
+.become-sp {
+  background:var(--card); border:1px solid var(--border);
+  padding:4rem 3rem; text-align:center; margin-top:4rem; position:relative; overflow:hidden;
+}
+.become-sp::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,0,85,0.06) 0%, transparent 60%); }
+.become-sp > * { position:relative; z-index:1; }
+.become-title { font-family:'Orbitron',monospace; font-size:1.8rem; font-weight:900; color:#fff; margin-bottom:1rem; }
+.become-title span { color:var(--pink); }
+.become-desc { font-size:1rem; color:#555; max-width:500px; margin:0 auto 2rem; line-height:1.7; }
+.become-benefits { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin:2rem 0 2.5rem; text-align:left; }
+.benefit-item { background:rgba(255,0,85,0.04); border:1px solid rgba(255,0,85,0.1); padding:1.2rem; }
+.benefit-icon { font-size:1.5rem; margin-bottom:8px; display:block; }
+.benefit-title { font-family:'Orbitron',monospace; font-size:0.65rem; color:var(--pink); letter-spacing:2px; margin-bottom:4px; }
+.benefit-text { font-size:0.82rem; color:#555; line-height:1.5; }
+
+/* responsive: on small screens, all tiers become 1 column */
+@media (max-width:700px){
+  .sponsors-tier.platinum,
+  .sponsors-tier.gold,
+  .sponsors-tier.silver {
+    grid-template-columns:1fr !important;
+  }
+  .sp-card { height:auto; min-height:160px; }
+}
+</style>
+</head>
+<body>
+<div id="cursor">○</div>
+<div id="mobile-menu">
+  <a href="index.html">Home</a><a href="events.html">Events</a>
+  <a href="sponsors.html" class="active">Sponsors</a>
+  <a href="brochure.html">Brochure</a><a href="https://rungta.campusmall.in/">Merchandise</a><a href="register.html">Register</a>
+</div>
+<nav id="navbar">
+  <!-- UPDATED: Logo image replaces text -->
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.ibb.co/7xMHV71b/651529152-18097996783949045-6752410534880380238-n.jpg" alt="VYOM Logo" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li>
+    <li><a href="sponsors.html" class="active">Sponsors</a></li>
+    <li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="register.html" class="nav-cta">Register Now</a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div><div class="page-header-grid"></div>
+  <div class="page-tag">The Investors</div>
+  <h1 class="page-title">Our <span>Sponsors</span></h1>
+  <p class="page-sub">VYOM 2026 is made possible by the generous support of our visionary partners.</p>
+</div>
+
+<section>
+  <div class="wrap">
+    <p style="text-align:center;color:#555;font-size:1rem;line-height:1.8;max-width:680px;margin:0 auto 1rem;">VYOM'26 is powered by visionary sponsors who support innovation, creativity, and student talent. Their contribution helps transform this festival into a grand arena of opportunity and celebration.</p>
+
+    <div class="tier-label">Title Sponsor</div>
+    <div class="sponsors-tier title-sp reveal">
+      <div class="sp-card title-big"><span class="sp-sym">○</span><div class="sp-name">Title Sponsor</div><div class="sp-type">Your Brand Here</div></div>
+    </div>
+
+    <div class="tier-label">Platinum Sponsors</div>
+    <div class="sponsors-tier platinum reveal">
+      <div class="sp-card"><span class="sp-sym">△</span><div class="sp-name">Platinum Partner</div><div class="sp-type">Your Brand Here</div></div>
+      <div class="sp-card"><span class="sp-sym">□</span><div class="sp-name">Platinum Partner</div><div class="sp-type">Your Brand Here</div></div>
+    </div>
+
+    <div class="tier-label">Gold Sponsors</div>
+    <div class="sponsors-tier gold reveal">
+      <div class="sp-card"><span class="sp-sym">○</span><div class="sp-name">Gold Partner</div><div class="sp-type">Your Brand</div></div>
+      <div class="sp-card"><span class="sp-sym">△</span><div class="sp-name">Gold Partner</div><div class="sp-type">Your Brand</div></div>
+      <!-- Note: there are 3 gold sponsors, third will wrap to next row (still 2 per row) -->
+      <div class="sp-card"><span class="sp-sym">□</span><div class="sp-name">Gold Partner</div><div class="sp-type">Your Brand</div></div>
+    </div>
+
+    <div class="tier-label">Silver Sponsors</div>
+    <div class="sponsors-tier silver reveal">
+      <div class="sp-card silver-card"><span class="sp-sym">○</span><div class="sp-name">Silver</div></div>
+      <div class="sp-card silver-card"><span class="sp-sym">△</span><div class="sp-name">Silver</div></div>
+      <div class="sp-card silver-card"><span class="sp-sym">□</span><div class="sp-name">Silver</div></div>
+      <div class="sp-card silver-card"><span class="sp-sym">○</span><div class="sp-name">Silver</div></div>
+    </div>
+
+    <div class="become-sp reveal">
+      <h2 class="become-title">Become a <span>Sponsor</span></h2>
+      <p class="become-desc">Partner with VYOM 2026 and connect your brand with 5,000+ students, faculty, and industry professionals at one of Chhattisgarh's biggest college fests.</p>
+      <div class="become-benefits">
+        <div class="benefit-item"><span class="benefit-icon">📢</span><div class="benefit-title">Brand Visibility</div><div class="benefit-text">Logo on all banners, digital creatives, merchandise and website.</div></div>
+        <div class="benefit-item"><span class="benefit-icon">🎯</span><div class="benefit-title">Target Audience</div><div class="benefit-text">Direct access to 5,000+ students from engineering and management streams.</div></div>
+        <div class="benefit-item"><span class="benefit-icon">🤝</span><div class="benefit-title">Campus Connect</div><div class="benefit-text">Recruitment drives, workshops, and product demonstrations on campus.</div></div>
+        <div class="benefit-item"><span class="benefit-icon">📱</span><div class="benefit-title">Social Media</div><div class="benefit-text">Feature in all VYOM social media posts, reels, and event coverage.</div></div>
+      </div>
+      <a href="mailto:vyom.s@rungta.ac.in?subject=Sponsorship Inquiry — VYOM 2026" class="btn-pink">Get In Touch — Become a Sponsor</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="mailto:vyom.s@rungta.ac.in">@</a></div></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li><li><a href="register.html">Register</a></li></ul></div>
+    <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=fun">Fun Games</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:vyom.s@rungta.ac.in">vyom.s@rungta.ac.in</a></li><li><a href="tel:9798274596">Vipul: 9798274596</a></li><li><a href="tel:8253075416">Praveen: 8253075416</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 VYOM'26 — Rungta Educational Foundation.</span><span class="footer-sym">○ △ □</span></div>
+</footer>
+<script>
+const cursor=document.getElementById('cursor');const syms=['○','△','□'];let si=0;
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
+setInterval(()=>{si=(si+1)%3;cursor.textContent=syms[si];},2000);
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>80));
+function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
