@@ -165,6 +165,13 @@ body{background-color:#000;color:#fff;}
 .rm-success-ev{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--pink);letter-spacing:2px;margin-top:1.2rem;}
 .rm-success-close{margin-top:2rem;background:var(--pink);color:#fff;border:none;padding:14px 44px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;}
 .rm-success-close:hover{background:#cc0044;}
+/* ── Coming Soon panel ── */
+.rm-coming-soon{display:none;flex-direction:column;align-items:center;justify-content:center;padding:3.5rem 2rem;text-align:center;}
+.rm-coming-soon.show{display:flex;}
+.rm-cs-icon{font-size:4.5rem;animation:popIn .6s cubic-bezier(.34,1.56,.64,1);margin-bottom:1.5rem;}
+.rm-cs-title{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--pink);letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;}
+.rm-cs-msg{font-family:'Rajdhani',sans-serif;font-size:1rem;color:#aaa;line-height:1.7;max-width:380px;}
+.rm-cs-sub{font-family:'Orbitron',monospace;font-size:.62rem;color:rgba(255,0,85,.6);letter-spacing:3px;margin-top:1rem;text-transform:uppercase;}
 
 @media(max-width:900px){
   .d-layout{grid-template-columns:1fr;}
@@ -216,6 +223,13 @@ body{background-color:#000;color:#fff;}
       <div class="rm-success-msg">Registration confirmed! See you at VYOM 2026.</div>
       <div class="rm-success-ev" id="rm-success-ev"></div>
       <button class="rm-success-close" onclick="closeModal()">Close</button>
+    </div>
+    <div class="rm-coming-soon" id="rm-coming-soon-view">
+      <div class="rm-cs-icon">⏳</div>
+      <div class="rm-cs-title">Coming Soon</div>
+      <div class="rm-cs-msg">Registrations for <span id="rm-cs-evname" style="color:#fff;font-weight:700;"></span> will open shortly. Stay tuned!</div>
+      <div class="rm-cs-sub">⚡ VYOM 2026 — Registrations Opening Soon</div>
+      <button class="rm-success-close" onclick="closeModal()" style="margin-top:2rem;">Close</button>
     </div>
   </div>
 </div>
@@ -298,7 +312,6 @@ body{background-color:#000;color:#fff;}
           </div>
           <div class="d-block">
             <div class="d-block-title">Contact Information</div>
-            <!-- ✅ UPDATED CONTACTS -->
             <div class="contact-row"><span class="c-name">Aditya Raj</span><a href="tel:9234578690" class="c-phone">📞 9234578690</a></div>
             <div class="contact-row"><span class="c-name">Nilmani Singh</span><a href="tel:7563016593" class="c-phone">📞 7563016593</a></div>
             <div class="contact-row"><span class="c-name">Raunit Kumar</span><a href="tel:6299240873" class="c-phone">📞 6299240873</a></div>
@@ -417,9 +430,7 @@ const EVENTS = [
   {id:'box-cricket',cat:'sports',catLabel:'Sports',icon:'🏏',name:'Box Cricket',
    img:'https://i.ibb.co/FbMfX5gx/8.jpg',
    tagline:'Action-packed box cricket at Vyom \'26! Form your squad of 8 (5 Boys + 3 Girls) and compete for glory.',
-   // ✅ UPDATED DESC
    desc:'🏏 Vyom \'26 Box Cricket Competition\n\nGet ready to hit the ground running at the Vyom \'26 Box Cricket Competition! Lace up your shoes, grab your bat, and join us for an action-packed day of thrilling box cricket matches. Show off your skills, strategize with your team, and experience the excitement of this offline sporting event. Don\'t miss out on the chance to be a part of this unforgettable day of competition and camaraderie!\n\n📋 ALL THAT YOU NEED TO KNOW ABOUT BOX CRICKET\n\n👥 Team Composition:\n• Each team consists of 8 players — 5 Boys + 3 Girls\n• One player can play for only one team. If a player is found playing for multiple teams, the team will be disqualified (for both men and women)\n• Each team can have a maximum of 3 players who have represented the University/College team\n• NO substitute for any girls and boys\n• Proper sportswear will only be considered (Shoes, T-Shirt, Lower). Without sports attire no one is allowed to play\n\n🏟️ Playing Area:\n• Box cricket is played in a confined space, not in the actual cricket field\n• The playing area is marked by lines or boundaries to denote runs and boundaries\n• There is no hit-wicket for girls\n• First over should be compulsorily bowled by a girl\n• One girl should take strike in batting\n• Full arm bowling is compulsory for boys\n• There is no restriction on bowling action of girls\n• The bowler must deliver the ball while standing inside the designated box, with no additional steps allowed\n• Second bouncer would be considered as No Ball in a single over\n• If the ball passes over the boundary/fence it will be considered out, except in the case of a No Ball or Free Hit\n• For a No Ball, same rule will be followed as in International Cricket\n• No extra run on Byes & Leg Byes\n• No Ball and Wide Ball would be considered as 1 extra run\n• Rules can be changed by higher authority during the match in certain specific conditions\n\n🏏 Overs:\nMatches are typically played with 4 overs per innings depending on the format and time available.\n\n⚖️ Umpires:\n• Matches may be officiated by one or two umpires, depending on availability\n• Umpire\'s call will be the final decision. If players argue with the umpire, the team may get disqualified\n\n🤝 Fair Play:\nGood sportsmanship and fair play are encouraged, with players expected to adhere to the rules and respect the decisions of the umpires.\n\nFor more details:\nAditya Raj: 9234578690 | Nilmani Singh: 7563016593 | Raunit Kumar: 6299240873\n\nVenue: In front of Central Library\nTeam Size: 8 Members (5 Boys + 3 Girls)',
-   // ✅ UPDATED DATE & TEAM
    date:'March 18, 2026 — 4:00 PM',venue:'In front of Central Library',team:'8 Members (5 Boys + 3 Girls)',
    formFields:[
      {id:'teamName',  label:'Team Name',             type:'text',   placeholder:'e.g. Thunder XI',     required:true, full:true},
@@ -1213,9 +1224,26 @@ let currentEv = null;
 function openModal(id){
   const ev = EVENTS.find(e=>e.id===id);
   if(!ev) return;
+
+  // ── All events except Box Cricket show Coming Soon ──
+  if(id !== 'box-cricket'){
+    document.getElementById('rm-form-view').style.display='none';
+    document.getElementById('rm-success-view').classList.remove('show');
+    const csv=document.getElementById('rm-coming-soon-view');
+    csv.classList.add('show');
+    document.getElementById('rm-cs-evname').textContent=ev.name;
+    document.getElementById('rm-icon').textContent=ev.icon;
+    document.getElementById('rm-name-label').textContent=ev.name+' — '+ev.catLabel;
+    document.getElementById('reg-modal-overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+    document.getElementById('reg-modal').scrollTop=0;
+    return;
+  }
+
   currentEv = ev;
   document.getElementById('rm-form-view').style.display='block';
   document.getElementById('rm-success-view').classList.remove('show');
+  document.getElementById('rm-coming-soon-view').classList.remove('show');
   document.getElementById('rm-status').className='rm-status';
   document.getElementById('rm-status').textContent='';
   const btn=document.getElementById('rm-submit-btn');
@@ -1251,6 +1279,7 @@ function openModal(id){
 function closeModal(){
   document.getElementById('reg-modal-overlay').classList.remove('open');
   document.body.style.overflow='';
+  document.getElementById('rm-coming-soon-view').classList.remove('show');
   currentEv=null;
 }
 
