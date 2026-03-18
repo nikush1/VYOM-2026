@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — VYOM 2026</title>
+<link rel="icon" type="image/png" href="https://i.ibb.co/TD3bmT7h/Untitled-design.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{--pink:#ff0055;--pink-dim:rgba(255,0,85,0.15);--pink-glow:rgba(255,0,85,0.35);}
+*{ cursor: none !important; }
+#shape-cursor {position:fixed;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;color:var(--pink);text-shadow:0 0 8px rgba(255,0,85,0.9),0 0 18px rgba(255,0,85,0.6),0 0 35px rgba(255,0,85,0.3);line-height:1;user-select:none;will-change:left,top;transition:transform 0.12s cubic-bezier(0.34,1.56,0.64,1),color 0.2s,text-shadow 0.2s,font-size 0.2s;}
+#shape-cursor.hover{font-size:1.5rem;text-shadow:0 0 12px rgba(255,0,85,1),0 0 28px rgba(255,0,85,0.8),0 0 55px rgba(255,0,85,0.5),0 0 80px rgba(255,0,85,0.2);}
+.shape-ghost{position:fixed;pointer-events:none;z-index:999990;font-family:'Orbitron',monospace;font-weight:900;color:var(--pink);line-height:1;user-select:none;will-change:left,top,opacity;}
+.shape-burst{position:fixed;pointer-events:none;z-index:999995;font-family:'Orbitron',monospace;font-weight:900;color:var(--pink);line-height:1;transform:translate(-50%,-50%) scale(1);animation:burstFade 0.55s ease-out forwards;}
+@keyframes burstFade{0%{transform:translate(-50%,-50%) scale(0.8);opacity:1;font-size:1.4rem;}100%{transform:translate(-50%,-50%) scale(2.8);opacity:0;font-size:1.4rem;}}
+#preloader{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity 0.8s,visibility 0.8s;}
+#preloader.hidden{opacity:0;visibility:hidden;}
+.preloader-content{text-align:center;animation:prePulse 2s ease-in-out infinite;}
+.preloader-logo{max-width:300px;width:80%;filter:drop-shadow(0 0 20px rgba(255,0,85,0.5));}
+@keyframes prePulse{0%,100%{transform:scale(1);opacity:.9;}50%{transform:scale(1.05);opacity:1;}}
+.filter-bar{display:flex;gap:0;flex-wrap:wrap;margin-bottom:2.5rem;background:#0c0c0c;border:1px solid rgba(255,0,85,0.15);overflow:hidden;}
+.fb{flex:1;min-width:80px;background:transparent;color:#aaa;border:none;border-right:1px solid rgba(255,0,85,0.1);padding:14px 6px;font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:1.5px;cursor:none;text-transform:uppercase;transition:all .2s;}
+.fb:last-child{border-right:none;}
+.fb:hover{color:#fff;background:rgba(255,0,85,.06);}
+.fb.active{background:var(--pink);color:#fff;}
+.search-wrap{position:relative;margin-bottom:2.5rem;}
+.s-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#aaa;font-size:1rem;pointer-events:none;}
+.s-input{width:100%;background:#0c0c0c;border:1px solid rgba(255,255,255,.07);color:#fff;padding:16px 16px 16px 46px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:500;outline:none;transition:border-color .2s;cursor:text!important;}
+.s-input:focus{border-color:rgba(255,0,85,.4);}
+.s-input::placeholder{color:#555;}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+.ev-card{background:#0c0c0c;border:1px solid rgba(255,255,255,.05);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column;}
+.ev-card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(255,0,85,.5);box-shadow:0 12px 40px rgba(255,0,85,.2);}
+.ev-img{position:relative;height:200px;overflow:hidden;background:#111;}
+.ev-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.ev-card:hover .ev-img img{transform:scale(1.07);}
+.ev-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#0d0d0d,#1a0a0f 60%,#200808);position:relative;}
+.ev-fallback::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,0,85,.07),transparent 70%);}
+.ev-badge{position:absolute;top:12px;right:12px;background:var(--pink);color:#fff;font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:2px;padding:5px 12px;text-transform:uppercase;z-index:2;}
+.ev-img-bar{position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);padding:28px 14px 8px;display:flex;align-items:flex-end;justify-content:space-between;}
+.ev-wm{font-family:'Orbitron',monospace;font-size:.48rem;color:#aaa;letter-spacing:2px;}
+.ev-vyom-tag{font-family:'Orbitron',monospace;font-size:.75rem;font-weight:900;color:var(--pink);letter-spacing:4px;text-align:right;}
+.ev-vyom-tag span{display:block;font-size:.48rem;color:rgba(255,0,85,.7);font-weight:400;letter-spacing:2px;}
+.ev-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
+.ev-name{font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;color:var(--pink);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.ev-tagline{font-size:.88rem;color:#ccc;line-height:1.6;margin-bottom:1.2rem;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+.ev-metas{display:flex;flex-direction:column;gap:6px;margin-bottom:1.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.04);}
+.ev-meta-r{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#ccc;}
+.ev-meta-r .ico{font-size:.9rem;flex-shrink:0;}
+.ev-view-btn{width:100%;background:var(--pink);color:#fff;border:none;padding:13px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:3px;cursor:none;text-transform:uppercase;transition:background .2s;}
+.ev-view-btn:hover{background:#cc0044;}
+.no-results{grid-column:1/-1;text-align:center;padding:5rem 2rem;font-family:'Orbitron',monospace;font-size:.72rem;color:#888;letter-spacing:3px;}
+#detail-page{display:none;padding-top:70px;}
+.d-back{display:inline-flex;align-items:center;gap:8px;color:var(--pink);font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:2px;cursor:none;text-decoration:none;padding:2rem 3rem .5rem;transition:gap .2s;text-transform:uppercase;}
+.d-back:hover{gap:14px;}
+.d-wrap{max-width:1200px;margin:0 auto;padding:1.5rem 3rem 5rem;}
+.d-title{font-family:'Orbitron',monospace;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--pink);text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem;line-height:1.1;}
+.d-cat-pill{display:inline-block;background:var(--pink);color:#fff;font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:3px;padding:6px 16px;text-transform:uppercase;margin-bottom:2rem;}
+.d-layout{display:grid;grid-template-columns:1fr 380px;gap:2.5rem;align-items:start;}
+.d-img-box{border:1px solid rgba(255,0,85,.15);overflow:hidden;background:#111;}
+.d-img-box img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.d-img-fallback{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(135deg,#0d0d0d,#1a0a0f 60%,#200808);position:relative;}
+.d-img-fallback::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,0,85,.08),transparent 70%);}
+.d-img-footer{background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.05);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.dif-l{font-family:'Orbitron',monospace;font-size:.52rem;color:#aaa;letter-spacing:3px;}
+.dif-r{display:flex;align-items:center;gap:14px;}
+.dif-rungta{font-family:'Orbitron',monospace;font-size:.55rem;color:#aaa;letter-spacing:1px;}
+.dif-vyom{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:900;color:var(--pink);letter-spacing:4px;}
+.dif-vyom small{display:block;font-size:.46rem;color:rgba(255,0,85,.7);font-weight:400;}
+.d-block{background:rgba(255,0,85,.04);border:1px solid rgba(255,0,85,.12);padding:2rem;margin-top:1.5rem;}
+.d-block-title{font-family:'Orbitron',monospace;font-size:.72rem;font-weight:900;color:var(--pink);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
+.d-desc-txt{font-size:.95rem;color:#ccc;line-height:1.85;}
+.contact-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.contact-row:last-child{border-bottom:none;}
+.c-name{font-weight:700;font-size:1rem;color:#ddd;}
+.c-phone{display:flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;font-size:.7rem;color:var(--pink);text-decoration:none;letter-spacing:1px;transition:color .2s;}
+.c-phone:hover{color:#fff;}
+.d-sidebar{position:sticky;top:90px;}
+.d-info-card{background:rgba(180,0,40,.1);border:1px solid rgba(255,0,85,.25);padding:2rem;}
+.dic-title{font-family:'Orbitron',monospace;font-size:.72rem;font-weight:900;color:var(--pink);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.5rem;}
+.dic-r{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,0,85,.1);}
+.dic-r:last-of-type{border-bottom:none;margin-bottom:1.5rem;}
+.dic-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.dic-lbl{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--pink);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.dic-val{font-size:.95rem;color:#fff;font-weight:600;}
+.dic-btn{width:100%;background:var(--pink);color:#fff;border:none;padding:16px;font-family:'Orbitron',monospace;font-size:.7rem;font-weight:700;letter-spacing:3px;cursor:none;text-transform:uppercase;transition:background .2s,box-shadow .2s;animation:glowPulse 2.5s ease-in-out infinite;}
+.dic-btn:hover{background:#cc0044;box-shadow:0 0 30px rgba(255,0,85,.5);}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(255,0,85,.3);}50%{box-shadow:0 0 25px rgba(255,0,85,.7),0 0 50px rgba(255,0,85,.3);}}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo-img{height:55px;width:auto;max-width:200px;object-fit:contain;}
+.nav-logo-sym,.nav-logo-text,.nav-logo-year{display:none;}
+#navbar{background:rgba(0,0,0,.3)!important;backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.05);transition:all .3s;}
+#navbar.scrolled{background:rgba(0,0,0,.6)!important;}
+#navbar .nav-links a,#navbar .nav-cta{color:#fff;}
+#navbar .nav-links a:hover,#navbar .nav-cta:hover{color:var(--pink);}
+#navbar .hamburger span{background:#fff;}
+.nav-logo-img{filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));}
+#main-content{opacity:0;transition:opacity .8s;}
+#main-content.visible{opacity:1;}
+body{background-color:#000;color:#fff;}
+.sec-desc,.aci-desc,.faq-a,.fc-sub,.cd-label,.scroll-txt,.stat-l,.cd-l,.rungta-quote{color:#ccc!important;}
+.footer-about,.footer-col ul li a,.footer-copy,.footer-sym{color:#ddd!important;}
+.footer-col ul li a:hover{color:var(--pink)!important;}
+.soc-btn{color:#fff!important;border-color:#444!important;}
+.soc-btn:hover{background:var(--pink)!important;border-color:var(--pink)!important;}
+#reg-notification{position:fixed;bottom:20px;left:20px;background:rgba(20,20,20,.4);backdrop-filter:blur(12px);border-left:4px solid var(--pink);border-radius:4px;padding:12px 18px;box-shadow:0 0 20px rgba(255,0,85,.3);z-index:9999;font-family:'Rajdhani',sans-serif;color:#fff;max-width:280px;transition:transform .3s,opacity .3s;border:1px solid rgba(255,255,255,.1);pointer-events:none;}
+.notif-content{display:flex;align-items:center;gap:10px;}
+.notif-icon{color:var(--pink);font-size:1.2rem;animation:pulse 2s infinite;}
+.notif-text{font-size:.85rem;line-height:1.4;}
+.notif-name{font-weight:700;color:var(--pink);}
+.notif-event{font-weight:600;color:#fff;}
+.notif-arena{display:inline-block;background:rgba(255,0,85,.2);padding:2px 8px;border-radius:20px;font-size:.7rem;margin-top:4px;color:#ccc;}
+@keyframes pulse{0%,100%{opacity:.8;}50%{opacity:1;text-shadow:0 0 8px var(--pink);}}
+#reg-modal-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;padding:1rem;}
+#reg-modal-overlay.open{opacity:1;visibility:visible;}
+#reg-modal{background:#080808;border:1px solid rgba(255,0,85,.4);box-shadow:0 0 80px rgba(255,0,85,.25),0 0 160px rgba(255,0,85,.08);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;transform:translateY(40px) scale(.96);transition:transform .4s cubic-bezier(.34,1.56,.64,1);position:relative;scrollbar-width:thin;scrollbar-color:var(--pink) #111;}
+#reg-modal-overlay.open #reg-modal{transform:translateY(0) scale(1);}
+#reg-modal::-webkit-scrollbar{width:4px;}
+#reg-modal::-webkit-scrollbar-track{background:#111;}
+#reg-modal::-webkit-scrollbar-thumb{background:var(--pink);}
+.rm-header{padding:2rem 2rem 1.5rem;position:relative;overflow:hidden;}
+.rm-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,0,85,.18),rgba(255,0,85,.03));pointer-events:none;}
+.rm-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,0,85,.5),transparent);}
+.rm-tag{font-family:'Orbitron',monospace;font-size:.5rem;font-weight:700;letter-spacing:4px;color:rgba(255,0,85,.7);text-transform:uppercase;margin-bottom:.4rem;position:relative;}
+.rm-title{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:2px;text-transform:uppercase;line-height:1.2;position:relative;}
+.rm-event-badge{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:rgba(255,0,85,.12);border:1px solid rgba(255,0,85,.3);padding:6px 14px;position:relative;}
+.rm-event-badge-icon{font-size:1.1rem;}
+.rm-event-badge-name{font-family:'Orbitron',monospace;font-size:.68rem;font-weight:700;color:var(--pink);letter-spacing:2px;text-transform:uppercase;}
+.rm-close{position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,0,85,.1);border:1px solid rgba(255,0,85,.3);color:#fff;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .2s,transform .2s;z-index:2;}
+.rm-close:hover{background:var(--pink);transform:rotate(90deg);}
+.rm-body{padding:2rem;}
+.rm-fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem;}
+.rm-field{display:flex;flex-direction:column;gap:7px;}
+.rm-field.full{grid-column:1/-1;}
+.rm-label{font-family:'Orbitron',monospace;font-size:.56rem;font-weight:700;letter-spacing:2px;color:rgba(255,0,85,.8);text-transform:uppercase;}
+.rm-label span{color:#ff6688;}
+.rm-input,.rm-select,.rm-textarea{background:#0d0d0d;border:1px solid rgba(255,255,255,.08);color:#fff;padding:12px 14px;font-family:'Rajdhani',sans-serif;font-size:.98rem;font-weight:500;outline:none;width:100%;box-sizing:border-box;transition:border-color .2s,box-shadow .2s;cursor:text!important;}
+.rm-select{cursor:none!important;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ff0055' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.rm-select option{background:#111;color:#fff;}
+.rm-input:focus,.rm-select:focus,.rm-textarea:focus{border-color:rgba(255,0,85,.5);box-shadow:0 0 0 3px rgba(255,0,85,.08);}
+.rm-input::placeholder,.rm-textarea::placeholder{color:#3a3a3a;}
+.rm-textarea{resize:vertical;min-height:80px;line-height:1.6;}
+.rm-hint{font-size:.75rem;color:#555;font-family:'Rajdhani',sans-serif;margin-top:4px;}
+.rm-div{border:none;border-top:1px solid rgba(255,255,255,.05);margin:1.6rem 0;}
+.rm-submit{width:100%;background:var(--pink);color:#fff;border:none;padding:17px;font-family:'Orbitron',monospace;font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:background .2s,transform .1s,box-shadow .2s;margin-top:1.4rem;position:relative;overflow:hidden;}
+.rm-submit::before{content:'';position:absolute;top:-50%;left:-60%;width:60px;height:200%;background:rgba(255,255,255,.15);transform:skewX(-20deg);transition:left .4s;}
+.rm-submit:hover::before{left:120%;}
+.rm-submit:hover:not(:disabled){background:#cc0044;box-shadow:0 0 30px rgba(255,0,85,.5);}
+.rm-submit:active:not(:disabled){transform:scale(.99);}
+.rm-submit:disabled{opacity:.55;}
+.rm-spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.rm-status{margin-top:1rem;padding:13px 16px;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;display:none;line-height:1.5;}
+.rm-status.success{display:block;background:rgba(0,200,100,.08);border:1px solid rgba(0,200,100,.3);color:#00c864;}
+.rm-status.error{display:block;background:rgba(255,0,85,.08);border:1px solid rgba(255,0,85,.3);color:#ff4477;}
+.rm-success{display:none;flex-direction:column;align-items:center;justify-content:center;padding:3.5rem 2rem;text-align:center;}
+.rm-success.show{display:flex;}
+.rm-success-anim{font-size:4.5rem;animation:popIn .6s cubic-bezier(.34,1.56,.64,1);margin-bottom:1.5rem;}
+@keyframes popIn{from{transform:scale(0) rotate(-20deg);opacity:0;}to{transform:scale(1) rotate(0);opacity:1;}}
+.rm-success-title{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:#00c864;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;}
+.rm-success-msg{font-family:'Rajdhani',sans-serif;font-size:1rem;color:#aaa;line-height:1.7;max-width:380px;}
+.rm-success-ev{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--pink);letter-spacing:2px;margin-top:1.2rem;}
+.rm-success-close{margin-top:2rem;background:var(--pink);color:#fff;border:none;padding:14px 44px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;}
+.rm-success-close:hover{background:#cc0044;}
+
+@media(max-width:900px){
+  .d-layout{grid-template-columns:1fr;}
+  .d-sidebar{position:static;}
+  .d-wrap{padding:1rem 1.5rem 4rem;}
+  .d-back{padding:1.5rem 1.5rem .5rem;}
+  .events-grid{grid-template-columns:1fr;}
+  .filter-bar{background:transparent;border:none;gap:6px;}
+  .fb{flex:none;border:1px solid rgba(255,0,85,.18);}
+  .rm-fields-grid{grid-template-columns:1fr;}
+  .rm-field.full{grid-column:1;}
+  .nav-logo-img{height:45px;max-width:160px;}
+}
+</style>
+</head>
+<body>
+
+<div id="shape-cursor">○</div>
+
+<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="preloader-logo">
+  </div>
+</div>
+
+<div id="reg-modal-overlay" onclick="overlayClick(event)">
+  <div id="reg-modal">
+    <div id="rm-form-view">
+      <div class="rm-header">
+        <div class="rm-tag">⚡ VYOM 2026 — Event Registration</div>
+        <div class="rm-title">Register Now</div>
+        <div class="rm-event-badge">
+          <span class="rm-event-badge-icon" id="rm-icon"></span>
+          <span class="rm-event-badge-name" id="rm-name-label"></span>
+        </div>
+        <button class="rm-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="rm-body">
+        <div id="rm-dynamic-fields"></div>
+        <button class="rm-submit" id="rm-submit-btn" onclick="submitReg()">
+          ⚡ <span id="rm-submit-label">Register</span>
+        </button>
+        <div class="rm-status" id="rm-status"></div>
+      </div>
+    </div>
+    <div class="rm-success" id="rm-success-view">
+      <div class="rm-success-anim">🎉</div>
+      <div class="rm-success-title">You're In!</div>
+      <div class="rm-success-msg">Registration confirmed! See you at VYOM 2026.</div>
+      <div class="rm-success-ev" id="rm-success-ev"></div>
+      <button class="rm-success-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="events.html" class="active">Events</a>
+  <a href="sponsors.html">Sponsors</a>
+  <a href="brochure.html">Brochure</a>
+  <a href="https://rungta.campusmall.in/">Merchandise</a>
+  <a href="events.html">Register</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="sponsors.html">Sponsors</a></li>
+    <li><a href="brochure.html">Brochure</a></li>
+    <li><a href="https://rungta.campusmall.in/" target="_blank">Merchandise</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="events.html" class="nav-cta">Register Now</a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div id="main-content">
+  <div id="list-page">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-grid"></div>
+      <div class="page-tag">All Events &amp; Challenges</div>
+      <h1 class="page-title">Events <span>&amp; Challenges</span></h1>
+      <p class="page-sub">From technical challenges to cultural performances, sports, gaming, art, and literary battles.</p>
+    </div>
+    <section>
+      <div class="wrap">
+        <div class="filter-bar" id="filter-bar">
+          <button class="fb active" onclick="filterEv('all',this)">All</button>
+          <button class="fb" onclick="filterEv('sports',this)">Sports</button>
+          <button class="fb" onclick="filterEv('esports',this)">E-Sports</button>
+          <button class="fb" onclick="filterEv('technical',this)">Technical</button>
+          <button class="fb" onclick="filterEv('entrepreneurship',this)">E-Summit</button>
+          <button class="fb" onclick="filterEv('cultural',this)">Cultural</button>
+          <button class="fb" onclick="filterEv('creative',this)">Creative</button>
+          <button class="fb" onclick="filterEv('fun',this)">Fun</button>
+          <button class="fb" onclick="filterEv('literary',this)">Literary</button>
+        </div>
+        <div class="search-wrap">
+          <span class="s-icon">🔍</span>
+          <input type="text" class="s-input" id="s-input" placeholder="Search events..." oninput="searchEv(this.value)">
+        </div>
+        <div class="events-grid" id="ev-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="detail-page">
+    <a class="d-back" onclick="showList()">← Back to Events</a>
+    <div class="d-wrap">
+      <div class="d-title" id="d-title"></div>
+      <div class="d-cat-pill" id="d-cat"></div>
+      <div class="d-layout">
+        <div>
+          <div class="d-img-box" id="d-img-box"></div>
+          <div class="d-img-footer">
+            <span class="dif-l">vyom.rungta.ac.in</span>
+            <div class="dif-r">
+              <span class="dif-rungta">RUNGTA EDUCATIONAL FOUNDATION</span>
+              <div class="dif-vyom">VYOM<small>2026</small></div>
+            </div>
+          </div>
+          <div class="d-block">
+            <div class="d-block-title">Event Description</div>
+            <div class="d-desc-txt" id="d-desc"></div>
+          </div>
+          <div class="d-block">
+            <div class="d-block-title">Contact Information</div>
+            <!-- ✅ UPDATED CONTACTS -->
+            <div class="contact-row"><span class="c-name">Aditya Raj</span><a href="tel:9234578690" class="c-phone">📞 9234578690</a></div>
+            <div class="contact-row"><span class="c-name">Nilmani Singh</span><a href="tel:7563016593" class="c-phone">📞 7563016593</a></div>
+            <div class="contact-row"><span class="c-name">Raunit Kumar</span><a href="tel:6299240873" class="c-phone">📞 6299240873</a></div>
+          </div>
+        </div>
+        <div class="d-sidebar">
+          <div class="d-info-card">
+            <div class="dic-title">Event Details</div>
+            <div class="dic-r"><span class="dic-ico">📅</span><div><div class="dic-lbl">Date</div><div class="dic-val" id="d-date"></div></div></div>
+            <div class="dic-r"><span class="dic-ico">📍</span><div><div class="dic-lbl">Venue</div><div class="dic-val" id="d-venue"></div></div></div>
+            <div class="dic-r"><span class="dic-ico">👥</span><div><div class="dic-lbl">Team Size</div><div class="dic-val" id="d-team"></div></div></div>
+            <button class="dic-btn" id="d-register-btn">⚡ Register Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="site-footer">
+    <div class="footer-grid">
+      <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="#">@</a></div></div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li></ul></div>
+      <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=literary">Literary</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:9234578690">Aditya Raj: 9234578690</a></li><li><a href="tel:7563016593">Nilmani Singh: 7563016593</a></li><li><a href="tel:6299240873">Raunit Kumar: 6299240873</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2026 VYOM'26 — Rungta. All rights reserved.</span><span class="footer-sym">○ △ □</span></div>
+  </footer>
+</div>
+
+<div id="reg-notification">
+  <div class="notif-content">
+    <div class="notif-icon">◉</div>
+    <div class="notif-text">
+      <span class="notif-name" id="notif-name">Rahul</span> just registered for <span class="notif-event" id="notif-event">Sports</span>
+      <div class="notif-arena" id="notif-arena">🏏 Box Cricket</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQbm3JM-zS7JIrrynJanazeWr59TuT6T6cm9jpcEQR2VvhdUgli_wOdUxRSf__k08D/exec';
+
+// ── CURSOR ──
+(function(){
+  const cur = document.getElementById('shape-cursor');
+  const SHAPES = ['○','△','□'];
+  const GHOST_COUNT = 6;
+  let shapeIdx = 0;
+  let mx = -300, my = -300;
+  const history = Array(GHOST_COUNT * 5 + 1).fill({x:-300,y:-300});
+  const ghosts = [];
+  for(let i = 0; i < GHOST_COUNT; i++){
+    const g = document.createElement('span');
+    g.className = 'shape-ghost';
+    const frac = (i+1)/GHOST_COUNT;
+    g.style.cssText = `font-size:${1.0-frac*0.55}rem;opacity:${0.45-frac*0.38};text-shadow:0 0 ${8-i}px rgba(255,0,85,${0.7-i*0.1});transform:translate(-50%,-50%);`;
+    g.textContent = SHAPES[0];
+    document.body.appendChild(g);
+    ghosts.push(g);
+  }
+  function cycleShape(){
+    shapeIdx=(shapeIdx+1)%SHAPES.length;
+    const sym=SHAPES[shapeIdx];
+    cur.style.transform='translate(-50%,-50%) scale(1.6)';
+    cur.textContent=sym;
+    setTimeout(()=>{cur.style.transform='translate(-50%,-50%) scale(1)';},150);
+    ghosts.forEach(g=>g.textContent=sym);
+  }
+  setInterval(cycleShape,2000);
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+    history.unshift({x:mx,y:my});history.pop();
+    const isHover=!!e.target.closest('a,button,.ev-card,.fb,.rm-close,.rm-submit,.rm-success-close,.dic-btn,.ev-view-btn,.d-back');
+    cur.classList.toggle('hover',isHover);
+  });
+  function animateGhosts(){
+    ghosts.forEach((g,i)=>{
+      const src=history[Math.min((i+1)*4,history.length-1)];
+      g.style.left=src.x+'px';g.style.top=src.y+'px';
+    });
+    requestAnimationFrame(animateGhosts);
+  }
+  requestAnimationFrame(animateGhosts);
+  document.addEventListener('click',e=>{
+    const sym=SHAPES[shapeIdx];
+    for(let i=0;i<3;i++){
+      const b=document.createElement('span');
+      b.className='shape-burst';b.textContent=sym;
+      b.style.left=e.clientX+'px';b.style.top=e.clientY+'px';
+      b.style.animationDelay=(i*0.08)+'s';
+      document.body.appendChild(b);
+      setTimeout(()=>b.remove(),700);
+    }
+  });
+  document.addEventListener('mouseleave',()=>{cur.style.opacity='0';ghosts.forEach(g=>g.style.opacity='0');});
+  document.addEventListener('mouseenter',()=>{cur.style.opacity='';ghosts.forEach((g,i)=>{const frac=(i+1)/GHOST_COUNT;g.style.opacity=String(0.45-frac*0.38);});});
+})();
+
+// ── PRELOADER ──
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('preloader').classList.add('hidden');
+    document.getElementById('main-content').classList.add('visible');
+  },1500);
+});
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>80));
+function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
+
+// =============================================================
+//  EVENTS DATA
+// =============================================================
+const EVENTS = [
+
+  // ── SPORTS ──────────────────────────────────────────────────
+  {id:'box-cricket',cat:'sports',catLabel:'Sports',icon:'🏏',name:'Box Cricket',
+   img:'https://i.ibb.co/FbMfX5gx/8.jpg',
+   tagline:'Action-packed box cricket at Vyom \'26! Form your squad of 8 (5 Boys + 3 Girls) and compete for glory.',
+   // ✅ UPDATED DESC
+   desc:'🏏 Vyom \'26 Box Cricket Competition\n\nGet ready to hit the ground running at the Vyom \'26 Box Cricket Competition! Lace up your shoes, grab your bat, and join us for an action-packed day of thrilling box cricket matches. Show off your skills, strategize with your team, and experience the excitement of this offline sporting event. Don\'t miss out on the chance to be a part of this unforgettable day of competition and camaraderie!\n\n📋 ALL THAT YOU NEED TO KNOW ABOUT BOX CRICKET\n\n👥 Team Composition:\n• Each team consists of 8 players — 5 Boys + 3 Girls\n• One player can play for only one team. If a player is found playing for multiple teams, the team will be disqualified (for both men and women)\n• Each team can have a maximum of 3 players who have represented the University/College team\n• NO substitute for any girls and boys\n• Proper sportswear will only be considered (Shoes, T-Shirt, Lower). Without sports attire no one is allowed to play\n\n🏟️ Playing Area:\n• Box cricket is played in a confined space, not in the actual cricket field\n• The playing area is marked by lines or boundaries to denote runs and boundaries\n• There is no hit-wicket for girls\n• First over should be compulsorily bowled by a girl\n• One girl should take strike in batting\n• Full arm bowling is compulsory for boys\n• There is no restriction on bowling action of girls\n• The bowler must deliver the ball while standing inside the designated box, with no additional steps allowed\n• Second bouncer would be considered as No Ball in a single over\n• If the ball passes over the boundary/fence it will be considered out, except in the case of a No Ball or Free Hit\n• For a No Ball, same rule will be followed as in International Cricket\n• No extra run on Byes & Leg Byes\n• No Ball and Wide Ball would be considered as 1 extra run\n• Rules can be changed by higher authority during the match in certain specific conditions\n\n🏏 Overs:\nMatches are typically played with 4 overs per innings depending on the format and time available.\n\n⚖️ Umpires:\n• Matches may be officiated by one or two umpires, depending on availability\n• Umpire\'s call will be the final decision. If players argue with the umpire, the team may get disqualified\n\n🤝 Fair Play:\nGood sportsmanship and fair play are encouraged, with players expected to adhere to the rules and respect the decisions of the umpires.\n\nFor more details:\nAditya Raj: 9234578690 | Nilmani Singh: 7563016593 | Raunit Kumar: 6299240873\n\nVenue: In front of Central Library\nTeam Size: 8 Members (5 Boys + 3 Girls)',
+   // ✅ UPDATED DATE & TEAM
+   date:'March 18, 2026 — 4:00 PM',venue:'In front of Central Library',team:'8 Members (5 Boys + 3 Girls)',
+   formFields:[
+     {id:'teamName',  label:'Team Name',             type:'text',   placeholder:'e.g. Thunder XI',     required:true, full:true},
+     {id:'name',      label:'Team Captain Name',      type:'text',   placeholder:'e.g. Arjun Sharma',   required:true},
+     {id:'erpId',     label:'ERP ID (Captain)',        type:'text',   placeholder:'e.g. 2210101234',     required:true},
+     {id:'branch',    label:'Branch (Captain)',        type:'text',   placeholder:'e.g. CSE 3rd Year',   required:true},
+     {id:'college',   label:'College (Captain)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'phone',     label:'Contact Info (Captain)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+     {id:'email',     label:'Email Address (Captain)', type:'email',  placeholder:'captain@email.com',   required:true},
+
+     {id:'member1',  label:'Team Member 1',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp1',     label:'ERP (Member 1)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college1', label:'College (Member 1)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact1', label:'Contact Info (Member 1)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member2',  label:'Team Member 2',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp2',     label:'ERP (Member 2)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college2', label:'College (Member 2)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact2', label:'Contact Info (Member 2)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member3',  label:'Team Member 3',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp3',     label:'ERP (Member 3)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college3', label:'College (Member 3)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact3', label:'Contact Info (Member 3)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member4',  label:'Team Member 4',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp4',     label:'ERP (Member 4)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college4', label:'College (Member 4)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact4', label:'Contact Info (Member 4)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member5',  label:'Team Member 5',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp5',     label:'ERP (Member 5)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college5', label:'College (Member 5)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact5', label:'Contact Info (Member 5)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member6',  label:'Team Member 6',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp6',     label:'ERP (Member 6)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college6', label:'College (Member 6)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact6', label:'Contact Info (Member 6)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
+
+     {id:'member7',  label:'Team Member 7',           type:'text',   placeholder:'Full name',           required:true},
+     {id:'erp7',     label:'ERP (Member 7)',           type:'text',   placeholder:'ERP ID',              required:true},
+     {id:'college7', label:'College (Member 7)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
+     {id:'contact7', label:'Contact Info (Member 7)',  type:'tel',    placeholder:'10-digit mobile',     required:true, full:true},
+   ]},
+
+  {id:'carrom',cat:'sports',catLabel:'Sports',icon:'🎯',name:'Carrom',
+   img:'https://i.ibb.co/gFmGsk4W/6.jpg',
+   tagline:'Test your precision and strategy at the Carrom Tournament — Vyom \'26!',
+   desc:'🎯 Vyom \'26 Carrom Tournament\n\nTest your precision, flicking skills, and board sense! Compete in an exciting individual battle of strategy and accuracy.\n\nPlayers will compete in a round-robin format followed by knockout rounds. May the best striker win!\n\nVenue: B-Block\nFormat: Single Player',
+   date:'April 7, 2026',venue:'B-Block',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Priya Singh',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — IT 2nd Year',required:true},
+   ]},
+
+  {id:'chess',cat:'sports',catLabel:'Sports',icon:'♟️',name:'Chess',
+   img:'https://i.ibb.co/JWvqDgtY/7.jpg',
+   tagline:'The ultimate battle of wits at Vyom \'26! Prove you are the grandmaster.',
+   desc:'♟️ Vyom \'26 Chess Championship\n\nShowcase your intellect, foresight, and strategic thinking. Compete against the best minds from across the campus.\n\nStandard time controls apply. Swiss format with knockout finals for top performers.\n\nVenue: B-Block\nFormat: Single Player',
+   date:'April 7, 2026',venue:'B-Block',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Kabir Mehta',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CS 4th Year',required:true},
+     {id:'extraInfo',label:'Chess Rating / Experience',type:'text',placeholder:'e.g. Beginner / FIDE 1200 / Club player',required:false,hint:'Optional — helps with seeding'},
+   ]},
+
+  {id:'volleyball',cat:'sports',catLabel:'Sports',icon:'🏐',name:'Volleyball',
+   img:'https://i.ibb.co/tT8S6HQR/9.jpg',
+   tagline:'High-energy volleyball at Vyom \'26! Spike, block, and dive your way to glory.',
+   desc:'🏐 Vyom \'26 Volleyball Tournament!\n\nSpike, block, and dive your way to glory. Both Boys and Girls teams are welcome to participate!\n\nKnockout format. Standard 6-player team rules apply. Best of 3 sets per match.\n\nVenue: Main Volleyball Court\nTeam: Boys & Girls',
+   date:'April 5, 2026',venue:'Main Volleyball Court',team:'Boys & Girls Teams',
+   formFields:[
+     {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Sneha Rao',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Mechanical',required:true},
+     {id:'extraInfo',label:'Gender Category',type:'select',options:['Boys','Girls'],required:true},
+     {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'basketball',cat:'sports',catLabel:'Sports',icon:'🏀',name:'Basketball',
+   img:'https://i.ibb.co/Y7pcZ8c6/10.jpg',
+   tagline:'Dribble, shoot and score at Vyom \'26! 3×3 Girls and 5×5 Boys formats.',
+   desc:'🏀 Vyom \'26 Basketball Championship!\n\nTwo formats — 3×3 for Girls and 5×5 for Boys. Dominate the court, run the plays and bring home the trophy!\n\nGirls: 3×3 half-court format (team of 3+1 sub).\nBoys: Full 5×5 basketball (team of 5+2 subs).\n\nVenue: Basketball Court',
+   date:'April 5, 2026',venue:'Basketball Court',team:'3×3 Girls / 5×5 Boys',
+   formFields:[
+     {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Deepak Rawat',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+     {id:'extraInfo',label:'Team Category',type:'select',options:['Boys (5×5)','Girls (3×3)'],required:true},
+     {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'athletics-100m',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — 100m Sprint',
+   img:'',
+   tagline:'Speed is everything! Race the 100m sprint at Vyom \'26.',
+   desc:'🏃 Vyom \'26 Athletics — 100m Sprint\n\nThe fastest legs on campus go head to head. Heats followed by a grand final for the top sprinters.\n\nOpen to all students. Separate categories for Boys and Girls.\n\nVenue: Athletics Track',
+   date:'April 7–8, 2026',venue:'Athletics Track',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Anjali Tiwari',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Civil 2nd Year',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
+  {id:'athletics-400m',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — 400m Run',
+   img:'',
+   tagline:'Endurance and speed — the 400m test at Vyom \'26.',
+   desc:'🏃 Vyom \'26 Athletics — 400m Run\n\nOne full lap around the track. A test of both speed and stamina. Heats and finals format.\n\nOpen to all students. Separate categories for Boys and Girls.\n\nVenue: Athletics Track',
+   date:'April 7–8, 2026',venue:'Athletics Track',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Suresh Rathod',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
+  {id:'athletics-relay',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — Relay Race',
+   img:'',
+   tagline:'Team speed and baton passing — the Relay Race at Vyom \'26!',
+   desc:'🏃 Vyom \'26 Athletics — Relay Race\n\nA team of 4 runners, one baton, one goal — cross that finish line first! Perfect your exchanges and race as one.\n\nStandard 4×100m relay format. Open for Boys and Girls teams.\n\nVenue: Athletics Track',
+   date:'April 7–8, 2026',venue:'Athletics Track',team:'4 Members (Team)',
+   formFields:[
+     {id:'name',label:'Team Captain',type:'text',placeholder:'e.g. Rakesh Kumar',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Sports',required:true},
+     {id:'extraInfo',label:'Team Category',type:'select',options:['Boys','Girls'],required:true},
+     {id:'teamMembers',label:'All 4 Runners',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'kabaddi',cat:'sports',catLabel:'Sports',icon:'🤼',name:'Kabaddi',
+   img:'https://i.ibb.co/N62q1D9r/14.jpg',
+   tagline:'Strength, agility and breath control — Kabaddi at Vyom \'26!',
+   desc:'🤼 Vyom \'26 Kabaddi Tournament\n\nAssemble your team of 7 and prove dominance on the mat! Touch, hold, escape — the oldest Indian sport returns.\n\nStandard Kabaddi rules apply. Knockout format. Held across multiple rounds.\n\nVenue: Kabaddi Court',
+   date:'April 7–8, 2026',venue:'Kabaddi Court',team:'7 Players',
+   formFields:[
+     {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Suresh Kumar',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — ME',required:true},
+     {id:'teamMembers',label:'All 7 Players',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'kho-kho',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Kho Kho',
+   img:'',
+   tagline:'Speed and strategy in the classic Kho Kho at Vyom \'26!',
+   desc:'🏃 Vyom \'26 Kho Kho Championship\n\nFast-paced traditional sport requiring lightning reflexes, teamwork, speed, and strategy. One of India\'s most exciting indigenous sports.\n\nStandard Kho Kho rules apply. Knockout format.\n\nVenue: Sports Ground',
+   date:'April 5, 2026',venue:'Sports Ground',team:'Standard Team',
+   formFields:[
+     {id:'name',label:'Team Captain',type:'text',placeholder:"Captain's full name",required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'table-tennis',cat:'sports',catLabel:'Sports',icon:'🏓',name:'Table Tennis',
+   img:'',
+   tagline:'Precision, reflexes and spin — Table Tennis at Vyom \'26!',
+   desc:'🏓 Vyom \'26 Table Tennis Tournament\n\nSingle player format. Lightning-fast rallies, killer spin, and match-winning precision — the best will advance through rounds to the finals.\n\nStandard TT rules. Knockout format.\n\nVenue: B-Block',
+   date:'April 5, 2026',venue:'B-Block',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nikhil Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — EE 3rd Year',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
+  {id:'shot-put',cat:'sports',catLabel:'Sports',icon:'🏋️',name:'Shot Put',
+   img:'',
+   tagline:'Pure power and technique at the Shot Put competition — Vyom \'26!',
+   desc:'🏋️ Vyom \'26 Shot Put Competition\n\nIndividual competition — give your best throw! Strength, stance, and technique determine who throws farthest.\n\nSeparate categories for Male and Female participants. 3 attempts per participant.\n\nVenue: Athletics Ground',
+   date:'April 7–8, 2026',venue:'Athletics Ground',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rahul Singh',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
+  {id:'arm-wrestling',cat:'sports',catLabel:'Sports',icon:'💪',name:'Arm Wrestling',
+   img:'https://i.ibb.co/7tjGx6VW/29.jpg',
+   tagline:'Pure strength on the table — Arm Wrestling at Vyom \'26!',
+   desc:'💪 Vyom \'26 Arm Wrestling Championship\n\nOne-on-one battles of pure power and technique. Open to all! Compete across weight categories and prove you have the strongest grip on campus.\n\nWeight categories ensure fair competition. Knockout bracket format.\n\nVenue: B-Block',
+   date:'April 7–8, 2026',venue:'B-Block',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Vikram Patel',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Civil',required:true},
+     {id:'extraInfo',label:'Weight Category',type:'select',options:['Under 60kg','60–75kg','75–90kg','90kg+'],required:true},
+   ]},
+
+  {id:'badminton',cat:'sports',catLabel:'Sports',icon:'🏸',name:'Badminton',
+   img:'',
+   tagline:'Fast rallies and smashing winners — Badminton at Vyom \'26!',
+   desc:'🏸 Vyom \'26 Badminton Tournament\n\nFast-paced singles competition. Showcase your footwork, smashes and drop shots to advance through the rounds.\n\nStandard badminton rules (21 points per game). Knockout format. Separate Men\'s and Women\'s categories.\n\nVenue: Badminton Court',
+   date:'April 5, 2026',venue:'Badminton Court',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Priya Nair',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE 2nd Year',required:true},
+     {id:'extraInfo',label:'Gender Category',type:'select',options:['Men','Women'],required:true},
+   ]},
+
+  // ── E-SPORTS ─────────────────────────────────────────────────
+  {id:'bgmi',cat:'esports',catLabel:'E-Sports',icon:'🎮',name:'BGMI',
+   img:'https://i.ibb.co/bM7TqF66/Brown-and-Light-Brown-Circle-Framed-Instagram-Profile-Picture-You-Tube-Thumbnail-1.jpg',
+   tagline:'Battle royale at Vyom \'26! Land smart, fight hard — only one squad survives.',
+   desc:'🎮 Vyom \'26 BGMI Tournament\n\nBring your own device. Form your squad, choose your drop zone strategically, and eliminate every rival squad. Classic Battle Royale format.\n\nSquad of 4. BYOD (Bring Your Own Device). Standard tournament settings apply.\n\nVenue: SB-03',
+   date:'April 7–8, 2026',venue:'SB-03',team:'Squad of 4 (BYOD)',
+   formFields:[
+     {id:'name',label:'Squad Leader Name',type:'text',placeholder:'e.g. Yash Gamer',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Squad Leader BGMI UID / IGN',type:'text',placeholder:'e.g. YashGG#12345',required:true,hint:'Your in-game name and ID'},
+     {id:'teamMembers',label:'All 4 Squad Members (Name + IGN)',type:'textarea',placeholder:'1. Name — IGN\n2. Name — IGN\n3. Name — IGN\n4. Name — IGN',required:true,full:true},
+   ]},
+
+  {id:'valorant',cat:'esports',catLabel:'E-Sports',icon:'🎯',name:'Valorant',
+   img:'https://i.ibb.co/rBXM3PP/21.jpg',
+   tagline:'Tactical shooter skills at Vyom \'26 Valorant! Aim, ability, win.',
+   desc:'🎯 Vyom \'26 Valorant Tournament\n\nBring your own device. The best tactical minds will rise through the bracket. Agent selection, team strategy, and clutch plays decide the champion.\n\nTeam of 5. BYOD. Standard Valorant competitive settings.\n\nVenue: GA-17',
+   date:'April 7–8, 2026',venue:'GA-17',team:'Team of 5 (BYOD)',
+   formFields:[
+     {id:'name',label:'Team Captain / IGN',type:'text',placeholder:'e.g. IronSight#1234',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — IT',required:true},
+     {id:'extraInfo',label:'Valorant Rank',type:'select',options:['Iron','Bronze','Silver','Gold','Platinum','Diamond','Immortal','Radiant','Unranked'],required:true},
+     {id:'teamMembers',label:'All 5 Team Members (Name + RiotID)',type:'textarea',placeholder:'1. Name — RiotID\n2. Name — RiotID\n...',required:true,full:true},
+   ]},
+
+  {id:'free-fire',cat:'esports',catLabel:'E-Sports',icon:'🔥',name:'Free Fire',
+   img:'https://i.ibb.co/Qjdw2sbr/23.jpg',
+   tagline:'Last squad standing at Vyom \'26 Free Fire! Battle royale on mobile.',
+   desc:'🔥 Vyom \'26 Free Fire Tournament\n\nForm a squad of 4. Last squad standing takes it all! Classic Battle Royale mode on mobile.\n\nBYOD. Squad of 4. Standard Free Fire tournament rules apply.\n\nVenue: SB-02',
+   date:'April 7–8, 2026',venue:'SB-02',team:'Squad of 4 (BYOD)',
+   formFields:[
+     {id:'name',label:'Squad Leader / IGN',type:'text',placeholder:'e.g. FireStorm#456',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Free Fire UID',type:'text',placeholder:'Your numeric UID',required:true},
+     {id:'teamMembers',label:'All 4 Squad Members (Name + UID)',type:'textarea',placeholder:'1. Name — UID\n2. Name — UID\n3. Name — UID\n4. Name — UID',required:true,full:true},
+   ]},
+
+  {id:'cod-mobile',cat:'esports',catLabel:'E-Sports',icon:'🔫',name:'Call of Duty Mobile',
+   img:'',
+   tagline:'Modern warfare on mobile at Vyom \'26 COD Mobile!',
+   desc:'🔫 Vyom \'26 Call of Duty Mobile Tournament\n\nThe most iconic FPS franchise goes mobile. Form your squad, pick your loadouts, and dominate every game mode.\n\nTeam of 5. BYOD. Standard CODM tournament settings. Multiple rounds to the grand final.\n\nVenue: E-Sports Zone',
+   date:'April 7–8, 2026',venue:'E-Sports Zone',team:'Team of 5 (BYOD)',
+   formFields:[
+     {id:'name',label:'Team Captain / IGN',type:'text',placeholder:'e.g. Delta Squad / Alpha#789',required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Player ID / UID',type:'text',placeholder:'Your CODM Player ID',required:true},
+     {id:'teamMembers',label:'All 5 Team Members (Name + IGN)',type:'textarea',placeholder:'1. Name — IGN\n2. Name — IGN\n...',required:true,full:true},
+   ]},
+
+  {id:'stumble-guys',cat:'esports',catLabel:'E-Sports',icon:'🎪',name:'Stumble Guys',
+   img:'',
+   tagline:'Chaotic fun and last-player-standing at Vyom \'26 Stumble Guys!',
+   desc:'🎪 Vyom \'26 Stumble Guys Tournament\n\nThe wildest party game on mobile! Navigate obstacle courses, survive elimination rounds, and be the last one standing.\n\nSolo format. BYOD. Multiple rounds of chaos-filled gameplay.\n\nVenue: E-Sports Zone',
+   date:'April 7–8, 2026',venue:'E-Sports Zone',team:'Single Player (BYOD)',
+   formFields:[
+     {id:'name',label:'Full Name / IGN',type:'text',placeholder:'e.g. RocketStumbler',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — IT',required:true},
+     {id:'extraInfo',label:'Stumble Guys Player ID',type:'text',placeholder:'Your in-game Player ID',required:true},
+   ]},
+
+  {id:'strike-world',cat:'esports',catLabel:'E-Sports',icon:'⚔️',name:'Strike World',
+   img:'',
+   tagline:'Dominate the battlefield in Strike World at Vyom \'26!',
+   desc:'⚔️ Vyom \'26 Strike World Tournament\n\nAn intense mobile combat game that tests aim, strategy, and teamwork. Compete for the top rank.\n\nBYOD. Knockout format. Details shared on registration.\n\nVenue: E-Sports Zone',
+   date:'April 7–8, 2026',venue:'E-Sports Zone',team:'Team (BYOD)',
+   formFields:[
+     {id:'name',label:'Team Leader / IGN',type:'text',placeholder:'Your name and in-game handle',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'teamMembers',label:'Team Members (with IGN)',type:'textarea',placeholder:'One per line: Name — IGN',required:true,full:true},
+   ]},
+
+  {id:'chess-online',cat:'esports',catLabel:'E-Sports',icon:'♟️',name:'Chess (Online)',
+   img:'',
+   tagline:'Rapid chess battles online at Vyom \'26 — outsmart your opponents!',
+   desc:'♟️ Vyom \'26 Online Chess Tournament\n\nRapid-format online chess. Open to all levels. Games will be played on Chess.com or Lichess under tournament links shared on registration.\n\nSolo. Online format. Swiss rounds with top players advancing to the final.\n\nVenue: Online / Virtual',
+   date:'April 7–8, 2026',venue:'Online / Virtual',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rahul Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE 3rd Year',required:true},
+     {id:'extraInfo',label:'Chess.com / Lichess Username',type:'text',placeholder:'e.g. KnightRider_2026',required:true,hint:'Create a free account if you don\'t have one'},
+   ]},
+
+  // ── TECHNICAL ─────────────────────────────────────────────────
+  {id:'code-future',cat:'technical',catLabel:'Technical',icon:'💻',name:'Code the Future of Your Campus',
+   img:'',
+   tagline:'Build tech solutions for real campus problems at Vyom \'26!',
+   desc:'💻 Vyom \'26 — Code the Future of Your Campus\n\nIdentify a real problem on your campus and build a software/app solution for it. Present your project to a panel of technical judges.\n\nTeam of up to 4. All tech stacks welcome — web, mobile, AI, IoT. Judged on innovation, feasibility, execution and presentation.\n\nVenue: Computer Lab',
+   date:'April 7–8, 2026',venue:'Computer Lab',team:'Up to 4 Members',
+   formFields:[
+     {id:'name',label:'Team Name / Leader',type:'text',placeholder:'e.g. CodeCraft / Priya Joshi',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Project Idea / Problem Statement',type:'text',placeholder:'e.g. Smart attendance using face recognition',required:true,full:false},
+     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'mvp-in-a-day',cat:'technical',catLabel:'Technical',icon:'🚀',name:'MVP in a Day (MSA)',
+   img:'',
+   tagline:'Ship a minimum viable product in 24 hours at Vyom \'26 — MSA Event!',
+   desc:'🚀 Vyom \'26 — MVP in a Day (Microsoft Student Ambassadors)\n\nDesign, build and present a Minimum Viable Product within a single day. Use any technology — Azure, web, AI, mobile. Judged on speed, quality and innovation.\n\nSponsored by Microsoft Learn Student Ambassadors. Team of 1–4.\n\nVenue: Microsoft Lab',
+   date:'April 7–8, 2026',venue:'Microsoft Lab',team:'1–4 Members',
+   formFields:[
+     {id:'name',label:'Team Name / Leader',type:'text',placeholder:'e.g. BuildFast / Rohan Gupta',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE / IT',required:true},
+     {id:'extraInfo',label:'MVP Concept / Tech Stack',type:'text',placeholder:'e.g. AI career advisor — React + Azure OpenAI',required:false,hint:'Brief description of what you plan to build'},
+     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line (1–4 members)',required:false,full:true},
+   ]},
+
+  {id:'digital-escape-room',cat:'technical',catLabel:'Technical',icon:'🔐',name:'Digital Escape Room (GDG)',
+   img:'https://i.ibb.co/whHnZd6R/24.jpg',
+   tagline:'Crack codes, solve puzzles, escape — GDG Escape Room at Vyom \'26!',
+   desc:'🔐 Vyom \'26 — Digital Escape Room (Google Developer Group)\n\nA fully digital puzzle challenge. Solve logic problems, decode messages, and crack technical riddles before time runs out.\n\nOrganised by GDG (Google Developer Group). Team of 2–3. Fastest team to escape wins.\n\nVenue: Google Lab',
+   date:'April 7–8, 2026',venue:'Google Lab',team:'2–3 Members',
+   formFields:[
+     {id:'name',label:'Team Leader Name',type:'text',placeholder:'e.g. Meera Tiwari',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CS',required:true},
+     {id:'teamMembers',label:'All Team Members (including leader)',type:'textarea',placeholder:'One name per line (2–3 members)',required:true,full:true},
+   ]},
+
+  {id:'kiro-quest',cat:'technical',catLabel:'Technical',icon:'☁️',name:'Kiro Quest (AWS)',
+   img:'',
+   tagline:'Cloud-powered problem solving at Vyom \'26 — AWS Kiro Quest!',
+   desc:'☁️ Vyom \'26 — Kiro Quest (Amazon Web Services)\n\nA cloud-focused technical challenge powered by AWS. Solve problems using AWS services, build infrastructure, and complete quests against the clock.\n\nOrganised by AWS community. Individual or team of 2. Basic cloud knowledge recommended.\n\nVenue: Computer Lab',
+   date:'April 7–8, 2026',venue:'Computer Lab',team:'1–2 Members',
+   formFields:[
+     {id:'name',label:'Full Name / Team Leader',type:'text',placeholder:'e.g. Aditya Verma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'AWS Experience Level',type:'select',options:['Beginner','Intermediate','Advanced'],required:false,hint:'Helps with task assignment'},
+     {id:'teamMembers',label:'Partner Name (if any)',type:'text',placeholder:'Leave blank if solo',required:false,full:true},
+   ]},
+
+  {id:'tech-time-travel',cat:'technical',catLabel:'Technical',icon:'⏳',name:'Tech Time Travel (Unstop)',
+   img:'',
+   tagline:'Navigate tech eras and solve challenges across time — Vyom \'26 x Unstop!',
+   desc:'⏳ Vyom \'26 — Tech Time Travel (Unstop)\n\nA unique quiz and challenge event in partnership with Unstop. Travel through technology eras — from the birth of computing to AI — and answer challenges from each era.\n\nIndividual event. Multiple rounds with elimination. Speed and accuracy rewarded.\n\nVenue: TBD',
+   date:'April 7–8, 2026',venue:'TBD',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Riya Kapoor',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — IT 3rd Year',required:true},
+   ]},
+
+  {id:'prompt-arena',cat:'technical',catLabel:'Technical',icon:'🤖',name:'Prompt Arena (GFG)',
+   img:'',
+   tagline:'Master AI prompting and win at Vyom \'26 Prompt Arena — GFG!',
+   desc:'🤖 Vyom \'26 — Prompt Arena (GeeksForGeeks)\n\nThe age of AI is here. Craft the perfect prompts to solve real-world problems using LLMs and generative AI tools. Judged on creativity, accuracy and output quality.\n\nOrganised by GeeksForGeeks. Individual. Multiple rounds.\n\nVenue: Computer Lab',
+   date:'April 7–8, 2026',venue:'Computer Lab',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nayan Raj',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE AI 2nd Year',required:true},
+     {id:'extraInfo',label:'AI Tools You Use',type:'text',placeholder:'e.g. ChatGPT, Claude, Gemini, Midjourney',required:false,hint:'Optional — helps judges understand your background'},
+   ]},
+
+  // ── ENTREPRENEURSHIP ──────────────────────────────────────────
+  {id:'e-summit',cat:'entrepreneurship',catLabel:'E-Summit',icon:'🚀',name:'E-Summit',
+   img:'',
+   tagline:'The ultimate entrepreneurship summit at Vyom \'26 — pitch, network, grow.',
+   desc:'🚀 Vyom \'26 E-Summit — Entrepreneurship Summit\n\nThe flagship entrepreneurship event of VYOM 2026. A full-day summit featuring startup pitches, mentorship sessions, panel discussions with industry leaders, and networking opportunities.\n\nPitch your startup idea to investors and industry experts. Compete in the startup challenge for prizes and recognition.\n\nOpen to individuals and teams. Students, alumni, and aspiring entrepreneurs all welcome.\n\nVenue: Auditorium',
+   date:'April 5 & 7, 2026',venue:'Auditorium',team:'Individual / Team',
+   formFields:[
+     {id:'name',label:'Your Name / Team Lead',type:'text',placeholder:'e.g. Karan Arora / Team VentureX',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA / CSE',required:true},
+     {id:'extraInfo',label:'Participating As',type:'select',options:['Individual Attendee','Startup Pitcher (Solo)','Startup Pitcher (Team)','Mentor / Speaker'],required:true},
+     {id:'teamMembers',label:'Startup Idea / Team Members (if team)',type:'textarea',placeholder:'Brief startup idea + team names if applicable',required:false,full:true,hint:'Required only for startup pitchers'},
+   ]},
+
+  // ── CULTURAL ─────────────────────────────────────────────────
+  {id:'solo-dance',cat:'cultural',catLabel:'Cultural',icon:'💃',name:'Solo Dance',
+   img:'https://i.ibb.co/2YKKnHS5/15.jpg',
+   tagline:'Own the stage at Vyom \'26 Solo Dance — any style, your moment!',
+   desc:'💃 Vyom \'26 Solo Dance Competition\n\nAny dance style welcome — classical, hip-hop, freestyle, folk, contemporary, Bollywood. This is your moment to own the stage.\n\nJudged on technique, expression, stage presence and choreography. Performance duration: 3–5 minutes.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Diya Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BA 2nd Year',required:true},
+     {id:'extraInfo',label:'Dance Style',type:'select',options:['Classical (Bharatanatyam / Kathak / etc.)','Bollywood','Hip-Hop','Contemporary','Folk','Freestyle','Other'],required:true},
+   ]},
+
+  {id:'solo-singing',cat:'cultural',catLabel:'Cultural',icon:'🎤',name:'Solo Singing',
+   img:'https://i.ibb.co/S41cfzRx/13.jpg',
+   tagline:'Showcase your voice at Vyom \'26 Solo Singing — Bollywood, classical, pop and more!',
+   desc:'🎤 Vyom \'26 Solo Singing Competition\n\nAny genre welcome — Bollywood, classical, pop, western, Indie. Let your voice carry the stage.\n\nJudged on vocals, pitch, expression and stage presence. Duration: 3–4 minutes. Karaoke/backing track allowed.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ritika Verma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Mass Comm',required:true},
+     {id:'extraInfo',label:'Genre / Song Title',type:'text',placeholder:'e.g. Bollywood — Tum Hi Ho',required:true,hint:'Song you plan to perform'},
+   ]},
+
+  {id:'group-dance',cat:'cultural',catLabel:'Cultural',icon:'👯',name:'Group Dance',
+   img:'https://i.ibb.co/B2YNDw1c/16.jpg',
+   tagline:'Synchronize and shine at Vyom \'26 Group Dance — 3 to 7 members on stage!',
+   desc:'👯 Vyom \'26 Group Dance Competition\n\nMin 3, max 7 members. Any style welcome — fusion, Bollywood, folk, contemporary. Synchronization, energy and storytelling are key.\n\nJudged on choreography, synchronization, energy and stage presence. Duration: 4–7 minutes.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'3–7 Members',
+   formFields:[
+     {id:'name',label:'Group Name / Leader',type:'text',placeholder:'e.g. Rhythm Squad / Priya Singh',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Various',required:true},
+     {id:'extraInfo',label:'Dance Style & No. of Members',type:'text',placeholder:'e.g. Fusion, 5 members',required:true},
+     {id:'teamMembers',label:'All Members',type:'textarea',placeholder:'One name per line (3–7 members)',required:true,full:true},
+   ]},
+
+  {id:'group-singing',cat:'cultural',catLabel:'Cultural',icon:'🎶',name:'Group Singing',
+   img:'https://i.ibb.co/jP97xmfj/17.jpg',
+   tagline:'Harmonize together at Vyom \'26 Group Singing!',
+   desc:'🎶 Vyom \'26 Group Singing Competition\n\nMin 2, max 5 members. Perfect harmony, tight arrangement, and collective expression wins the stage.\n\nJudged on harmony, vocals, arrangement and presentation. Duration: 4–5 minutes.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'2–5 Members',
+   formFields:[
+     {id:'name',label:'Group Name / Leader',type:'text',placeholder:'e.g. Sargam / Neha Gupta',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+     {id:'extraInfo',label:'Song & Genre',type:'text',placeholder:'e.g. Bollywood medley',required:false},
+     {id:'teamMembers',label:'All Members',type:'textarea',placeholder:'One name per line (2–5 members)',required:true,full:true},
+   ]},
+
+  {id:'dance-face-battle',cat:'cultural',catLabel:'Cultural',icon:'🕺',name:'Dance Face Battle',
+   img:'https://i.ibb.co/60YV1dKt/18.jpg',
+   tagline:'Head-to-head freestyle — no prep, just vibes at Vyom \'26 Dance Face Battle!',
+   desc:'🕺 Vyom \'26 Dance Face Battle\n\nOn-the-spot freestyle. No prep needed. The crowd and judges decide. Feel the music and battle it out!\n\nElimination format. Judged on creativity, energy, crowd response and improvisation.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'On-the-Spot Registration',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+   ]},
+
+  {id:'flash-mob',cat:'cultural',catLabel:'Cultural',icon:'⚡',name:'Flash Mob',
+   img:'',
+   tagline:'Surprise the campus — an electric Flash Mob at Vyom \'26!',
+   desc:'⚡ Vyom \'26 Flash Mob\n\nCoordinate a surprise flash mob performance anywhere on campus! Sudden, energetic, and unforgettable — any dance style, any music.\n\nGroup of 5 or more. Performance will be judged on crowd reaction, coordination and creativity.\n\nVenue: Campus-wide (location of your choice)',
+   date:'April 5–8, 2026',venue:'Campus-Wide',team:'5+ Members',
+   formFields:[
+     {id:'name',label:'Group Leader / Organiser',type:'text',placeholder:'e.g. Priya Nair',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE / Arts',required:true},
+     {id:'extraInfo',label:'Planned Location & Dance Style',type:'text',placeholder:'e.g. Canteen Area — Bollywood Fusion',required:true},
+     {id:'teamMembers',label:'All Participants',type:'textarea',placeholder:'One name per line (min 5)',required:true,full:true},
+   ]},
+
+  {id:'ramp-walk',cat:'cultural',catLabel:'Cultural',icon:'👑',name:'Cultural Ramp Walk',
+   img:'',
+   tagline:'Walk the ramp in cultural attire and own the stage at Vyom \'26!',
+   desc:'👑 Vyom \'26 Cultural Ramp Walk\n\nA celebration of India\'s diverse cultural heritage through fashion. Walk the ramp in traditional attire from any Indian state or culture.\n\nJudged on attire, confidence, grace and cultural representation.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ananya Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BA 1st Year',required:true},
+     {id:'extraInfo',label:'Cultural Theme / State',type:'text',placeholder:'e.g. Rajasthan / Bengal / Tamil Nadu',required:true,hint:'Which culture/state will you represent?'},
+   ]},
+
+  {id:'drama-nukad',cat:'cultural',catLabel:'Cultural',icon:'🎭',name:'Drama / Nukad Natak',
+   img:'',
+   tagline:'Tell powerful stories through street theatre at Vyom \'26!',
+   desc:'🎭 Vyom \'26 Drama / Nukad Natak\n\nStreet theatre with a message! Nukad Natak is the people\'s art — raw, powerful, performed anywhere, for everyone.\n\nTeam of 5–15 members. Performance duration: 10–15 minutes. Any theme — social, comedy, drama.\n\nJudged on script, performance, delivery and impact.\n\nVenue: Open Stage / Campus Areas',
+   date:'April 7–8, 2026',venue:'Open Stage / Campus Areas',team:'5–15 Members',
+   formFields:[
+     {id:'name',label:'Group Name / Director',type:'text',placeholder:'e.g. Rang Manch / Divya Nair',required:true},
+     {id:'phone',label:'Director / Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Arts / CSE',required:true},
+     {id:'extraInfo',label:'Theme / Story Concept',type:'text',placeholder:'e.g. Gender equality / Comedy of errors',required:true},
+     {id:'teamMembers',label:'All Cast Members',type:'textarea',placeholder:'One name per line (5–15 members)',required:true,full:true},
+   ]},
+
+  {id:'instrumental',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Drum / Instrumental Play',
+   img:'',
+   tagline:'Let your instrument speak at Vyom \'26 — any instrument welcome!',
+   desc:'🥁 Vyom \'26 Drum / Instrumental Play Competition\n\nAny instrument welcome — Drums, Guitar, Tabla, Flute, Violin, Keyboard, Sitar and more. Perform a solo or duet piece that showcases your mastery.\n\nJudged on technique, rhythm, emotion and stage presence. Duration: 3–5 minutes.\n\nVenue: B-Block Open Stage',
+   date:'April 7–8, 2026',venue:'B-Block Open Stage',team:'Solo / Duet',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Arjun Nair',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Music / CSE',required:true},
+     {id:'extraInfo',label:'Instrument(s)',type:'text',placeholder:'e.g. Guitar + Tabla (Duet)',required:true,hint:'Specify instrument and solo or duet'},
+   ]},
+
+  // ── CREATIVE / ART ────────────────────────────────────────────
+  {id:'canvas-15min',cat:'creative',catLabel:'Creative',icon:'🎨',name:'15 Min Canvas',
+   img:'',tagline:'Create a masterpiece in just 15 minutes at Vyom \'26!',
+   desc:'🎨 Vyom \'26 — 15 Minute Canvas Challenge\n\nThink fast, paint faster! Create a complete artwork on canvas in just 15 minutes. Any subject, any style.\n\nIndividual competition. All paints and brushes provided. Judged on creativity, technique and completion.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Kavya Reddy',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
+   ]},
+
+  {id:'cloth-painting',cat:'creative',catLabel:'Creative',icon:'👕',name:'Cloth Painting',
+   img:'',tagline:'Transform fabric into art at Vyom \'26 Cloth Painting!',
+   desc:'👕 Vyom \'26 Cloth Painting Competition\n\nUse fabric paints to create beautiful designs on cloth. Express your creativity through wearable art.\n\nIndividual. Fabric and basic materials provided. Judged on design, creativity and technique.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rima Das',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Design',required:true},
+   ]},
+
+  {id:'spin-sketch',cat:'creative',catLabel:'Creative',icon:'🌀',name:'Spin & Sketch',
+   img:'',tagline:'Art meets physics — Spin & Sketch at Vyom \'26!',
+   desc:'🌀 Vyom \'26 Spin & Sketch\n\nCreate patterns and art using spinning techniques — think spin art, spirograph-style creations. A fun mix of physics and creativity.\n\nIndividual. Materials provided. Judged on visual appeal and creativity.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BCA',required:true},
+   ]},
+
+  {id:'3d-art-clay',cat:'creative',catLabel:'Creative',icon:'🏺',name:'3D Art using Clay',
+   img:'',tagline:'Sculpt your imagination at Vyom \'26 — 3D Art using Clay!',
+   desc:'🏺 Vyom \'26 — 3D Art using Clay\n\nBring your imagination to life in three dimensions. Sculpt, shape, and create a 3D artwork out of clay in the given time.\n\nIndividual. Clay materials provided. Judged on creativity, craftsmanship and 3D form.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nandita Roy',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Architecture',required:true},
+   ]},
+
+  {id:'live-painting',cat:'creative',catLabel:'Creative',icon:'🖌️',name:'Live Painting & Sketching',
+   img:'',tagline:'Paint live in front of an audience at Vyom \'26!',
+   desc:'🖌️ Vyom \'26 — Live Painting & Sketching\n\nPerform your art live in front of an audience. Time-limited session where you create a complete piece — painting or sketch — while people watch.\n\nIndividual. Your own materials or provided supplies. Judged on quality, speed and process.\n\nVenue: Open Art Space, Campus',
+   date:'April 7–8, 2026',venue:'Open Art Space, Campus',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aryan Mehta',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
+     {id:'extraInfo',label:'Medium',type:'select',options:['Painting (Acrylic/Watercolour)','Pencil Sketch','Charcoal','Digital Art (Tablet)','Other'],required:true},
+   ]},
+
+  {id:'eco-paper-bag',cat:'creative',catLabel:'Creative',icon:'🌿',name:'Eco-Friendly Paper Bag Making',
+   img:'',tagline:'Craft creative, eco-friendly paper bags at Vyom \'26!',
+   desc:'🌿 Vyom \'26 — Eco-Friendly Paper Bag Making\n\nDesign and create a beautiful, functional paper bag using eco-friendly materials. A celebration of sustainability and creativity.\n\nIndividual. Basic materials provided. Judged on design, eco-friendliness, strength and aesthetics.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Environmental Engg.',required:true},
+   ]},
+
+  {id:'face-painting',cat:'creative',catLabel:'Creative',icon:'🎨',name:'Face Painting',
+   img:'https://i.ibb.co/JRdYHTb5/35.jpg',tagline:'Colorful creativity on a living canvas — Face Painting at Vyom \'26!',
+   desc:'🎨 Vyom \'26 Face Painting Competition\n\nTransform faces into works of art! Use safe, skin-friendly face paints to create stunning designs.\n\nIndividual painter who works on a volunteer model. Judged on design complexity, precision and visual impact.\n\nVenue: Open Area, B-Block',
+   date:'March 26, 2026',venue:'Open Area, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name (Artist)',type:'text',placeholder:'e.g. Simran Kaur',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
+   ]},
+
+  {id:'reel-making',cat:'creative',catLabel:'Creative',icon:'🎬',name:'Reel Making',
+   img:'https://i.ibb.co/PvVJVXcj/38.jpg',tagline:'Film, edit and post your best VYOM reel — most viral wins at Vyom \'26!',
+   desc:'🎬 Vyom \'26 Reel Making Competition\n\nCapture the essence of VYOM 2026 in a short-form video reel. Film it, edit it, post it. The reel with the most engagement and creativity wins!\n\nIndividual. Post on Instagram with the official hashtag. Submissions reviewed at end of fest.\n\nVenue: Campus-Wide',
+   date:'April 7–8, 2026',venue:'Campus-Wide',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true,hint:"We'll send you submission hashtag and guidelines"},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+     {id:'extraInfo',label:'Instagram Handle',type:'text',placeholder:'e.g. @your_handle',required:false,hint:'For tagging and tracking your submission'},
+   ]},
+
+  {id:'dalgona-art',cat:'creative',catLabel:'Creative',icon:'🕯️',name:'Dalgona Art using Candle Wax',
+   img:'',tagline:'Intricate wax art — Dalgona Art challenge at Vyom \'26!',
+   desc:'🕯️ Vyom \'26 Dalgona Art using Candle Wax\n\nCreate intricate, delicate art patterns using candle wax — a mesmerizing and precise craft. Think symmetry, flow and detail.\n\nIndividual. Materials provided. Judged on precision, design complexity and visual appeal.\n\nVenue: Art Zone, B-Block',
+   date:'April 7–8, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Arts',required:true},
+   ]},
+
+  {id:'photography',cat:'creative',catLabel:'Creative',icon:'📸',name:'Photography',
+   img:'https://i.ibb.co/Xr34V7Qj/39.jpg',tagline:'Capture the soul of Vyom \'26 through your lens!',
+   desc:'📸 Vyom \'26 Photography Competition\n\nSubmit your best shots from the VYOM 2026 festival. Capture candid moments, performances, architecture, emotions — anything that tells the story of the fest.\n\nIndividual. Campus-wide. Submit your best 3 photos digitally. Judged on composition, storytelling and technical quality.\n\nVenue: Campus-Wide',
+   date:'April 7–8, 2026',venue:'Campus-Wide',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true,hint:'Submission link and instructions sent here'},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+     {id:'extraInfo',label:'Camera / Device',type:'text',placeholder:'e.g. DSLR / iPhone 15 / Sony Alpha',required:false},
+   ]},
+
+  // ── FUN / INFORMAL EVENTS ─────────────────────────────────────
+  {id:'hopscotch',cat:'fun',catLabel:'Fun Events',icon:'🎪',name:'Hopscotch (with Brick)',
+   img:'https://i.ibb.co/27w79K8X/28.jpg',tagline:'Childhood fun with a twist — Hopscotch with Bricks at Vyom \'26!',
+   desc:'🎪 Vyom \'26 Hopscotch Challenge (With Bricks)\n\nRemember hopscotch from school? Now it\'s a competitive event! Navigate the brick hopscotch course as fast as possible — the fastest player wins.\n\nIndividual. Multiple rounds. Timed format.\n\nVenue: Recreation Area',
+   date:'April 7–8, 2026',venue:'Recreation Area',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA 1st Year',required:true},
+   ]},
+
+  {id:'tug-of-war',cat:'fun',catLabel:'Fun Events',icon:'🪢',name:'Tug of War',
+   img:'https://i.ibb.co/0jsFRNcC/12.jpg',tagline:'Pure team strength at Vyom \'26 Tug of War — pull your way to victory!',
+   desc:'🪢 Vyom \'26 Tug of War\n\nAssemble your strongest team and pull your way to victory! The most classic test of collective strength.\n\nTeam event. Knockout format. Standard Tug of War rules. Separate categories may be available for Boys and Girls.\n\nVenue: B-Block Ground',
+   date:'April 7–8, 2026',venue:'B-Block Ground',team:'Team Event',
+   formFields:[
+     {id:'name',label:'Team Captain',type:'text',placeholder:"Captain's full name",required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Mech',required:true},
+     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'pushup',cat:'fun',catLabel:'Fun Events',icon:'💪',name:'Push-up Competition',
+   img:'https://i.ibb.co/3mQpbcqN/30.jpg',tagline:'How many can you do? Push-up Competition at Vyom \'26!',
+   desc:'💪 Vyom \'26 Push-up Competition\n\nThe player with the most proper-form push-ups wins! No breaks allowed, steady rhythm required.\n\nIndividual. All push-ups must maintain correct form as validated by the judge. Separate categories for Boys and Girls.\n\nVenue: B-Block Ground',
+   date:'April 7–8, 2026',venue:'B-Block Ground',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
+  {id:'bar-hanging',cat:'fun',catLabel:'Fun Events',icon:'🏋️',name:'Bar Hanging Competition',
+   img:'https://i.ibb.co/DDhnmmGQ/31.jpg',tagline:'Grip, endure, outlast — Bar Hanging Competition at Vyom \'26!',
+   desc:'🏋️ Vyom \'26 Bar Hanging Competition\n\nHold on to the bar for as long as you can. The last one hanging wins. A pure test of grip strength and mental endurance!\n\nIndividual. No gloves permitted. Judges verify form.\n\nVenue: B-Block Ground',
+   date:'April 7–8, 2026',venue:'B-Block Ground',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+   ]},
+
+  {id:'treasure-hunt',cat:'fun',catLabel:'Fun Events',icon:'🗺️',name:'Treasure Hunt',
+   img:'https://i.ibb.co/HTNmfChJ/20.jpg',tagline:'Clues, codes and clever thinking — Treasure Hunt at Vyom \'26!',
+   desc:'🗺️ Vyom \'26 Treasure Hunt\n\nTeam of 4 — follow the clues, decode the riddles, and find the treasure before any other team! Think fast, communicate well.\n\nMultiple checkpoints across campus. First team to complete all clues wins.\n\nVenue: Campus-Wide',
+   date:'April 7–8, 2026',venue:'Campus-Wide',team:'4 Members',
+   formFields:[
+     {id:'name',label:'Team Leader Name',type:'text',placeholder:'e.g. Ananya Gupta',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — IT',required:true},
+     {id:'teamMembers',label:'All 4 Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'sack-race',cat:'fun',catLabel:'Fun Events',icon:'🏃',name:'Sack Race',
+   img:'https://i.ibb.co/wryZkGHg/25.jpg',tagline:'Hop your way to the finish line at the Vyom \'26 Sack Race!',
+   desc:'🏃 Vyom \'26 Sack Race\n\nGet in the sack, hop fast, and cross the finish line first! The classic fun race that never gets old.\n\nIndividual. Multiple heats. Fastest participants advance to the final.\n\nVenue: In front of B-Block',
+   date:'April 7–8, 2026',venue:'In front of B-Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BBA',required:true},
+   ]},
+
+  {id:'ball-dribbling',cat:'fun',catLabel:'Fun Events',icon:'⚽',name:'Ball Dribbling Challenge',
+   img:'',tagline:'Dribble fast and true at Vyom \'26 Ball Dribbling Challenge!',
+   desc:'⚽ Vyom \'26 Ball Dribbling Challenge\n\nNavigate an obstacle course while dribbling a ball as fast as possible. Tests coordination, agility and ball control.\n\nIndividual. Timed event. Multiple obstacles in the course.\n\nVenue: Sports Ground',
+   date:'April 7–8, 2026',venue:'Sports Ground',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+   ]},
+
+  {id:'slow-cycle-race',cat:'fun',catLabel:'Fun Events',icon:'🚲',name:'Slow Cycle Race',
+   img:'',tagline:'Last to cross wins — the slowest cyclist takes glory at Vyom \'26!',
+   desc:'🚲 Vyom \'26 Slow Cycle Race\n\nIn this race, the LAST one to finish wins! Go as slow as possible without stopping or putting your foot down. Balance, patience and nerve decide the winner.\n\nIndividual. Own or provided cycle. Feet must not touch the ground.\n\nVenue: Campus Road',
+   date:'April 7–8, 2026',venue:'Campus Road',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — ECE',required:true},
+   ]},
+
+  {id:'red-light-green-light',cat:'fun',catLabel:'Fun Events',icon:'🚦',name:'Red Light Green Light',
+   img:'',tagline:'Freeze when they say Red Light — last one standing wins at Vyom \'26!',
+   desc:'🚦 Vyom \'26 — Red Light Green Light\n\nInspired by the iconic game — move on Green, freeze on Red. Move even a muscle when frozen and you\'re out!\n\nLarge group elimination format. Fast, fun and intense. Everyone is welcome to join.\n\nVenue: Open Ground',
+   date:'April 7–8, 2026',venue:'Open Ground',team:'Individual (Walk-In)',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET',required:true},
+   ]},
+
+  // ── LITERARY ─────────────────────────────────────────────────
+  {id:'youth-parliament',cat:'literary',catLabel:'Literary',icon:'🏛️',name:'Youth Parliament',
+   img:'',tagline:'Debate laws, represent your constituency at Vyom \'26 Youth Parliament!',
+   desc:'🏛️ Vyom \'26 Youth Parliament\n\nExperience the world of democracy and governance. Take on roles as members of parliament, debate bills, represent constituencies and navigate procedural rules.\n\nTeam/individual. Multiple sessions. Judged on knowledge, oratory, reasoning and decorum.\n\nVenue: Auditorium / Seminar Hall',
+   date:'April 7–8, 2026',venue:'Auditorium / Seminar Hall',team:'Individual / Group',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Siddharth Verma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Law / Political Science',required:true},
+     {id:'extraInfo',label:'Preferred Role',type:'select',options:['Speaker / Prime Minister','Opposition Leader','Cabinet Minister','Independent MP','Any Role'],required:false,hint:'Optional — role assignment is at organiser discretion'},
+   ]},
+
+  {id:'debate',cat:'literary',catLabel:'Literary',icon:'💬',name:'Debate',
+   img:'',tagline:'Argue, persuade, win — the Debate competition at Vyom \'26!',
+   desc:'💬 Vyom \'26 Debate Competition\n\nStructured debate on current topics. Both sides get equal time to argue their position — the stronger argument wins.\n\nPairs or individual. Topics announced on the spot or with 15 min prep. Judged on logic, evidence, delivery and rebuttal.\n\nVenue: Seminar Hall',
+   date:'April 7–8, 2026',venue:'Seminar Hall',team:'Individual / Pairs',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nikita Joshi',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — English / Law',required:true},
+     {id:'extraInfo',label:'Participating As',type:'select',options:['Individual','Pair (will register partner separately)'],required:true},
+   ]},
+
+  {id:'open-mic',cat:'literary',catLabel:'Literary',icon:'🎙️',name:'Open Mic',
+   img:'',tagline:'Your words, your stage — Open Mic at Vyom \'26!',
+   desc:'🎙️ Vyom \'26 Open Mic\n\nStep up to the mic and share whatever moves you — poetry, spoken word, stand-up comedy, storytelling, rap or prose. No judgment, just expression.\n\nIndividual. 3–5 minute slots. Sign up and perform!\n\nVenue: B-Block Open Stage',
+   date:'April 5–8, 2026',venue:'B-Block Open Stage',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aditya Shukla',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Performance Type',type:'select',options:['Poetry / Shayari','Spoken Word','Stand-up Comedy','Storytelling','Rap','Original Song','Other'],required:true},
+   ]},
+
+  {id:'extempore',cat:'literary',catLabel:'Literary',icon:'🗣️',name:'Extempore',
+   img:'',tagline:'Think on your feet and speak without preparation at Vyom \'26 Extempore!',
+   desc:'🗣️ Vyom \'26 Extempore Speaking Competition\n\nReceive your topic just 1 minute before you speak — then deliver a confident, structured, 3-minute talk. No notes allowed.\n\nIndividual. Multiple rounds. Judged on fluency, structure, confidence, content and vocabulary.\n\nVenue: Seminar Hall',
+   date:'April 7–8, 2026',venue:'Seminar Hall',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Meghna Pillai',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA 2nd Year',required:true},
+     {id:'extraInfo',label:'Preferred Language',type:'select',options:['English','Hindi','Bilingual (Hindi + English)'],required:true},
+   ]},
+];
+
+// =============================================================
+//  MODAL LOGIC
+// =============================================================
+let currentEv = null;
+
+function openModal(id){
+  const ev = EVENTS.find(e=>e.id===id);
+  if(!ev) return;
+  currentEv = ev;
+  document.getElementById('rm-form-view').style.display='block';
+  document.getElementById('rm-success-view').classList.remove('show');
+  document.getElementById('rm-status').className='rm-status';
+  document.getElementById('rm-status').textContent='';
+  const btn=document.getElementById('rm-submit-btn');
+  btn.disabled=false;
+  btn.innerHTML='⚡ <span id="rm-submit-label">Register for '+ev.name+'</span>';
+  document.getElementById('rm-icon').textContent=ev.icon;
+  document.getElementById('rm-name-label').textContent=ev.name+' — '+ev.catLabel;
+  const container=document.getElementById('rm-dynamic-fields');
+  container.innerHTML='<p style="font-size:.78rem;color:#555;font-family:\'Rajdhani\',sans-serif;margin-bottom:1.4rem;">Fields marked <span style=\'color:#ff6688\'>*</span> are required.</p><div class="rm-fields-grid" id="rm-grid"></div>';
+  const grid=document.getElementById('rm-grid');
+  ev.formFields.forEach(f=>{
+    const wrap=document.createElement('div');
+    wrap.className='rm-field'+(f.full?' full':'');
+    const lbl=`<label class="rm-label" for="rf-${f.id}">${f.label}${f.required?'<span> *</span>':''}</label>`;
+    let inp='';
+    if(f.type==='textarea'){
+      inp=`<textarea id="rf-${f.id}" class="rm-textarea" placeholder="${f.placeholder||''}"${f.required?' required':''}></textarea>`;
+    } else if(f.type==='select'){
+      const opts=(f.options||[]).map(o=>`<option value="${o}">${o}</option>`).join('');
+      inp=`<select id="rf-${f.id}" class="rm-select"${f.required?' required':''}><option value="">— Select —</option>${opts}</select>`;
+    } else {
+      inp=`<input id="rf-${f.id}" type="${f.type}" class="rm-input" placeholder="${f.placeholder||''}"${f.required?' required':''}${f.type==='tel'?' maxlength="15"':''}>`;
+    }
+    const hint=f.hint?`<div class="rm-hint">${f.hint}</div>`:'';
+    wrap.innerHTML=lbl+inp+hint;
+    grid.appendChild(wrap);
+  });
+  document.getElementById('reg-modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('reg-modal').scrollTop=0;
+}
+
+function closeModal(){
+  document.getElementById('reg-modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+  currentEv=null;
+}
+
+function overlayClick(e){if(e.target===document.getElementById('reg-modal-overlay')) closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+
+async function submitReg(){
+  if(!currentEv) return;
+  const btn=document.getElementById('rm-submit-btn');
+  const st=document.getElementById('rm-status');
+  let valid=true;
+
+  const payload={
+    eventName:     currentEv.name,
+    eventCategory: currentEv.catLabel,
+  };
+
+  for(const f of currentEv.formFields){
+    const el=document.getElementById('rf-'+f.id);
+    if(!el) continue;
+    const val=(el.value||'').trim();
+    if(f.required && !val){
+      showStatus('error','⚠️ Please fill in: '+f.label);
+      el.focus(); valid=false; break;
+    }
+    if(f.type==='email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){
+      showStatus('error','⚠️ Please enter a valid email address.');
+      el.focus(); valid=false; break;
+    }
+    if(f.type==='tel' && val && val.length<10){
+      showStatus('error','⚠️ Please enter a valid 10-digit phone number.');
+      el.focus(); valid=false; break;
+    }
+    payload[f.id] = val;
+  }
+  if(!valid) return;
+
+  if(!APPS_SCRIPT_URL || APPS_SCRIPT_URL==='PASTE_YOUR_APPS_SCRIPT_URL_HERE'){
+    showStatus('error','⚙️ Backend not configured. Please contact the organiser.');
+    return;
+  }
+
+  btn.disabled=true;
+  btn.innerHTML='<span class="rm-spinner"></span> Submitting...';
+  st.className='rm-status';
+
+  try{
+    let result = null;
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      redirect: 'follow',
+    });
+    const text = await res.text();
+    try { result = JSON.parse(text); } catch(e){ result = { success: true }; }
+
+    if(result && result.success === false){
+      showStatus('error', '⚠️ ' + (result.error || 'Registration failed. Please try again.'));
+      btn.disabled=false;
+      btn.innerHTML='⚡ <span>Register for '+currentEv.name+'</span>';
+    } else {
+      showSuccess();
+    }
+  } catch(err){
+    showStatus('error','❌ Network error. Please check your connection and try again.');
+    btn.disabled=false;
+    btn.innerHTML='⚡ <span>Register for '+currentEv.name+'</span>';
+  }
+}
+
+function showStatus(type,msg){
+  const el=document.getElementById('rm-status');
+  el.className='rm-status '+type;
+  el.textContent=msg;
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function showSuccess(){
+  document.getElementById('rm-form-view').style.display='none';
+  const sv=document.getElementById('rm-success-view');
+  sv.classList.add('show');
+  document.getElementById('rm-success-ev').textContent=
+    '✅ Registered for: '+(currentEv ? currentEv.name : '');
+  document.getElementById('reg-modal').scrollTop=0;
+}
+
+// =============================================================
+//  RENDER CARDS
+// =============================================================
+let curFilter='all', curSearch='';
+
+function renderCards(){
+  const grid=document.getElementById('ev-grid');
+  let list=EVENTS;
+  if(curFilter!=='all') list=list.filter(e=>e.cat===curFilter);
+  if(curSearch) list=list.filter(e=>
+    e.name.toLowerCase().includes(curSearch.toLowerCase())||
+    e.tagline.toLowerCase().includes(curSearch.toLowerCase())
+  );
+  if(!list.length){grid.innerHTML='<div class="no-results">No events found.</div>';return;}
+  grid.innerHTML=list.map(ev=>{
+    const imgH=ev.img
+      ?`<img src="${ev.img}" alt="${ev.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ev-fallback" style="display:none">${ev.icon}</div>`
+      :`<div class="ev-fallback">${ev.icon}</div>`;
+    return `<div class="ev-card" onclick="showDetail('${ev.id}')">
+      <div class="ev-img">${imgH}<div class="ev-badge">${ev.catLabel}</div>
+      <div class="ev-img-bar"><span class="ev-wm">vyom.rungta.ac.in</span><div class="ev-vyom-tag">VYOM<span>2026</span></div></div></div>
+      <div class="ev-body">
+        <div class="ev-name">${ev.name}</div>
+        <div class="ev-tagline">${ev.tagline}</div>
+        <div class="ev-metas">
+          <div class="ev-meta-r"><span class="ico">📅</span>${ev.date}</div>
+          <div class="ev-meta-r"><span class="ico">📍</span>${ev.venue}</div>
+          <div class="ev-meta-r"><span class="ico">👥</span>${ev.team}</div>
+        </div>
+        <button class="ev-view-btn">View Details</button>
+      </div></div>`;
+  }).join('');
+}
+
+function filterEv(cat,btn){
+  curFilter=cat;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function searchEv(v){curSearch=v;renderCards();}
+
+// =============================================================
+//  DETAIL PAGE
+// =============================================================
+function showDetail(id){
+  const ev=EVENTS.find(e=>e.id===id);if(!ev) return;
+  document.getElementById('d-title').textContent=ev.name;
+  document.getElementById('d-cat').textContent=ev.catLabel;
+  document.getElementById('d-date').textContent=ev.date;
+  document.getElementById('d-venue').textContent=ev.venue;
+  document.getElementById('d-team').textContent=ev.team;
+  document.getElementById('d-desc').innerHTML=ev.desc.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  const imgBox=document.getElementById('d-img-box');
+  imgBox.innerHTML=ev.img
+    ?`<img src="${ev.img}" alt="${ev.name}" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'d-img-fallback\\'>${ev.icon}</div>'">`
+    :`<div class="d-img-fallback">${ev.icon}</div>`;
+  document.getElementById('d-register-btn').onclick=()=>openModal(ev.id);
+  document.getElementById('list-page').style.display='none';
+  document.getElementById('detail-page').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({page:'detail',id},'',`#${id}`);
+}
+
+function showList(){
+  document.getElementById('list-page').style.display='block';
+  document.getElementById('detail-page').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState({page:'list'},'','events.html');
+}
+
+window.addEventListener('popstate',e=>{
+  if(!e.state||e.state.page==='list') showList();
+  else if(e.state.page==='detail') showDetail(e.state.id);
+});
+
+const urlCat=new URLSearchParams(location.search).get('cat');
+const urlHash=location.hash.replace('#','');
+if(urlCat){
+  curFilter=urlCat;
+  const btn=document.querySelector(`.fb[onclick*="'${urlCat}'"]`);
+  if(btn){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+}
+renderCards();
+if(urlHash){const ev=EVENTS.find(e=>e.id===urlHash);if(ev) showDetail(urlHash);}
+
+// =============================================================
+//  FLOATING NOTIFICATION
+// =============================================================
+(function(){
+  const names=['Aarav','Vihaan','Ananya','Diya','Advik','Kabir','Reyansh','Sai','Arjun','Ishaan','Myra','Aryan','Rudra','Pari','Krishna','Shaurya','Tanvi','Ayaan','Pihu','Yash','Sia','Dhruv','Rohan','Meera','Riya','Kavya','Aditya','Anushka','Arnav','Sarthak','Shreya','Prisha'];
+  const evts=[
+    {name:'Box Cricket',arena:'Sports',e:'🏏'},{name:'Chess',arena:'Sports',e:'♟️'},
+    {name:'Volleyball',arena:'Sports',e:'🏐'},{name:'Basketball',arena:'Sports',e:'🏀'},
+    {name:'Badminton',arena:'Sports',e:'🏸'},{name:'Kabaddi',arena:'Sports',e:'🤼'},
+    {name:'BGMI',arena:'E-Sports',e:'🎮'},{name:'Valorant',arena:'E-Sports',e:'🎯'},
+    {name:'Free Fire',arena:'E-Sports',e:'🔥'},{name:'COD Mobile',arena:'E-Sports',e:'🔫'},
+    {name:'Code the Future',arena:'Technical',e:'💻'},{name:'MVP in a Day',arena:'Technical',e:'🚀'},
+    {name:'Prompt Arena',arena:'Technical',e:'🤖'},{name:'Digital Escape Room',arena:'Technical',e:'🔐'},
+    {name:'E-Summit',arena:'E-Summit',e:'🚀'},
+    {name:'Solo Dance',arena:'Cultural',e:'💃'},{name:'Solo Singing',arena:'Cultural',e:'🎤'},
+    {name:'Group Dance',arena:'Cultural',e:'👯'},{name:'Flash Mob',arena:'Cultural',e:'⚡'},
+    {name:'Drama / Nukad Natak',arena:'Cultural',e:'🎭'},
+    {name:'Photography',arena:'Creative',e:'📸'},{name:'Reel Making',arena:'Creative',e:'🎬'},
+    {name:'15 Min Canvas',arena:'Creative',e:'🎨'},{name:'Face Painting',arena:'Creative',e:'🎨'},
+    {name:'Tug of War',arena:'Fun Events',e:'🪢'},{name:'Treasure Hunt',arena:'Fun Events',e:'🗺️'},
+    {name:'Red Light Green Light',arena:'Fun Events',e:'🚦'},{name:'Slow Cycle Race',arena:'Fun Events',e:'🚲'},
+    {name:'Open Mic',arena:'Literary',e:'🎙️'},{name:'Debate',arena:'Literary',e:'💬'},
+    {name:'Youth Parliament',arena:'Literary',e:'🏛️'},{name:'Extempore',arena:'Literary',e:'🗣️'},
+  ];
+  function rand(a){return a[Math.floor(Math.random()*a.length)];}
+  function upd(){
+    const n=rand(names),ev=rand(evts);
+    document.getElementById('notif-name').textContent=n;
+    document.getElementById('notif-event').textContent=ev.arena;
+    document.getElementById('notif-arena').innerHTML=ev.e+' '+ev.name;
+  }
+  setInterval(upd,4000);upd();
+})();
+</script>
+</body>
+</html>
