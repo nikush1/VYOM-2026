@@ -11,9 +11,8 @@
 <style>
 #preloader{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.8s ease,visibility 0.8s ease;}
 #preloader.hidden{opacity:0;visibility:hidden;}
-.preloader-content{text-align:center;animation:preloaderPulse 2s ease-in-out infinite;}
-.preloader-logo{max-width:300px;width:80%;height:auto;filter:drop-shadow(0 0 20px rgba(255,0,85,0.5));}
-@keyframes preloaderPulse{0%,100%{transform:scale(1);opacity:0.9;}50%{transform:scale(1.05);opacity:1;}}
+.preloader-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.preloader-logo{width:100%;height:100%;object-fit:cover;display:block;}
 
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:5rem 2rem 4rem;background-image:url('https://i.ibb.co/HLYb90TH/Untitled-design-12.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;}
 #hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.85)),radial-gradient(circle at center,rgba(255,0,85,0.15),transparent 70%);z-index:0;}
@@ -175,9 +174,10 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 </head>
 <body>
 
+<!-- ===== PRELOADER (GIF) ===== -->
 <div id="preloader">
   <div class="preloader-content">
-    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="preloader-logo">
+    <img src="https://raw.githubusercontent.com/nikush1/public/4e17c2bb5c87ddeed86f17891cd9632e99977121/original-a776538c6d5bedc7eb58c5977b9bd1df.gif" alt="VYOM Loader" class="preloader-logo">
   </div>
 </div>
 
@@ -464,7 +464,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 
 <script>
 window.addEventListener('load',function(){
-  setTimeout(function(){document.getElementById('preloader').classList.add('hidden');},2000);
+  setTimeout(function(){document.getElementById('preloader').classList.add('hidden');},5500);
 });
 
 const cursor=document.getElementById('cursor');
@@ -530,7 +530,7 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   resizeCanvas();drawParticles();
 })();
 
-// ===== FLOATING NOTIFICATION — UPDATED ALL EVENTS =====
+// ===== FLOATING NOTIFICATION =====
 (function(){
   const notifName=document.getElementById('notif-name');
   const notifEvent=document.getElementById('notif-event');
@@ -539,7 +539,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   const names=['Aarav','Vihaan','Vivaan','Ananya','Diya','Advik','Kabir','Reyansh','Aadhya','Anvi','Sai','Arjun','Ishaan','Myra','Aaradhya','Aryan','Rudra','Pari','Anaya','Krishna','Shaurya','Tanvi','Atharv','Kiaan','Ayaan','Pihu','Ira','Yash','Sia','Dhruv','Rohan','Meera','Riya','Kavya','Aditya','Nitya','Anushka','Ved','Jhanvi','Arnav','Anika','Sarthak','Aarna','Samarth','Aarush','Shreya','Prisha'];
 
   const events=[
-    // Sports
     {name:'Box Cricket',arena:'Sports',e:'🏏'},
     {name:'Carrom',arena:'Sports',e:'🎯'},
     {name:'Chess',arena:'Sports',e:'♟️'},
@@ -554,7 +553,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     {name:'Shot Put',arena:'Sports',e:'🏋️'},
     {name:'Arm Wrestling',arena:'Sports',e:'💪'},
     {name:'Badminton',arena:'Sports',e:'🏸'},
-    // E-Sports
     {name:'BGMI',arena:'E-Sports',e:'🎮'},
     {name:'Valorant',arena:'E-Sports',e:'🎯'},
     {name:'Free Fire',arena:'E-Sports',e:'🔥'},
@@ -562,16 +560,13 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     {name:'Stumble Guys',arena:'E-Sports',e:'🎪'},
     {name:'Strike World',arena:'E-Sports',e:'⚔️'},
     {name:'Chess (Online)',arena:'E-Sports',e:'♟️'},
-    // Technical
     {name:'Code the Future',arena:'Technical',e:'💻'},
     {name:'MVP in a Day',arena:'Technical',e:'🚀'},
     {name:'Digital Escape Room',arena:'Technical',e:'🔐'},
     {name:'Kiro Quest (AWS)',arena:'Technical',e:'☁️'},
     {name:'Tech Time Travel',arena:'Technical',e:'⏳'},
     {name:'Prompt Arena (GFG)',arena:'Technical',e:'🤖'},
-    // E-Summit
     {name:'E-Summit',arena:'E-Summit',e:'🚀'},
-    // Cultural
     {name:'Solo Dance',arena:'Cultural',e:'💃'},
     {name:'Solo Singing',arena:'Cultural',e:'🎤'},
     {name:'Group Dance',arena:'Cultural',e:'👯'},
@@ -581,7 +576,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     {name:'Cultural Ramp Walk',arena:'Cultural',e:'👑'},
     {name:'Drama / Nukad Natak',arena:'Cultural',e:'🎭'},
     {name:'Drum / Instrumental',arena:'Cultural',e:'🎸'},
-    // Creative
     {name:'15 Min Canvas',arena:'Creative',e:'🎨'},
     {name:'Cloth Painting',arena:'Creative',e:'👕'},
     {name:'Spin & Sketch',arena:'Creative',e:'🌀'},
@@ -592,7 +586,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     {name:'Reel Making',arena:'Creative',e:'🎬'},
     {name:'Dalgona Art',arena:'Creative',e:'🕯️'},
     {name:'Photography',arena:'Creative',e:'📸'},
-    // Fun
     {name:'Hopscotch (with Brick)',arena:'Fun Events',e:'🎪'},
     {name:'Tug of War',arena:'Fun Events',e:'🪢'},
     {name:'Push-up Competition',arena:'Fun Events',e:'💪'},
@@ -602,7 +595,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     {name:'Ball Dribbling',arena:'Fun Events',e:'⚽'},
     {name:'Slow Cycle Race',arena:'Fun Events',e:'🚲'},
     {name:'Red Light Green Light',arena:'Fun Events',e:'🚦'},
-    // Literary
     {name:'Youth Parliament',arena:'Literary',e:'🏛️'},
     {name:'Debate',arena:'Literary',e:'💬'},
     {name:'Open Mic',arena:'Literary',e:'🎙️'},
