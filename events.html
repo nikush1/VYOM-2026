@@ -165,14 +165,12 @@ body{background-color:#000;color:#fff;}
 .rm-success-ev{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--pink);letter-spacing:2px;margin-top:1.2rem;}
 .rm-success-close{margin-top:2rem;background:var(--pink);color:#fff;border:none;padding:14px 44px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;}
 .rm-success-close:hover{background:#cc0044;}
-/* ── Coming Soon panel ── */
 .rm-coming-soon{display:none;flex-direction:column;align-items:center;justify-content:center;padding:3.5rem 2rem;text-align:center;}
 .rm-coming-soon.show{display:flex;}
 .rm-cs-icon{font-size:4.5rem;animation:popIn .6s cubic-bezier(.34,1.56,.64,1);margin-bottom:1.5rem;}
 .rm-cs-title{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--pink);letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;}
 .rm-cs-msg{font-family:'Rajdhani',sans-serif;font-size:1rem;color:#aaa;line-height:1.7;max-width:380px;}
 .rm-cs-sub{font-family:'Orbitron',monospace;font-size:.62rem;color:rgba(255,0,85,.6);letter-spacing:3px;margin-top:1rem;text-transform:uppercase;}
-
 @media(max-width:900px){
   .d-layout{grid-template-columns:1fr;}
   .d-sidebar{position:static;}
@@ -440,48 +438,42 @@ const EVENTS = [
      {id:'college',   label:'College (Captain)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'phone',     label:'Contact Info (Captain)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
      {id:'email',     label:'Email Address (Captain)', type:'email',  placeholder:'captain@email.com',   required:true},
-
      {id:'member1',  label:'Team Member 1',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp1',     label:'ERP (Member 1)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college1', label:'College (Member 1)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact1', label:'Contact Info (Member 1)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member2',  label:'Team Member 2',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp2',     label:'ERP (Member 2)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college2', label:'College (Member 2)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact2', label:'Contact Info (Member 2)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member3',  label:'Team Member 3',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp3',     label:'ERP (Member 3)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college3', label:'College (Member 3)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact3', label:'Contact Info (Member 3)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member4',  label:'Team Member 4',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp4',     label:'ERP (Member 4)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college4', label:'College (Member 4)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact4', label:'Contact Info (Member 4)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member5',  label:'Team Member 5',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp5',     label:'ERP (Member 5)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college5', label:'College (Member 5)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact5', label:'Contact Info (Member 5)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member6',  label:'Team Member 6',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp6',     label:'ERP (Member 6)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college6', label:'College (Member 6)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact6', label:'Contact Info (Member 6)',  type:'tel',    placeholder:'10-digit mobile',     required:true},
-
      {id:'member7',  label:'Team Member 7',           type:'text',   placeholder:'Full name',           required:true},
      {id:'erp7',     label:'ERP (Member 7)',           type:'text',   placeholder:'ERP ID',              required:true},
      {id:'college7', label:'College (Member 7)',       type:'select', options:['RISU-SOCSE','RISU-SOIT','RISU-SOP','RISU-SOLS','RISU-SOET','RISU-SOMC','RCET','GDRCST','RIPER/RCPSR'], required:true},
      {id:'contact7', label:'Contact Info (Member 7)',  type:'tel',    placeholder:'10-digit mobile',     required:true, full:true},
    ]},
 
+  // ── MORE SPORTS ──
   {id:'carrom',cat:'sports',catLabel:'Sports',icon:'🎯',name:'Carrom',
    img:'https://i.ibb.co/gFmGsk4W/6.jpg',
    tagline:'Test your precision and strategy at the Carrom Tournament — Vyom \'26!',
-   desc:'🎯 Vyom \'26 Carrom Tournament\n\nTest your precision, flicking skills, and board sense! Compete in an exciting individual battle of strategy and accuracy.\n\nPlayers will compete in a round-robin format followed by knockout rounds. May the best striker win!\n\nVenue: B-Block\nFormat: Single Player',
-   date:'March 23–28, 2026',venue:'B-Block',team:'Single Player',
+   desc:'🎯 Vyom \'26 Carrom Tournament\n\nTest your precision, flicking skills, and board sense! Compete in an exciting individual battle of strategy and accuracy.\n\nPlayers will compete in a round-robin format followed by knockout rounds. May the best striker win!\n\nStudent Incharge: Aditi Sahu, Raja Kumar | Contact: 9981990218 / 9504836138\nVenue: TC-05, C Block\nFormat: Single Player',
+   date:'March 23–26, 2026',venue:'TC-05, C Block',team:'Single Player',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Priya Singh',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -492,8 +484,8 @@ const EVENTS = [
   {id:'chess',cat:'sports',catLabel:'Sports',icon:'♟️',name:'Chess',
    img:'https://i.ibb.co/JWvqDgtY/7.jpg',
    tagline:'The ultimate battle of wits at Vyom \'26! Prove you are the grandmaster.',
-   desc:'♟️ Vyom \'26 Chess Championship\n\nShowcase your intellect, foresight, and strategic thinking. Compete against the best minds from across the campus.\n\nStandard time controls apply. Swiss format with knockout finals for top performers.\n\nVenue: B-Block\nFormat: Single Player',
-   date:'March 23–28, 2026',venue:'B-Block',team:'Single Player',
+   desc:'♟️ Vyom \'26 Chess Championship\n\nShowcase your intellect, foresight, and strategic thinking. Compete against the best minds from across the campus.\n\nStandard time controls apply. Swiss format with knockout finals for top performers.\n\nStudent Incharge: Vipul Kumar, Vishwajeet | Contact: 7632013805 / 8603077674\nVenue: TC-02, C Block\nFormat: Single Player',
+   date:'March 23–26, 2026',venue:'TC-02, C Block',team:'Single Player',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Kabir Mehta',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -505,8 +497,8 @@ const EVENTS = [
   {id:'volleyball',cat:'sports',catLabel:'Sports',icon:'🏐',name:'Volleyball',
    img:'https://i.ibb.co/tT8S6HQR/9.jpg',
    tagline:'High-energy volleyball at Vyom \'26! Spike, block, and dive your way to glory.',
-   desc:'🏐 Vyom \'26 Volleyball Tournament!\n\nSpike, block, and dive your way to glory. Both Boys and Girls teams are welcome to participate!\n\nKnockout format. Standard 6-player team rules apply. Best of 3 sets per match.\n\nVenue: Main Volleyball Court\nTeam: Boys & Girls',
-   date:'March 23–28, 2026',venue:'Main Volleyball Court',team:'Boys & Girls Teams',
+   desc:'🏐 Vyom \'26 Volleyball Tournament!\n\nSpike, block, and dive your way to glory. Both Boys and Girls teams are welcome to participate!\n\nKnockout format. Standard 6-player team rules apply. Best of 3 sets per match.\n\nStudent Incharge: Prem Raj, Vivek Singh | Contact: 7541921135 / 9608992114\nVenue: Volleyball Court',
+   date:'March 24–26, 2026',venue:'Volleyball Court',team:'Boys & Girls Teams',
    formFields:[
      {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Sneha Rao',required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -519,8 +511,8 @@ const EVENTS = [
   {id:'basketball',cat:'sports',catLabel:'Sports',icon:'🏀',name:'Basketball',
    img:'https://i.ibb.co/Y7pcZ8c6/10.jpg',
    tagline:'Dribble, shoot and score at Vyom \'26! 3×3 Girls and 5×5 Boys formats.',
-   desc:'🏀 Vyom \'26 Basketball Championship!\n\nTwo formats — 3×3 for Girls and 5×5 for Boys. Dominate the court, run the plays and bring home the trophy!\n\nGirls: 3×3 half-court format (team of 3+1 sub).\nBoys: Full 5×5 basketball (team of 5+2 subs).\n\nVenue: Basketball Court',
-   date:'March 23–28, 2026',venue:'Basketball Court',team:'3×3 Girls / 5×5 Boys',
+   desc:'🏀 Vyom \'26 Basketball Championship!\n\nTwo formats — 3×3 for Girls and 5×5 for Boys. Dominate the court, run the plays and bring home the trophy!\n\nStudent Incharge: Saurabh Raj, Navneet | Contact: 6200389016 / 8102366979\nVenue: Basketball Court',
+   date:'March 24–26, 2026',venue:'Basketball Court',team:'3×3 Girls / 5×5 Boys',
    formFields:[
      {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Deepak Rawat',required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -530,51 +522,11 @@ const EVENTS = [
      {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
    ]},
 
-  {id:'athletics-100m',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — 100m Sprint',
-   img:'',
-   tagline:'Speed is everything! Race the 100m sprint at Vyom \'26.',
-   desc:'🏃 Vyom \'26 Athletics — 100m Sprint\n\nThe fastest legs on campus go head to head. Heats followed by a grand final for the top sprinters.\n\nOpen to all students. Separate categories for Boys and Girls.\n\nVenue: Athletics Track',
-   date:'March 23–28, 2026',venue:'Athletics Track',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Anjali Tiwari',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Civil 2nd Year',required:true},
-     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
-   ]},
-
-  {id:'athletics-400m',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — 400m Run',
-   img:'',
-   tagline:'Endurance and speed — the 400m test at Vyom \'26.',
-   desc:'🏃 Vyom \'26 Athletics — 400m Run\n\nOne full lap around the track. A test of both speed and stamina. Heats and finals format.\n\nOpen to all students. Separate categories for Boys and Girls.\n\nVenue: Athletics Track',
-   date:'March 23–28, 2026',venue:'Athletics Track',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Suresh Rathod',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE',required:true},
-     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
-   ]},
-
-  {id:'athletics-relay',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics — Relay Race',
-   img:'',
-   tagline:'Team speed and baton passing — the Relay Race at Vyom \'26!',
-   desc:'🏃 Vyom \'26 Athletics — Relay Race\n\nA team of 4 runners, one baton, one goal — cross that finish line first! Perfect your exchanges and race as one.\n\nStandard 4×100m relay format. Open for Boys and Girls teams.\n\nVenue: Athletics Track',
-   date:'March 23–28, 2026',venue:'Athletics Track',team:'4 Members (Team)',
-   formFields:[
-     {id:'name',label:'Team Captain',type:'text',placeholder:'e.g. Rakesh Kumar',required:true},
-     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Sports',required:true},
-     {id:'extraInfo',label:'Team Category',type:'select',options:['Boys','Girls'],required:true},
-     {id:'teamMembers',label:'All 4 Runners',type:'textarea',placeholder:'One name per line',required:true,full:true},
-   ]},
-
   {id:'kabaddi',cat:'sports',catLabel:'Sports',icon:'🤼',name:'Kabaddi',
    img:'https://i.ibb.co/N62q1D9r/14.jpg',
    tagline:'Strength, agility and breath control — Kabaddi at Vyom \'26!',
-   desc:'🤼 Vyom \'26 Kabaddi Tournament\n\nAssemble your team of 7 and prove dominance on the mat! Touch, hold, escape — the oldest Indian sport returns.\n\nStandard Kabaddi rules apply. Knockout format. Held across multiple rounds.\n\nVenue: Kabaddi Court',
-   date:'March 23–28, 2026',venue:'Kabaddi Court',team:'7 Players',
+   desc:'🤼 Vyom \'26 Kabaddi Tournament\n\nAssemble your team of 7 and prove dominance on the mat! Touch, hold, escape — the oldest Indian sport returns.\n\nStandard Kabaddi rules apply. Knockout format. Held across multiple rounds.\n\nStudent Incharge: Rohit Raj, Prashant Kumar | Contact: 9523396888 / 9470668237\nVenue: Near Basketball Court',
+   date:'March 23–25, 2026',venue:'Near Basketball Court',team:'7 Players',
    formFields:[
      {id:'name',label:'Team Captain Name',type:'text',placeholder:'e.g. Suresh Kumar',required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -586,8 +538,8 @@ const EVENTS = [
   {id:'kho-kho',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Kho Kho',
    img:'',
    tagline:'Speed and strategy in the classic Kho Kho at Vyom \'26!',
-   desc:'🏃 Vyom \'26 Kho Kho Championship\n\nFast-paced traditional sport requiring lightning reflexes, teamwork, speed, and strategy. One of India\'s most exciting indigenous sports.\n\nStandard Kho Kho rules apply. Knockout format.\n\nVenue: Sports Ground',
-   date:'March 23–28, 2026',venue:'Sports Ground',team:'Standard Team',
+   desc:'🏃 Vyom \'26 Kho Kho Championship\n\nFast-paced traditional sport requiring lightning reflexes, teamwork, speed, and strategy. One of India\'s most exciting indigenous sports.\n\nStandard Kho Kho rules apply. Knockout format.\n\nStudent Incharge: Kaushik Sinha, Vaishnavi Kumari | Contact: 9135447701 / 6206697573\nVenue: Near Basketball Court',
+   date:'March 25–26, 2026',venue:'Near Basketball Court',team:'Standard Team',
    formFields:[
      {id:'name',label:'Team Captain',type:'text',placeholder:"Captain's full name",required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -596,37 +548,25 @@ const EVENTS = [
      {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
    ]},
 
-  {id:'table-tennis',cat:'sports',catLabel:'Sports',icon:'🏓',name:'Table Tennis',
+  {id:'athletics',cat:'sports',catLabel:'Sports',icon:'🏃',name:'Athletics',
    img:'',
-   tagline:'Precision, reflexes and spin — Table Tennis at Vyom \'26!',
-   desc:'🏓 Vyom \'26 Table Tennis Tournament\n\nSingle player format. Lightning-fast rallies, killer spin, and match-winning precision — the best will advance through rounds to the finals.\n\nStandard TT rules. Knockout format.\n\nVenue: B-Block',
-   date:'March 23–28, 2026',venue:'B-Block',team:'Single Player',
+   tagline:'Speed, stamina and strength — Athletics at Vyom \'26!',
+   desc:'🏃 Vyom \'26 Athletics\n\nMultiple track and field events — sprints, relay races, shot put and more. Compete individually or as a team.\n\nSeparate categories for Boys and Girls. Multiple heats with top athletes advancing to finals.\n\nStudent Incharge: Ayush Patel, Abhishek Kumar | Contact: 8709114134 / 6299929022\nVenue: Ground',
+   date:'March 25–26, 2026',venue:'Ground',team:'Individual / Team',
    formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nikhil Sharma',required:true},
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Anjali Tiwari',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — EE 3rd Year',required:true},
-     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
-   ]},
-
-  {id:'shot-put',cat:'sports',catLabel:'Sports',icon:'🏋️',name:'Shot Put',
-   img:'',
-   tagline:'Pure power and technique at the Shot Put competition — Vyom \'26!',
-   desc:'🏋️ Vyom \'26 Shot Put Competition\n\nIndividual competition — give your best throw! Strength, stance, and technique determine who throws farthest.\n\nSeparate categories for Male and Female participants. 3 attempts per participant.\n\nVenue: Athletics Ground',
-   date:'March 23–28, 2026',venue:'Athletics Ground',team:'Single Player',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rahul Singh',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE',required:true},
-     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+     {id:'email',label:'Email Address',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — PE 2nd Year',required:true},
+     {id:'extraInfo',label:'Event',type:'select',options:['100m Sprint','400m Run','Relay Race','Shot Put','Other'],required:true},
+     {id:'gender',label:'Gender',type:'select',options:['Male','Female'],required:true},
    ]},
 
   {id:'arm-wrestling',cat:'sports',catLabel:'Sports',icon:'💪',name:'Arm Wrestling',
    img:'https://i.ibb.co/7tjGx6VW/29.jpg',
    tagline:'Pure strength on the table — Arm Wrestling at Vyom \'26!',
-   desc:'💪 Vyom \'26 Arm Wrestling Championship\n\nOne-on-one battles of pure power and technique. Open to all! Compete across weight categories and prove you have the strongest grip on campus.\n\nWeight categories ensure fair competition. Knockout bracket format.\n\nVenue: B-Block',
-   date:'March 23–28, 2026',venue:'B-Block',team:'Single Player',
+   desc:'💪 Vyom \'26 Arm Wrestling Championship\n\nOne-on-one battles of pure power and technique. Open to all! Compete across weight categories and prove you have the strongest grip on campus.\n\nWeight categories ensure fair competition. Knockout bracket format.\n\nStudent Incharge: Shivam Raj | Contact: 9006663697\nVenue: B Block Entrance',
+   date:'March 23, 2026',venue:'B Block Entrance',team:'Single Player',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Vikram Patel',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -635,11 +575,37 @@ const EVENTS = [
      {id:'extraInfo',label:'Weight Category',type:'select',options:['Under 60kg','60–75kg','75–90kg','90kg+'],required:true},
    ]},
 
+  {id:'tug-of-war',cat:'fun',catLabel:'Fun Events',icon:'🪢',name:'Tug of War',
+   img:'https://i.ibb.co/0jsFRNcC/12.jpg',
+   tagline:'Pure team strength at Vyom \'26 Tug of War — pull your way to victory!',
+   desc:'🪢 Vyom \'26 Tug of War\n\nAssemble your strongest team and pull your way to victory! The most classic test of collective strength.\n\nTeam event. Knockout format. Standard Tug of War rules.\n\nStudent Incharge: Raghav Jha, Gautam Singh | Contact: 8294642105 / 9931577966\nVenue: Ground',
+   date:'March 25–26, 2026',venue:'Ground',team:'Team Event',
+   formFields:[
+     {id:'name',label:'Team Captain',type:'text',placeholder:"Captain's full name",required:true},
+     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Mech',required:true},
+     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'table-tennis',cat:'sports',catLabel:'Sports',icon:'🏓',name:'Table Tennis',
+   img:'',
+   tagline:'Precision, reflexes and spin — Table Tennis at Vyom \'26!',
+   desc:'🏓 Vyom \'26 Table Tennis Tournament\n\nSingle player format. Lightning-fast rallies, killer spin, and match-winning precision — the best will advance through rounds to the finals.\n\nStandard TT rules. Knockout format.\n\nStudent Incharge: Shivam Raj, Sagar Bharti | Contact: 9470840228 / 7987504890\nVenue: Sports Room',
+   date:'March 24–25, 2026',venue:'Sports Room',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nikhil Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — EE 3rd Year',required:true},
+     {id:'extraInfo',label:'Gender',type:'select',options:['Male','Female'],required:true},
+   ]},
+
   {id:'badminton',cat:'sports',catLabel:'Sports',icon:'🏸',name:'Badminton',
    img:'',
    tagline:'Fast rallies and smashing winners — Badminton at Vyom \'26!',
-   desc:'🏸 Vyom \'26 Badminton Tournament\n\nFast-paced singles competition. Showcase your footwork, smashes and drop shots to advance through the rounds.\n\nStandard badminton rules (21 points per game). Knockout format. Separate Men\'s and Women\'s categories.\n\nVenue: Badminton Court',
-   date:'March 23–28, 2026',venue:'Badminton Court',team:'Single Player',
+   desc:'🏸 Vyom \'26 Badminton Tournament\n\nFast-paced singles competition. Showcase your footwork, smashes and drop shots to advance through the rounds.\n\nStandard badminton rules (21 points per game). Knockout format.\n\nStudent Incharge: Azad Agrawal, Abhay Raj | Contact: 7750081487 / 6203013422\nVenue: Boys Hostel Court',
+   date:'March 24–26, 2026',venue:'Boys Hostel Court',team:'Single Player',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Priya Nair',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -648,12 +614,13 @@ const EVENTS = [
      {id:'extraInfo',label:'Gender Category',type:'select',options:['Men','Women'],required:true},
    ]},
 
-  // ── E-SPORTS ─────────────────────────────────────────────────
+
+  // ── E-SPORTS ──
   {id:'bgmi',cat:'esports',catLabel:'E-Sports',icon:'🎮',name:'BGMI',
    img:'https://i.ibb.co/bM7TqF66/Brown-and-Light-Brown-Circle-Framed-Instagram-Profile-Picture-You-Tube-Thumbnail-1.jpg',
    tagline:'Battle royale at Vyom \'26! Land smart, fight hard — only one squad survives.',
-   desc:'🎮 Vyom \'26 BGMI Tournament\n\nBring your own device. Form your squad, choose your drop zone strategically, and eliminate every rival squad. Classic Battle Royale format.\n\nSquad of 4. BYOD (Bring Your Own Device). Standard tournament settings apply.\n\nVenue: SB-03',
-   date:'March 23–28, 2026',venue:'SB-03',team:'Squad of 4 (BYOD)',
+   desc:'🎮 Vyom \'26 BGMI Tournament\n\nBring your own device. Form your squad, choose your drop zone strategically, and eliminate every rival squad. Classic Battle Royale format.\n\nSquad of 4. BYOD. Standard tournament settings apply.\n\nStudent Incharge: Shikha Tomar | Contact: 9770490724\nVenue: H Block',
+   date:'March 23–26, 2026',venue:'H Block',team:'Squad of 4 (BYOD)',
    formFields:[
      {id:'name',label:'Squad Leader Name',type:'text',placeholder:'e.g. Yash Gamer',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -666,8 +633,8 @@ const EVENTS = [
   {id:'valorant',cat:'esports',catLabel:'E-Sports',icon:'🎯',name:'Valorant',
    img:'https://i.ibb.co/rBXM3PP/21.jpg',
    tagline:'Tactical shooter skills at Vyom \'26 Valorant! Aim, ability, win.',
-   desc:'🎯 Vyom \'26 Valorant Tournament\n\nBring your own device. The best tactical minds will rise through the bracket. Agent selection, team strategy, and clutch plays decide the champion.\n\nTeam of 5. BYOD. Standard Valorant competitive settings.\n\nVenue: GA-17',
-   date:'March 23–28, 2026',venue:'GA-17',team:'Team of 5 (BYOD)',
+   desc:'🎯 Vyom \'26 Valorant Tournament\n\nBring your own device. The best tactical minds will rise through the bracket. Agent selection, team strategy, and clutch plays decide the champion.\n\nTeam of 5. BYOD. Standard Valorant competitive settings.\n\nStudent Incharge: Arjav Jain | Contact: 8319337033\nVenue: GA17 Lab',
+   date:'March 26, 2026',venue:'GA17 Lab',team:'Team of 5 (BYOD)',
    formFields:[
      {id:'name',label:'Team Captain / IGN',type:'text',placeholder:'e.g. IronSight#1234',required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -680,8 +647,8 @@ const EVENTS = [
   {id:'free-fire',cat:'esports',catLabel:'E-Sports',icon:'🔥',name:'Free Fire',
    img:'https://i.ibb.co/Qjdw2sbr/23.jpg',
    tagline:'Last squad standing at Vyom \'26 Free Fire! Battle royale on mobile.',
-   desc:'🔥 Vyom \'26 Free Fire Tournament\n\nForm a squad of 4. Last squad standing takes it all! Classic Battle Royale mode on mobile.\n\nBYOD. Squad of 4. Standard Free Fire tournament rules apply.\n\nVenue: SB-02',
-   date:'March 23–28, 2026',venue:'SB-02',team:'Squad of 4 (BYOD)',
+   desc:'🔥 Vyom \'26 Free Fire Tournament\n\nForm a squad of 4. Last squad standing takes it all! Classic Battle Royale mode on mobile.\n\nBYOD. Squad of 4. Standard Free Fire tournament rules apply.\n\nStudent Incharge: Sumit Kumar | Contact: 9229923377\nVenue: H Block',
+   date:'March 23–26, 2026',venue:'H Block',team:'Squad of 4 (BYOD)',
    formFields:[
      {id:'name',label:'Squad Leader / IGN',type:'text',placeholder:'e.g. FireStorm#456',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -694,8 +661,8 @@ const EVENTS = [
   {id:'cod-mobile',cat:'esports',catLabel:'E-Sports',icon:'🔫',name:'Call of Duty Mobile',
    img:'',
    tagline:'Modern warfare on mobile at Vyom \'26 COD Mobile!',
-   desc:'🔫 Vyom \'26 Call of Duty Mobile Tournament\n\nThe most iconic FPS franchise goes mobile. Form your squad, pick your loadouts, and dominate every game mode.\n\nTeam of 5. BYOD. Standard CODM tournament settings. Multiple rounds to the grand final.\n\nVenue: E-Sports Zone',
-   date:'March 23–28, 2026',venue:'E-Sports Zone',team:'Team of 5 (BYOD)',
+   desc:'🔫 Vyom \'26 Call of Duty Mobile Tournament\n\nThe most iconic FPS franchise goes mobile. Form your squad, pick your loadouts, and dominate every game mode.\n\nTeam of 5. BYOD. Standard CODM tournament settings.\n\nStudent Incharge: Alok Kumar | Contact: 6201900278\nVenue: FH03',
+   date:'March 27, 2026',venue:'FH03',team:'Team of 5 (BYOD)',
    formFields:[
      {id:'name',label:'Team Captain / IGN',type:'text',placeholder:'e.g. Delta Squad / Alpha#789',required:true},
      {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -708,8 +675,8 @@ const EVENTS = [
   {id:'stumble-guys',cat:'esports',catLabel:'E-Sports',icon:'🎪',name:'Stumble Guys',
    img:'',
    tagline:'Chaotic fun and last-player-standing at Vyom \'26 Stumble Guys!',
-   desc:'🎪 Vyom \'26 Stumble Guys Tournament\n\nThe wildest party game on mobile! Navigate obstacle courses, survive elimination rounds, and be the last one standing.\n\nSolo format. BYOD. Multiple rounds of chaos-filled gameplay.\n\nVenue: E-Sports Zone',
-   date:'March 23–28, 2026',venue:'E-Sports Zone',team:'Single Player (BYOD)',
+   desc:'🎪 Vyom \'26 Stumble Guys Tournament\n\nThe wildest party game on mobile! Navigate obstacle courses, survive elimination rounds, and be the last one standing.\n\nSolo format. BYOD. Multiple rounds of chaos-filled gameplay.\n\nStudent Incharge: Raunak Jaiswal | Contact: 9244127497\nVenue: FH04',
+   date:'March 27, 2026',venue:'FH04',team:'Single Player (BYOD)',
    formFields:[
      {id:'name',label:'Full Name / IGN',type:'text',placeholder:'e.g. RocketStumbler',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -718,52 +685,27 @@ const EVENTS = [
      {id:'extraInfo',label:'Stumble Guys Player ID',type:'text',placeholder:'Your in-game Player ID',required:true},
    ]},
 
-  {id:'strike-world',cat:'esports',catLabel:'E-Sports',icon:'⚔️',name:'Strike World',
-   img:'',
-   tagline:'Dominate the battlefield in Strike World at Vyom \'26!',
-   desc:'⚔️ Vyom \'26 Strike World Tournament\n\nAn intense mobile combat game that tests aim, strategy, and teamwork. Compete for the top rank.\n\nBYOD. Knockout format. Details shared on registration.\n\nVenue: E-Sports Zone',
-   date:'March 23–28, 2026',venue:'E-Sports Zone',team:'Team (BYOD)',
-   formFields:[
-     {id:'name',label:'Team Leader / IGN',type:'text',placeholder:'Your name and in-game handle',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
-     {id:'teamMembers',label:'Team Members (with IGN)',type:'textarea',placeholder:'One per line: Name — IGN',required:true,full:true},
-   ]},
 
-  {id:'chess-online',cat:'esports',catLabel:'E-Sports',icon:'♟️',name:'Chess (Online)',
-   img:'',
-   tagline:'Rapid chess battles online at Vyom \'26 — outsmart your opponents!',
-   desc:'♟️ Vyom \'26 Online Chess Tournament\n\nRapid-format online chess. Open to all levels. Games will be played on Chess.com or Lichess under tournament links shared on registration.\n\nSolo. Online format. Swiss rounds with top players advancing to the final.\n\nVenue: Online / Virtual',
-   date:'March 23–28, 2026',venue:'Online / Virtual',team:'Single Player',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rahul Sharma',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE 3rd Year',required:true},
-     {id:'extraInfo',label:'Chess.com / Lichess Username',type:'text',placeholder:'e.g. KnightRider_2026',required:true,hint:'Create a free account if you don\'t have one'},
-   ]},
-
-  // ── TECHNICAL ─────────────────────────────────────────────────
-  {id:'code-future',cat:'technical',catLabel:'Technical',icon:'💻',name:'Code the Future of Your Campus',
+  // ── TECHNICAL ──
+  {id:'code-future',cat:'technical',catLabel:'Technical',icon:'💻',name:'Code the Future',
    img:'',
    tagline:'Build tech solutions for real campus problems at Vyom \'26!',
-   desc:'💻 Vyom \'26 — Code the Future of Your Campus\n\nIdentify a real problem on your campus and build a software/app solution for it. Present your project to a panel of technical judges.\n\nTeam of up to 4. All tech stacks welcome — web, mobile, AI, IoT. Judged on innovation, feasibility, execution and presentation.\n\nVenue: Computer Lab',
-   date:'March 23–28, 2026',venue:'Computer Lab',team:'Up to 4 Members',
+   desc:'💻 Vyom \'26 — Code the Future of Your Campus\n\nIdentify a real problem on your campus and build a software/app solution for it. Present your project to a panel of technical judges.\n\nTeam of up to 4. All tech stacks welcome — web, mobile, AI, IoT. Judged on innovation, feasibility, execution and presentation.\n\nStudent Incharge: Ronit Shekhar | Contact: 7857838745\nVenue: FB19',
+   date:'March 23, 2026',venue:'FB19',team:'Up to 4 Members',
    formFields:[
      {id:'name',label:'Team Name / Leader',type:'text',placeholder:'e.g. CodeCraft / Priya Joshi',required:true},
      {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
      {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
      {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
-     {id:'extraInfo',label:'Project Idea / Problem Statement',type:'text',placeholder:'e.g. Smart attendance using face recognition',required:true,full:false},
+     {id:'extraInfo',label:'Project Idea / Problem Statement',type:'text',placeholder:'e.g. Smart attendance using face recognition',required:true},
      {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
    ]},
 
   {id:'mvp-in-a-day',cat:'technical',catLabel:'Technical',icon:'🚀',name:'MVP in a Day (MSA)',
    img:'',
    tagline:'Ship a minimum viable product in 24 hours at Vyom \'26 — MSA Event!',
-   desc:'🚀 Vyom \'26 — MVP in a Day (Microsoft Student Ambassadors)\n\nDesign, build and present a Minimum Viable Product within a single day. Use any technology — Azure, web, AI, mobile. Judged on speed, quality and innovation.\n\nSponsored by Microsoft Learn Student Ambassadors. Team of 1–4.\n\nVenue: Microsoft Lab',
-   date:'March 23–28, 2026',venue:'Microsoft Lab',team:'1–4 Members',
+   desc:'🚀 Vyom \'26 — MVP in a Day (Microsoft Student Ambassadors)\n\nDesign, build and present a Minimum Viable Product within a single day. Use any technology — Azure, web, AI, mobile. Judged on speed, quality and innovation.\n\nSponsored by Microsoft Learn Student Ambassadors. Team of 1–4.\n\nStudent Incharge: Rishi Soni, Akshat Sahu | Contact: 9296161262 / 9303937565\nVenue: GA20 Lab',
+   date:'March 23, 2026',venue:'GA20 Lab',team:'1–4 Members',
    formFields:[
      {id:'name',label:'Team Name / Leader',type:'text',placeholder:'e.g. BuildFast / Rohan Gupta',required:true},
      {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -776,8 +718,8 @@ const EVENTS = [
   {id:'digital-escape-room',cat:'technical',catLabel:'Technical',icon:'🔐',name:'Digital Escape Room (GDG)',
    img:'https://i.ibb.co/whHnZd6R/24.jpg',
    tagline:'Crack codes, solve puzzles, escape — GDG Escape Room at Vyom \'26!',
-   desc:'🔐 Vyom \'26 — Digital Escape Room (Google Developer Group)\n\nA fully digital puzzle challenge. Solve logic problems, decode messages, and crack technical riddles before time runs out.\n\nOrganised by GDG (Google Developer Group). Team of 2–3. Fastest team to escape wins.\n\nVenue: Google Lab',
-   date:'March 23–28, 2026',venue:'Google Lab',team:'2–3 Members',
+   desc:'🔐 Vyom \'26 — Digital Escape Room (Google Developer Group)\n\nA fully digital puzzle challenge. Solve logic problems, decode messages, and crack technical riddles before time runs out.\n\nOrganised by GDG. Team of 2–3. Fastest team to escape wins.\n\nStudent Incharge: Shraddha Tiwari | Contact: 9302787061\nVenue: GA21 Lab',
+   date:'March 24, 2026',venue:'GA21 Lab',team:'2–3 Members',
    formFields:[
      {id:'name',label:'Team Leader Name',type:'text',placeholder:'e.g. Meera Tiwari',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -786,25 +728,11 @@ const EVENTS = [
      {id:'teamMembers',label:'All Team Members (including leader)',type:'textarea',placeholder:'One name per line (2–3 members)',required:true,full:true},
    ]},
 
-  {id:'kiro-quest',cat:'technical',catLabel:'Technical',icon:'☁️',name:'Kiro Quest (AWS)',
-   img:'',
-   tagline:'Cloud-powered problem solving at Vyom \'26 — AWS Kiro Quest!',
-   desc:'☁️ Vyom \'26 — Kiro Quest (Amazon Web Services)\n\nA cloud-focused technical challenge powered by AWS. Solve problems using AWS services, build infrastructure, and complete quests against the clock.\n\nOrganised by AWS community. Individual or team of 2. Basic cloud knowledge recommended.\n\nVenue: Computer Lab',
-   date:'March 23–28, 2026',venue:'Computer Lab',team:'1–2 Members',
-   formFields:[
-     {id:'name',label:'Full Name / Team Leader',type:'text',placeholder:'e.g. Aditya Verma',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
-     {id:'extraInfo',label:'AWS Experience Level',type:'select',options:['Beginner','Intermediate','Advanced'],required:false,hint:'Helps with task assignment'},
-     {id:'teamMembers',label:'Partner Name (if any)',type:'text',placeholder:'Leave blank if solo',required:false,full:true},
-   ]},
-
   {id:'tech-time-travel',cat:'technical',catLabel:'Technical',icon:'⏳',name:'Tech Time Travel (Unstop)',
    img:'',
    tagline:'Navigate tech eras and solve challenges across time — Vyom \'26 x Unstop!',
-   desc:'⏳ Vyom \'26 — Tech Time Travel (Unstop)\n\nA unique quiz and challenge event in partnership with Unstop. Travel through technology eras — from the birth of computing to AI — and answer challenges from each era.\n\nIndividual event. Multiple rounds with elimination. Speed and accuracy rewarded.\n\nVenue: TBD',
-   date:'March 23–28, 2026',venue:'TBD',team:'Individual',
+   desc:'⏳ Vyom \'26 — Tech Time Travel (Unstop)\n\nA unique quiz and challenge event in partnership with Unstop. Travel through technology eras — from the birth of computing to AI — and answer challenges from each era.\n\nIndividual event. Multiple rounds with elimination. Speed and accuracy rewarded.\n\nStudent Incharge: Khushi Mahto | Contact: 7858805562\nVenue: SA07',
+   date:'March 24, 2026',venue:'SA07',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Riya Kapoor',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -815,37 +743,106 @@ const EVENTS = [
   {id:'prompt-arena',cat:'technical',catLabel:'Technical',icon:'🤖',name:'Prompt Arena (GFG)',
    img:'',
    tagline:'Master AI prompting and win at Vyom \'26 Prompt Arena — GFG!',
-   desc:'🤖 Vyom \'26 — Prompt Arena (GeeksForGeeks)\n\nThe age of AI is here. Craft the perfect prompts to solve real-world problems using LLMs and generative AI tools. Judged on creativity, accuracy and output quality.\n\nOrganised by GeeksForGeeks. Individual. Multiple rounds.\n\nVenue: Computer Lab',
-   date:'March 23–28, 2026',venue:'Computer Lab',team:'Individual',
+   desc:'🤖 Vyom \'26 — Prompt Arena (GeeksForGeeks)\n\nThe age of AI is here. Craft the perfect prompts to solve real-world problems using LLMs and generative AI tools. Judged on creativity, accuracy and output quality.\n\nOrganised by GeeksForGeeks. Individual. Multiple rounds.\n\nStudent Incharge: Ashish Raj | Contact: 9102362667\nVenue: SA08',
+   date:'March 25, 2026',venue:'SA08',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nayan Raj',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
      {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE AI 2nd Year',required:true},
-     {id:'extraInfo',label:'AI Tools You Use',type:'text',placeholder:'e.g. ChatGPT, Claude, Gemini, Midjourney',required:false,hint:'Optional — helps judges understand your background'},
+     {id:'extraInfo',label:'AI Tools You Use',type:'text',placeholder:'e.g. ChatGPT, Claude, Gemini, Midjourney',required:false,hint:'Optional'},
    ]},
 
-  // ── ENTREPRENEURSHIP ──────────────────────────────────────────
-  {id:'e-summit',cat:'entrepreneurship',catLabel:'E-Summit',icon:'🚀',name:'E-Summit',
+  {id:'kiro-quest',cat:'technical',catLabel:'Technical',icon:'☁️',name:'Kiro Quest (AWS)',
    img:'',
-   tagline:'The ultimate entrepreneurship summit at Vyom \'26 — pitch, network, grow.',
-   desc:'🚀 Vyom \'26 E-Summit — Entrepreneurship Summit\n\nThe flagship entrepreneurship event of VYOM 2026. A full-day summit featuring startup pitches, mentorship sessions, panel discussions with industry leaders, and networking opportunities.\n\nPitch your startup idea to investors and industry experts. Compete in the startup challenge for prizes and recognition.\n\nOpen to individuals and teams. Students, alumni, and aspiring entrepreneurs all welcome.\n\nVenue: Auditorium',
-   date:'March 23–28, 2026',venue:'Auditorium',team:'Individual / Team',
+   tagline:'Cloud-powered problem solving at Vyom \'26 — AWS Kiro Quest!',
+   desc:'☁️ Vyom \'26 — Kiro Quest (Amazon Web Services)\n\nA cloud-focused technical challenge powered by AWS. Solve problems using AWS services, build infrastructure, and complete quests against the clock.\n\nOrganised by AWS community. Individual or team of 2. Basic cloud knowledge recommended.\n\nStudent Incharge: Abhishek Yadav | Contact: 9340900774\nVenue: SA06',
+   date:'March 25, 2026',venue:'SA06',team:'1–2 Members',
    formFields:[
-     {id:'name',label:'Your Name / Team Lead',type:'text',placeholder:'e.g. Karan Arora / Team VentureX',required:true},
+     {id:'name',label:'Full Name / Team Leader',type:'text',placeholder:'e.g. Aditya Verma',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
      {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA / CSE',required:true},
-     {id:'extraInfo',label:'Participating As',type:'select',options:['Individual Attendee','Startup Pitcher (Solo)','Startup Pitcher (Team)','Mentor / Speaker'],required:true},
-     {id:'teamMembers',label:'Startup Idea / Team Members (if team)',type:'textarea',placeholder:'Brief startup idea + team names if applicable',required:false,full:true,hint:'Required only for startup pitchers'},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'AWS Experience Level',type:'select',options:['Beginner','Intermediate','Advanced'],required:false},
+     {id:'teamMembers',label:'Partner Name (if any)',type:'text',placeholder:'Leave blank if solo',required:false,full:true},
    ]},
 
-  // ── CULTURAL ─────────────────────────────────────────────────
+  {id:'microsoft-hackathon',cat:'technical',catLabel:'Technical',icon:'🖥️',name:'Microsoft Hackathon',
+   img:'',
+   tagline:'Build, innovate and present at the Microsoft Hackathon — Vyom \'26!',
+   desc:'🖥️ Vyom \'26 Microsoft Hackathon\n\nThe flagship hackathon of VYOM 2026! Build real solutions using Microsoft technologies — Azure, GitHub Copilot, Power Platform, or any other MS stack. Present to a panel of judges over two days.\n\nTeam of 2–4. Any tech stack accepted. Microsoft tools preferred.\n\nStudent Incharge: Ronit Shekhar | Contact: 7857838745\nVenue: SB03 / TNP Hall',
+   date:'March 26–27, 2026',venue:'SB03 / TNP Hall',team:'2–4 Members',
+   formFields:[
+     {id:'name',label:'Team Name / Leader',type:'text',placeholder:'e.g. BuildFast / Aditya Kumar',required:true},
+     {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Project Idea / Problem Statement',type:'text',placeholder:'e.g. AI-powered campus navigation system',required:false,hint:'Brief description — can be refined at the event'},
+     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line (2–4 members)',required:true,full:true},
+   ]},
+
+
+  // ── ENTREPRENEURSHIP (RUBI) ──
+  {id:'shark-tank',cat:'entrepreneurship',catLabel:'E-Summit',icon:'🦈',name:'Shark Tank 2.0',
+   img:'',
+   tagline:'Pitch your startup idea to investors and win big at Vyom \'26 Shark Tank 2.0!',
+   desc:'🦈 Vyom \'26 — Shark Tank 2.0 (RUBI)\n\nStep into the tank and pitch your startup idea to a panel of sharks — investors, industry experts, and alumni. Defend your idea, negotiate the deal, and walk away with investment and recognition.\n\nIndividual or team. Prepared pitches. Judged on idea viability, pitch quality, financials, and Q&A.\n\nStudent Incharge: Ayush Wankhade, Kshitij Patel | Contact: 9238922791 / 9302306666\nVenue: B Block Auditorium',
+   date:'March 24, 2026',venue:'B Block Auditorium',team:'Individual / Team',
+   formFields:[
+     {id:'name',label:'Founder / Team Lead',type:'text',placeholder:'e.g. Raj Mehta',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE 3rd Year',required:true},
+     {id:'extraInfo',label:'Startup Name & Idea',type:'text',placeholder:'e.g. EduPath — AI career counselling app',required:true},
+     {id:'teamMembers',label:'Co-Founders (if any)',type:'textarea',placeholder:'One name per line',required:false,full:true},
+   ]},
+
+  {id:'innovators-arena',cat:'entrepreneurship',catLabel:'E-Summit',icon:'💡',name:"Innovator's Arena",
+   img:'',
+   tagline:'Showcase your innovation and compete at the Innovator\'s Arena — Vyom \'26!',
+   desc:'💡 Vyom \'26 — Innovator\'s Arena (RUBI)\n\nPresent your innovative product, prototype, or idea to judges and peers. Open to any domain — tech, social, agriculture, healthcare, education.\n\nIndividual or team. Display + presentation format. Judged on innovation, impact and feasibility.\n\nStudent Incharge: Aditi Ray, Vrishabh | Contact: 9123139785 / 9098197054\nVenue: Porch / Open Stage',
+   date:'March 24, 2026',venue:'Porch / Open Stage',team:'Individual / Team',
+   formFields:[
+     {id:'name',label:'Team Lead / Name',type:'text',placeholder:'e.g. Priya Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — IT',required:true},
+     {id:'extraInfo',label:'Innovation / Project Name',type:'text',placeholder:'e.g. AquaSense — smart water quality monitor',required:true},
+     {id:'teamMembers',label:'Team Members (if any)',type:'textarea',placeholder:'One name per line',required:false,full:true},
+   ]},
+
+  {id:'be-your-own-shark',cat:'entrepreneurship',catLabel:'E-Summit',icon:'💰',name:'Be Your Own Shark',
+   img:'',
+   tagline:'Learn to invest and think like a shark at Vyom \'26!',
+   desc:'💰 Vyom \'26 — Be Your Own Shark (RUBI)\n\nA simulation-based entrepreneurship event where YOU play the shark. Evaluate startup pitches, make investment decisions, and build your portfolio.\n\nIndividual. Fast-paced decision rounds. Judged on investment strategy and reasoning.\n\nStudent Incharge: Pallavi Sidar, Rakhi Kumari | Contact: 7880238749 / 9304985006\nVenue: Corridor, B Block',
+   date:'March 24, 2026',venue:'Corridor, B Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ankur Joshi',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA 1st Year',required:true},
+   ]},
+
+  {id:'mind-your-business',cat:'entrepreneurship',catLabel:'E-Summit',icon:'🧠',name:'Mind Your Business',
+   img:'',
+   tagline:'Test your business acumen in this high-stakes entrepreneurship challenge — Vyom \'26!',
+   desc:'🧠 Vyom \'26 — Mind Your Business (RUBI)\n\nA business strategy and case study event. Analyse real-world business scenarios, devise strategies, and present your solution to a panel.\n\nTeam of 2–3. Case study given on the spot. 30 minutes prep + 10 minutes presentation.\n\nStudent Incharge: Simar Kaur, Gautam Singh | Contact: 9826198300 / 9263054487\nVenue: Open Stage',
+   date:'March 24, 2026',venue:'Open Stage',team:'2–3 Members',
+   formFields:[
+     {id:'name',label:'Team Lead',type:'text',placeholder:'e.g. Divya Nair',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA / BBA',required:true},
+     {id:'teamMembers',label:'Team Members',type:'textarea',placeholder:'One name per line (2–3 members)',required:true,full:true},
+   ]},
+
+
+  // ── CULTURAL (RANGMANCH) ──
   {id:'solo-dance',cat:'cultural',catLabel:'Cultural',icon:'💃',name:'Solo Dance',
    img:'https://i.ibb.co/2YKKnHS5/15.jpg',
    tagline:'Own the stage at Vyom \'26 Solo Dance — any style, your moment!',
-   desc:'💃 Vyom \'26 Solo Dance Competition\n\nAny dance style welcome — classical, hip-hop, freestyle, folk, contemporary, Bollywood. This is your moment to own the stage.\n\nJudged on technique, expression, stage presence and choreography. Performance duration: 3–5 minutes.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'Single Player',
+   desc:'💃 Vyom \'26 Solo Dance Competition\n\nAny dance style welcome — classical, hip-hop, freestyle, folk, contemporary, Bollywood. This is your moment to own the stage.\n\nJudged on technique, expression, stage presence and choreography. Performance duration: 3–5 minutes.\n\nStudent Incharge: Sujal Bisen, Sakshi Yadav | Contact: 7724964624\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Single Player',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Diya Sharma',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -854,24 +851,11 @@ const EVENTS = [
      {id:'extraInfo',label:'Dance Style',type:'select',options:['Classical (Bharatanatyam / Kathak / etc.)','Bollywood','Hip-Hop','Contemporary','Folk','Freestyle','Other'],required:true},
    ]},
 
-  {id:'solo-singing',cat:'cultural',catLabel:'Cultural',icon:'🎤',name:'Solo Singing',
-   img:'https://i.ibb.co/S41cfzRx/13.jpg',
-   tagline:'Showcase your voice at Vyom \'26 Solo Singing — Bollywood, classical, pop and more!',
-   desc:'🎤 Vyom \'26 Solo Singing Competition\n\nAny genre welcome — Bollywood, classical, pop, western, Indie. Let your voice carry the stage.\n\nJudged on vocals, pitch, expression and stage presence. Duration: 3–4 minutes. Karaoke/backing track allowed.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'Single Player',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ritika Verma',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Mass Comm',required:true},
-     {id:'extraInfo',label:'Genre / Song Title',type:'text',placeholder:'e.g. Bollywood — Tum Hi Ho',required:true,hint:'Song you plan to perform'},
-   ]},
-
   {id:'group-dance',cat:'cultural',catLabel:'Cultural',icon:'👯',name:'Group Dance',
    img:'https://i.ibb.co/B2YNDw1c/16.jpg',
    tagline:'Synchronize and shine at Vyom \'26 Group Dance — 3 to 7 members on stage!',
-   desc:'👯 Vyom \'26 Group Dance Competition\n\nMin 3, max 7 members. Any style welcome — fusion, Bollywood, folk, contemporary. Synchronization, energy and storytelling are key.\n\nJudged on choreography, synchronization, energy and stage presence. Duration: 4–7 minutes.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'3–7 Members',
+   desc:'👯 Vyom \'26 Group Dance Competition\n\nMin 3, max 7 members. Any style welcome — fusion, Bollywood, folk, contemporary. Synchronization, energy and storytelling are key.\n\nJudged on choreography, synchronization, energy and stage presence. Duration: 4–7 minutes.\n\nStudent Incharge: Rudra Prakash Sahu, Manas Dhruw | Contact: 7646934846\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'3–7 Members',
    formFields:[
      {id:'name',label:'Group Name / Leader',type:'text',placeholder:'e.g. Rhythm Squad / Priya Singh',required:true},
      {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -881,11 +865,24 @@ const EVENTS = [
      {id:'teamMembers',label:'All Members',type:'textarea',placeholder:'One name per line (3–7 members)',required:true,full:true},
    ]},
 
+  {id:'solo-singing',cat:'cultural',catLabel:'Cultural',icon:'🎤',name:'Solo Singing',
+   img:'https://i.ibb.co/S41cfzRx/13.jpg',
+   tagline:'Showcase your voice at Vyom \'26 Solo Singing — Bollywood, classical, pop and more!',
+   desc:'🎤 Vyom \'26 Solo Singing Competition\n\nAny genre welcome — Bollywood, classical, pop, western, Indie. Let your voice carry the stage.\n\nJudged on vocals, pitch, expression and stage presence. Duration: 3–4 minutes. Karaoke/backing track allowed.\n\nStudent Incharge: Arpit Mishra, Md. Ayaz | Contact: 9669689470\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Single Player',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ritika Verma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Mass Comm',required:true},
+     {id:'extraInfo',label:'Genre / Song Title',type:'text',placeholder:'e.g. Bollywood — Tum Hi Ho',required:true,hint:'Song you plan to perform'},
+   ]},
+
   {id:'group-singing',cat:'cultural',catLabel:'Cultural',icon:'🎶',name:'Group Singing',
    img:'https://i.ibb.co/jP97xmfj/17.jpg',
    tagline:'Harmonize together at Vyom \'26 Group Singing!',
-   desc:'🎶 Vyom \'26 Group Singing Competition\n\nMin 2, max 5 members. Perfect harmony, tight arrangement, and collective expression wins the stage.\n\nJudged on harmony, vocals, arrangement and presentation. Duration: 4–5 minutes.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'2–5 Members',
+   desc:'🎶 Vyom \'26 Group Singing Competition\n\nMin 2, max 5 members. Perfect harmony, tight arrangement, and collective expression wins the stage.\n\nJudged on harmony, vocals, arrangement and presentation. Duration: 4–5 minutes.\n\nStudent Incharge: Md. Jeeshan, Sara Fatima | Contact: 6266018657\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'2–5 Members',
    formFields:[
      {id:'name',label:'Group Name / Leader',type:'text',placeholder:'e.g. Sargam / Neha Gupta',required:true},
      {id:'phone',label:'Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -895,63 +892,11 @@ const EVENTS = [
      {id:'teamMembers',label:'All Members',type:'textarea',placeholder:'One name per line (2–5 members)',required:true,full:true},
    ]},
 
-  {id:'dance-face-battle',cat:'cultural',catLabel:'Cultural',icon:'🕺',name:'Dance Face Battle',
-   img:'https://i.ibb.co/60YV1dKt/18.jpg',
-   tagline:'Head-to-head freestyle — no prep, just vibes at Vyom \'26 Dance Face Battle!',
-   desc:'🕺 Vyom \'26 Dance Face Battle\n\nOn-the-spot freestyle. No prep needed. The crowd and judges decide. Feel the music and battle it out!\n\nElimination format. Judged on creativity, energy, crowd response and improvisation.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'On-the-Spot Registration',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
-   ]},
-
-  {id:'flash-mob',cat:'cultural',catLabel:'Cultural',icon:'⚡',name:'Flash Mob',
-   img:'',
-   tagline:'Surprise the campus — an electric Flash Mob at Vyom \'26!',
-   desc:'⚡ Vyom \'26 Flash Mob\n\nCoordinate a surprise flash mob performance anywhere on campus! Sudden, energetic, and unforgettable — any dance style, any music.\n\nGroup of 5 or more. Performance will be judged on crowd reaction, coordination and creativity.\n\nVenue: Campus-wide (location of your choice)',
-   date:'March 23–28, 2026',venue:'Campus-Wide',team:'5+ Members',
-   formFields:[
-     {id:'name',label:'Group Leader / Organiser',type:'text',placeholder:'e.g. Priya Nair',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE / Arts',required:true},
-     {id:'extraInfo',label:'Planned Location & Dance Style',type:'text',placeholder:'e.g. Canteen Area — Bollywood Fusion',required:true},
-     {id:'teamMembers',label:'All Participants',type:'textarea',placeholder:'One name per line (min 5)',required:true,full:true},
-   ]},
-
-  {id:'ramp-walk',cat:'cultural',catLabel:'Cultural',icon:'👑',name:'Cultural Ramp Walk',
-   img:'',
-   tagline:'Walk the ramp in cultural attire and own the stage at Vyom \'26!',
-   desc:'👑 Vyom \'26 Cultural Ramp Walk\n\nA celebration of India\'s diverse cultural heritage through fashion. Walk the ramp in traditional attire from any Indian state or culture.\n\nJudged on attire, confidence, grace and cultural representation.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Ananya Sharma',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BA 1st Year',required:true},
-     {id:'extraInfo',label:'Cultural Theme / State',type:'text',placeholder:'e.g. Rajasthan / Bengal / Tamil Nadu',required:true,hint:'Which culture/state will you represent?'},
-   ]},
-
-  {id:'drama-nukad',cat:'cultural',catLabel:'Cultural',icon:'🎭',name:'Drama / Nukad Natak',
-   img:'',
-   tagline:'Tell powerful stories through street theatre at Vyom \'26!',
-   desc:'🎭 Vyom \'26 Drama / Nukad Natak\n\nStreet theatre with a message! Nukad Natak is the people\'s art — raw, powerful, performed anywhere, for everyone.\n\nTeam of 5–15 members. Performance duration: 10–15 minutes. Any theme — social, comedy, drama.\n\nJudged on script, performance, delivery and impact.\n\nVenue: Open Stage / Campus Areas',
-   date:'March 23–28, 2026',venue:'Open Stage / Campus Areas',team:'5–15 Members',
-   formFields:[
-     {id:'name',label:'Group Name / Director',type:'text',placeholder:'e.g. Rang Manch / Divya Nair',required:true},
-     {id:'phone',label:'Director / Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Arts / CSE',required:true},
-     {id:'extraInfo',label:'Theme / Story Concept',type:'text',placeholder:'e.g. Gender equality / Comedy of errors',required:true},
-     {id:'teamMembers',label:'All Cast Members',type:'textarea',placeholder:'One name per line (5–15 members)',required:true,full:true},
-   ]},
-
-  {id:'instrumental',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Drum / Instrumental Play',
+  {id:'instrumental',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Instruments Competition',
    img:'',
    tagline:'Let your instrument speak at Vyom \'26 — any instrument welcome!',
-   desc:'🥁 Vyom \'26 Drum / Instrumental Play Competition\n\nAny instrument welcome — Drums, Guitar, Tabla, Flute, Violin, Keyboard, Sitar and more. Perform a solo or duet piece that showcases your mastery.\n\nJudged on technique, rhythm, emotion and stage presence. Duration: 3–5 minutes.\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'Solo / Duet',
+   desc:'🥁 Vyom \'26 Instruments Competition\n\nAny instrument welcome — Drums, Guitar, Tabla, Flute, Violin, Keyboard, Sitar and more. Perform a solo or duet piece that showcases your mastery.\n\nJudged on technique, rhythm, emotion and stage presence. Duration: 3–5 minutes.\n\nStudent Incharge: Ayush Raj Saini, G. Pawan | Contact: 8092286605\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Solo / Duet',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Arjun Nair',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -960,11 +905,88 @@ const EVENTS = [
      {id:'extraInfo',label:'Instrument(s)',type:'text',placeholder:'e.g. Guitar + Tabla (Duet)',required:true,hint:'Specify instrument and solo or duet'},
    ]},
 
-  // ── CREATIVE / ART ────────────────────────────────────────────
+  {id:'dance-face-battle',cat:'cultural',catLabel:'Cultural',icon:'🕺',name:'Dance Face Battle',
+   img:'https://i.ibb.co/60YV1dKt/18.jpg',
+   tagline:'Head-to-head freestyle — no prep, just vibes at Vyom \'26 Dance Face Battle!',
+   desc:'🕺 Vyom \'26 Dance Face Battle (Intercollege)\n\nOn-the-spot freestyle. No prep needed. The crowd and judges decide. Feel the music and battle it out! Open to all colleges.\n\nElimination format. Judged on creativity, energy, crowd response and improvisation.\n\nStudent Incharge: Ayush Raj Saini, Mahek Sahu | Contact: 8092286605\nVenue: B Block Open Stage',
+   date:'March 25, 2026',venue:'B Block Open Stage',team:'On-the-Spot Registration',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET',required:true},
+   ]},
+
+  {id:'skit-drama',cat:'cultural',catLabel:'Cultural',icon:'🎭',name:'Skit / Drama / Mime',
+   img:'',
+   tagline:'Tell powerful stories on stage — Skit, Drama & Mime at Vyom \'26!',
+   desc:'🎭 Vyom \'26 Skit / Drama / Mime\n\nStreet theatre, full drama, or silent mime — any form of performing arts welcome. Raw, powerful, performed for everyone.\n\nTeam of 3–15 members. Performance duration: 8–15 minutes. Any theme — social, comedy, drama, mime.\n\nJudged on script, performance, delivery and impact.\n\nStudent Incharge: Abhishek Tiwari, Krishna Rathor | Contact: 9039301419\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'3–15 Members',
+   formFields:[
+     {id:'name',label:'Group Name / Director',type:'text',placeholder:'e.g. Rang Manch / Divya Nair',required:true},
+     {id:'phone',label:'Director / Leader Phone',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Arts / CSE',required:true},
+     {id:'extraInfo',label:'Performance Type & Theme',type:'select',options:['Skit','Drama','Mime','Mixed'],required:true},
+     {id:'teamMembers',label:'All Cast Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
+   ]},
+
+  {id:'mimicry',cat:'cultural',catLabel:'Cultural',icon:'🎙️',name:'Mimicry Competition',
+   img:'',
+   tagline:'Imitate, entertain and win at Vyom \'26 Mimicry Competition!',
+   desc:'🎙️ Vyom \'26 Mimicry Competition\n\nImpersonate celebrities, politicians, film characters, or anyone you like! The most convincing and entertaining mimicry artist wins.\n\nIndividual. 3–5 minutes performance. Judged on accuracy, entertainment value and variety.\n\nStudent Incharge: Pushpendra Sahu, Shruti Dubey | Contact: 7000708835\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rohan Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Characters / Celebrities You Will Mimic',type:'text',placeholder:'e.g. Amitabh Bachchan, PM Modi, Shah Rukh Khan',required:false,hint:'Optional — for scheduling purposes'},
+   ]},
+
+  {id:'flash-mob',cat:'cultural',catLabel:'Cultural',icon:'⚡',name:'Flash Mob',
+   img:'',
+   tagline:'Surprise the campus — an electric Flash Mob at Vyom \'26!',
+   desc:'⚡ Vyom \'26 Flash Mob\n\nCoordinate a surprise flash mob performance at Central Library or TI Mall! Sudden, energetic, and unforgettable — any dance style, any music.\n\nGroup of 5 or more. Performance judged on crowd reaction, coordination and creativity.\n\nStudent Incharge: Sujal Kumar Bisen | Contact: 7724964624\nVenue: Central Library / TI Mall',
+   date:'March 20 & 22, 2026',venue:'Central Library / TI Mall',team:'5+ Members',
+   formFields:[
+     {id:'name',label:'Group Leader / Organiser',type:'text',placeholder:'e.g. Priya Nair',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'leader@email.com',required:true},
+     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — CSE / Arts',required:true},
+     {id:'extraInfo',label:'Planned Location & Dance Style',type:'text',placeholder:'e.g. Central Library — Bollywood Fusion',required:true},
+     {id:'teamMembers',label:'All Participants',type:'textarea',placeholder:'One name per line (min 5)',required:true,full:true},
+   ]},
+
+  {id:'beyond-the-diaries',cat:'cultural',catLabel:'Cultural',icon:'📔',name:'Beyond the Diaries',
+   img:'',
+   tagline:'Express your story through performance — Beyond the Diaries at Vyom \'26 (Radiance)!',
+   desc:'📔 Vyom \'26 — Beyond the Diaries (Radiance)\n\nA unique performing arts event where participants bring personal stories, emotions, and experiences to the stage. Poetry, monologue, dance — any form of expression.\n\nIndividual or duo. 3–6 minutes. Judged on authenticity, emotion, and presentation.\n\nStudent Incharge: Anamika, Nisha | Contact: 7722930776 / 7470678192\nVenue: Auditorium',
+   date:'March 23–25, 2026',venue:'Auditorium',team:'Individual / Duo',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Anika Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Arts',required:true},
+     {id:'extraInfo',label:'Performance Type',type:'select',options:['Solo Monologue','Poetry Performance','Solo Dance','Duo Performance','Other'],required:true},
+   ]},
+
+  {id:'hair-styling',cat:'cultural',catLabel:'Cultural',icon:'✂️',name:'Hair Styling',
+   img:'',
+   tagline:'Style, creativity and flair — Hair Styling Competition at Vyom \'26 (Radiance)!',
+   desc:'✂️ Vyom \'26 Hair Styling Competition (Radiance)\n\nShowcase your creative hair styling skills on a model. Themes can be inspired by culture, fantasy, fashion, or fusion.\n\nIndividual stylist working on a volunteer model. Judged on creativity, technique, and final look.\n\nStudent Incharge: Apeksha, Divya | Contact: 9373800686 / 9039345548\nVenue: Porch',
+   date:'March 23–25, 2026',venue:'Porch',team:'Individual (Stylist)',
+   formFields:[
+     {id:'name',label:'Full Name (Stylist)',type:'text',placeholder:'e.g. Kavya Reddy',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fashion / Arts',required:true},
+     {id:'extraInfo',label:'Theme / Style Concept',type:'text',placeholder:'e.g. Rajasthani Bridal / Futuristic / Bollywood',required:false},
+   ]},
+
+
+  // ── CREATIVE / ART (RAG) ──
   {id:'canvas-15min',cat:'creative',catLabel:'Creative',icon:'🎨',name:'15 Min Canvas',
    img:'',tagline:'Create a masterpiece in just 15 minutes at Vyom \'26!',
-   desc:'🎨 Vyom \'26 — 15 Minute Canvas Challenge\n\nThink fast, paint faster! Create a complete artwork on canvas in just 15 minutes. Any subject, any style.\n\nIndividual competition. All paints and brushes provided. Judged on creativity, technique and completion.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   desc:'🎨 Vyom \'26 — 15 Minute Canvas Challenge (RAG)\n\nThink fast, paint faster! Create a complete artwork on canvas in just 15 minutes. Any subject, any style.\n\nIndividual competition. All paints and brushes provided. Judged on creativity, technique and completion.\n\nStudent Incharge: Alok Prasad, Harshit | Contact: 9262794486 / 7042895508\nVenue: B Block Porch',
+   date:'March 25, 2026',venue:'B Block Porch',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Kavya Reddy',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -974,8 +996,8 @@ const EVENTS = [
 
   {id:'cloth-painting',cat:'creative',catLabel:'Creative',icon:'👕',name:'Cloth Painting',
    img:'',tagline:'Transform fabric into art at Vyom \'26 Cloth Painting!',
-   desc:'👕 Vyom \'26 Cloth Painting Competition\n\nUse fabric paints to create beautiful designs on cloth. Express your creativity through wearable art.\n\nIndividual. Fabric and basic materials provided. Judged on design, creativity and technique.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   desc:'👕 Vyom \'26 Cloth Painting Competition (RAG)\n\nUse fabric paints to create beautiful designs on cloth. Express your creativity through wearable art.\n\nIndividual. Fabric and basic materials provided. Judged on design, creativity and technique.\n\nStudent Incharge: Dhananjay, Divyansh | Contact: 7050137438 / 9131026167\nVenue: B Block Porch',
+   date:'March 25, 2026',venue:'B Block Porch',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rima Das',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -985,18 +1007,18 @@ const EVENTS = [
 
   {id:'spin-sketch',cat:'creative',catLabel:'Creative',icon:'🌀',name:'Spin & Sketch',
    img:'',tagline:'Art meets physics — Spin & Sketch at Vyom \'26!',
-   desc:'🌀 Vyom \'26 Spin & Sketch\n\nCreate patterns and art using spinning techniques — think spin art, spirograph-style creations. A fun mix of physics and creativity.\n\nIndividual. Materials provided. Judged on visual appeal and creativity.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
+   desc:'🌀 Vyom \'26 Spin & Sketch (RAG)\n\nCreate patterns and art using spinning techniques — think spin art, spirograph-style creations. A fun mix of physics and creativity.\n\nIndividual. Materials provided. Judged on visual appeal and creativity.\n\nStudent Incharge: Ritu, Aman | Contact: 6206336251\nVenue: A Block Porch',
+   date:'March 25, 2026',venue:'A Block Porch',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BCA',required:true},
    ]},
 
-  {id:'3d-art-clay',cat:'creative',catLabel:'Creative',icon:'🏺',name:'3D Art using Clay',
-   img:'',tagline:'Sculpt your imagination at Vyom \'26 — 3D Art using Clay!',
-   desc:'🏺 Vyom \'26 — 3D Art using Clay\n\nBring your imagination to life in three dimensions. Sculpt, shape, and create a 3D artwork out of clay in the given time.\n\nIndividual. Clay materials provided. Judged on creativity, craftsmanship and 3D form.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
+  {id:'clay-o-rama',cat:'creative',catLabel:'Creative',icon:'🏺',name:'Clay-O-Rama',
+   img:'',tagline:'Sculpt your imagination at Vyom \'26 — Clay-O-Rama!',
+   desc:'🏺 Vyom \'26 — Clay-O-Rama (RAG)\n\nBring your imagination to life in three dimensions. Sculpt, shape, and create a 3D artwork out of clay in the given time.\n\nIndividual. Clay materials provided. Judged on creativity, craftsmanship and 3D form.\n\nStudent Incharge: Ashhab, Amar | Contact: 9301579815 / 6203633998\nVenue: SA03',
+   date:'March 26, 2026',venue:'SA03',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nandita Roy',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1004,32 +1026,20 @@ const EVENTS = [
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Architecture',required:true},
    ]},
 
-  {id:'live-painting',cat:'creative',catLabel:'Creative',icon:'🖌️',name:'Live Painting & Sketching',
-   img:'',tagline:'Paint live in front of an audience at Vyom \'26!',
-   desc:'🖌️ Vyom \'26 — Live Painting & Sketching\n\nPerform your art live in front of an audience. Time-limited session where you create a complete piece — painting or sketch — while people watch.\n\nIndividual. Your own materials or provided supplies. Judged on quality, speed and process.\n\nVenue: Open Art Space, Campus',
-   date:'March 23–28, 2026',venue:'Open Art Space, Campus',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aryan Mehta',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
-     {id:'extraInfo',label:'Medium',type:'select',options:['Painting (Acrylic/Watercolour)','Pencil Sketch','Charcoal','Digital Art (Tablet)','Other'],required:true},
-   ]},
-
-  {id:'eco-paper-bag',cat:'creative',catLabel:'Creative',icon:'🌿',name:'Eco-Friendly Paper Bag Making',
-   img:'',tagline:'Craft creative, eco-friendly paper bags at Vyom \'26!',
-   desc:'🌿 Vyom \'26 — Eco-Friendly Paper Bag Making\n\nDesign and create a beautiful, functional paper bag using eco-friendly materials. A celebration of sustainability and creativity.\n\nIndividual. Basic materials provided. Judged on design, eco-friendliness, strength and aesthetics.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
+  {id:'squid-gambit-art',cat:'creative',catLabel:'Creative',icon:'🎮',name:'Squid Gambit Art',
+   img:'',tagline:'Squid Game inspired art challenge — Squid Gambit Art at Vyom \'26!',
+   desc:'🎮 Vyom \'26 — Squid Gambit Art (RAG)\n\nInspired by the famous Squid Game dalgona challenge — carve your shape perfectly! A creative, nerve-wracking art experience.\n\nIndividual. Materials provided. Judged on precision, creativity and successful completion.\n\nStudent Incharge: Diksha, Armaan | Contact: 8839917857 / 758060383\nVenue: Chai ka Adda',
+   date:'March 26, 2026',venue:'Chai ka Adda',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Environmental Engg.',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET',required:true},
    ]},
 
   {id:'face-painting',cat:'creative',catLabel:'Creative',icon:'🎨',name:'Face Painting',
    img:'https://i.ibb.co/JRdYHTb5/35.jpg',tagline:'Colorful creativity on a living canvas — Face Painting at Vyom \'26!',
-   desc:'🎨 Vyom \'26 Face Painting Competition\n\nTransform faces into works of art! Use safe, skin-friendly face paints to create stunning designs.\n\nIndividual painter who works on a volunteer model. Judged on design complexity, precision and visual impact.\n\nVenue: Open Area, B-Block',
-   date:'March 23–28, 2026',venue:'Open Area, B-Block',team:'Individual',
+   desc:'🎨 Vyom \'26 Face Painting Competition (RAG)\n\nTransform faces into works of art! Use safe, skin-friendly face paints to create stunning designs.\n\nIndividual painter who works on a volunteer model. Judged on design complexity, precision and visual impact.\n\nStudent Incharge: Sagen, Sana | Contact: 8102148923 / 7222984463\nVenue: Auditorium',
+   date:'March 26, 2026',venue:'Auditorium',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name (Artist)',type:'text',placeholder:'e.g. Simran Kaur',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1037,10 +1047,32 @@ const EVENTS = [
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
    ]},
 
+  {id:'millet-art',cat:'creative',catLabel:'Creative',icon:'🌾',name:'Millet Art',
+   img:'',tagline:'Create beautiful art with millets at Vyom \'26 — Millet Art!',
+   desc:'🌾 Vyom \'26 Millet Art (RAG)\n\nA unique and sustainable art form — create beautiful patterns, designs, and pictures using different types of millets. A celebration of creativity and our agricultural heritage.\n\nIndividual. Materials provided. Judged on design, creativity and precision.\n\nStudent Incharge: Savri, Disha | Contact: 8103099124 / 9165998863\nVenue: SA03',
+   date:'March 27, 2026',venue:'SA03',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET',required:true},
+   ]},
+
+  {id:'live-painting',cat:'creative',catLabel:'Creative',icon:'🖌️',name:'Live Painting',
+   img:'',tagline:'Paint live in front of an audience at Vyom \'26!',
+   desc:'🖌️ Vyom \'26 — Live Painting (RAG)\n\nPerform your art live in front of an audience. Time-limited session where you create a complete piece while people watch.\n\nIndividual. Your own materials or provided supplies. Judged on quality, speed and process.\n\nStudent Incharge: Aastha, Priyal | Contact: 9202222751 / 9302290335\nVenue: A Block Porch',
+   date:'March 27, 2026',venue:'A Block Porch',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aryan Mehta',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Fine Arts',required:true},
+     {id:'extraInfo',label:'Medium',type:'select',options:['Painting (Acrylic/Watercolour)','Pencil Sketch','Charcoal','Other'],required:true},
+   ]},
+
   {id:'reel-making',cat:'creative',catLabel:'Creative',icon:'🎬',name:'Reel Making',
    img:'https://i.ibb.co/PvVJVXcj/38.jpg',tagline:'Film, edit and post your best VYOM reel — most viral wins at Vyom \'26!',
-   desc:'🎬 Vyom \'26 Reel Making Competition\n\nCapture the essence of VYOM 2026 in a short-form video reel. Film it, edit it, post it. The reel with the most engagement and creativity wins!\n\nIndividual. Post on Instagram with the official hashtag. Submissions reviewed at end of fest.\n\nVenue: Campus-Wide',
-   date:'March 23–28, 2026',venue:'Campus-Wide',team:'Individual',
+   desc:'🎬 Vyom \'26 Reel Making Competition (RAG)\n\nCapture the essence of VYOM 2026 in a short-form video reel. Film it, edit it, post it. The reel with the most engagement and creativity wins!\n\nIndividual. Post on Instagram with the official hashtag. Submissions reviewed at end of fest.\n\nStudent Incharge: Hemant, Sabiya | Contact: 6265619759 / 7587405602\nVenue: Campus-Wide',
+   date:'March 25–27, 2026',venue:'Campus-Wide',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1049,20 +1081,10 @@ const EVENTS = [
      {id:'extraInfo',label:'Instagram Handle',type:'text',placeholder:'e.g. @your_handle',required:false,hint:'For tagging and tracking your submission'},
    ]},
 
-  {id:'dalgona-art',cat:'creative',catLabel:'Creative',icon:'🕯️',name:'Dalgona Art using Candle Wax',
-   img:'',tagline:'Intricate wax art — Dalgona Art challenge at Vyom \'26!',
-   desc:'🕯️ Vyom \'26 Dalgona Art using Candle Wax\n\nCreate intricate, delicate art patterns using candle wax — a mesmerizing and precise craft. Think symmetry, flow and detail.\n\nIndividual. Materials provided. Judged on precision, design complexity and visual appeal.\n\nVenue: Art Zone, B-Block',
-   date:'March 23–28, 2026',venue:'Art Zone, B-Block',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Arts',required:true},
-   ]},
-
   {id:'photography',cat:'creative',catLabel:'Creative',icon:'📸',name:'Photography',
    img:'https://i.ibb.co/Xr34V7Qj/39.jpg',tagline:'Capture the soul of Vyom \'26 through your lens!',
-   desc:'📸 Vyom \'26 Photography Competition\n\nSubmit your best shots from the VYOM 2026 festival. Capture candid moments, performances, architecture, emotions — anything that tells the story of the fest.\n\nIndividual. Campus-wide. Submit your best 3 photos digitally. Judged on composition, storytelling and technical quality.\n\nVenue: Campus-Wide',
-   date:'March 23–28, 2026',venue:'Campus-Wide',team:'Individual',
+   desc:'📸 Vyom \'26 Photography Competition (RAG)\n\nSubmit your best shots from the VYOM 2026 festival. Capture candid moments, performances, architecture, emotions — anything that tells the story of the fest.\n\nIndividual. Campus-wide. Submit your best 3 photos digitally. Judged on composition, storytelling and technical quality.\n\nStudent Incharge: Anshika, Aarohi | Contact: 9302040396 / 8305223606\nVenue: Campus-Wide',
+   date:'March 25–27, 2026',venue:'Campus-Wide',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1071,7 +1093,30 @@ const EVENTS = [
      {id:'extraInfo',label:'Camera / Device',type:'text',placeholder:'e.g. DSLR / iPhone 15 / Sony Alpha',required:false},
    ]},
 
-  // ── FUN / INFORMAL EVENTS ─────────────────────────────────────
+  {id:'graffiti-wall',cat:'creative',catLabel:'Creative',icon:'🖊️',name:'Graffiti Wall',
+   img:'',tagline:'Express your art on the wall — Graffiti Wall at Vyom \'26 (COPE)!',
+   desc:'🖊️ Vyom \'26 — Graffiti Wall (COPE)\n\nLet your creativity run wild on a designated wall. Spray paint, sketch, or stencil — create your masterpiece for all to see.\n\nIndividual. Materials may be provided. Judged on creativity, message, and visual impact.\n\nStudent Incharge: Aditi Ray, Palak | Contact: 9123139785 / 8709029972\nVenue: Corridor, B Block',
+   date:'March 25, 2026',venue:'Corridor, B Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rohan Verma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Architecture',required:true},
+     {id:'extraInfo',label:'Art Style / Theme',type:'text',placeholder:'e.g. Abstract / Social awareness / Pop art',required:false},
+   ]},
+
+  {id:'back-to-back-drawing',cat:'creative',catLabel:'Creative',icon:'✏️',name:'Back to Back Drawing',
+   img:'',tagline:'Describe it without looking — Back to Back Drawing at Vyom \'26 (Carpediem)!',
+   desc:'✏️ Vyom \'26 — Back to Back Drawing (Carpediem)\n\nSit back to back with your partner. One person describes an image, the other draws it without seeing it. Hilarious and challenging!\n\nPair event. Multiple rounds. Judged on accuracy and how close the drawing matches the original.\n\nStudent Incharge: Bhoomika, Eklavya | Contact: 6203955524\nVenue: TC01',
+   date:'March 26–27, 2026',venue:'TC01',team:'Pair (2 Members)',
+   formFields:[
+     {id:'name',label:'Team / Player 1 Name',type:'text',placeholder:'e.g. Priya Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'teamMembers',label:'Player 2 Name',type:'text',placeholder:'Your partner\'s full name',required:true,full:true},
+   ]},
+
+
+  // ── FUN EVENTS ──
   {id:'hopscotch',cat:'fun',catLabel:'Fun Events',icon:'🎪',name:'Hopscotch (with Brick)',
    img:'https://i.ibb.co/27w79K8X/28.jpg',tagline:'Childhood fun with a twist — Hopscotch with Bricks at Vyom \'26!',
    desc:'🎪 Vyom \'26 Hopscotch Challenge (With Bricks)\n\nRemember hopscotch from school? Now it\'s a competitive event! Navigate the brick hopscotch course as fast as possible — the fastest player wins.\n\nIndividual. Multiple rounds. Timed format.\n\nVenue: Recreation Area',
@@ -1080,18 +1125,6 @@ const EVENTS = [
      {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA 1st Year',required:true},
-   ]},
-
-  {id:'tug-of-war',cat:'fun',catLabel:'Fun Events',icon:'🪢',name:'Tug of War',
-   img:'https://i.ibb.co/0jsFRNcC/12.jpg',tagline:'Pure team strength at Vyom \'26 Tug of War — pull your way to victory!',
-   desc:'🪢 Vyom \'26 Tug of War\n\nAssemble your strongest team and pull your way to victory! The most classic test of collective strength.\n\nTeam event. Knockout format. Standard Tug of War rules. Separate categories may be available for Boys and Girls.\n\nVenue: B-Block Ground',
-   date:'March 23–28, 2026',venue:'B-Block Ground',team:'Team Event',
-   formFields:[
-     {id:'name',label:'Team Captain',type:'text',placeholder:"Captain's full name",required:true},
-     {id:'phone',label:'Captain Phone',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'email',label:'Email',type:'email',placeholder:'captain@email.com',required:true},
-     {id:'college',label:'College / Branch',type:'text',placeholder:'e.g. RCET — Mech',required:true},
-     {id:'teamMembers',label:'All Team Members',type:'textarea',placeholder:'One name per line',required:true,full:true},
    ]},
 
   {id:'pushup',cat:'fun',catLabel:'Fun Events',icon:'💪',name:'Push-up Competition',
@@ -1137,16 +1170,6 @@ const EVENTS = [
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — BBA',required:true},
    ]},
 
-  {id:'ball-dribbling',cat:'fun',catLabel:'Fun Events',icon:'⚽',name:'Ball Dribbling Challenge',
-   img:'',tagline:'Dribble fast and true at Vyom \'26 Ball Dribbling Challenge!',
-   desc:'⚽ Vyom \'26 Ball Dribbling Challenge\n\nNavigate an obstacle course while dribbling a ball as fast as possible. Tests coordination, agility and ball control.\n\nIndividual. Timed event. Multiple obstacles in the course.\n\nVenue: Sports Ground',
-   date:'March 23–28, 2026',venue:'Sports Ground',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
-   ]},
-
   {id:'slow-cycle-race',cat:'fun',catLabel:'Fun Events',icon:'🚲',name:'Slow Cycle Race',
    img:'',tagline:'Last to cross wins — the slowest cyclist takes glory at Vyom \'26!',
    desc:'🚲 Vyom \'26 Slow Cycle Race\n\nIn this race, the LAST one to finish wins! Go as slow as possible without stopping or putting your foot down. Balance, patience and nerve decide the winner.\n\nIndividual. Own or provided cycle. Feet must not touch the ground.\n\nVenue: Campus Road',
@@ -1167,11 +1190,77 @@ const EVENTS = [
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET',required:true},
    ]},
 
-  // ── LITERARY ─────────────────────────────────────────────────
+  {id:'punching-demons',cat:'fun',catLabel:'Fun Events',icon:'🥊',name:'Punching Your Demons',
+   img:'',tagline:'Face your fears and punch them out at Vyom \'26 — COPE!',
+   desc:'🥊 Vyom \'26 — Punching Your Demons (COPE)\n\nA cathartic fun event where you quite literally punch your fears, stress, and negativity away! Part fun, part therapy.\n\nIndividual. Multiple rounds of punching challenges.\n\nStudent Incharge: Raj Narayan, Vaibhavi | Contact: 8102848776 / 8109155550\nVenue: Corridor, B Block',
+   date:'March 23, 2026',venue:'Corridor, B Block',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'Your name',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET',required:true},
+   ]},
+
+  {id:'quiz',cat:'fun',catLabel:'Fun Events',icon:'🧠',name:'Quiz (Carpediem)',
+   img:'',tagline:'Test your knowledge across every domain at the Vyom \'26 Quiz!',
+   desc:'🧠 Vyom \'26 — Quiz (Carpediem)\n\nA multi-round quiz covering general knowledge, current affairs, science, sports, entertainment and more. Think fast, answer faster!\n\nIndividual or team of 2. Multiple elimination rounds. Buzzer-based finals.\n\nStudent Incharge: Sneha, Aditi | Contact: 7223014442\nVenue: SC05',
+   date:'March 26–27, 2026',venue:'SC05',team:'Individual / Pair',
+   formFields:[
+     {id:'name',label:'Full Name / Team Name',type:'text',placeholder:'e.g. Raj Kumar / Quiz Masters',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Participating As',type:'select',options:['Individual','Pair'],required:true},
+     {id:'teamMembers',label:'Partner Name (if pair)',type:'text',placeholder:'Leave blank if individual',required:false,full:true},
+   ]},
+
+  {id:'whisper-challenge',cat:'fun',catLabel:'Fun Events',icon:'🤫',name:'Whisper Challenge',
+   img:'',tagline:'Lip-read your way to victory at the Vyom \'26 Whisper Challenge!',
+   desc:'🤫 Vyom \'26 — Whisper Challenge (Carpediem)\n\nWear the noise-cancelling headphones, watch your partner\'s lips, and guess the phrase! Hilarious misunderstandings guaranteed.\n\nPair event. Multiple rounds. Most correctly guessed phrases wins.\n\nStudent Incharge: Prerna, Shobhit | Contact: 7898398783\nVenue: TC02',
+   date:'March 26–27, 2026',venue:'TC02',team:'Pair (2 Members)',
+   formFields:[
+     {id:'name',label:'Player 1 Name',type:'text',placeholder:'e.g. Ananya Sharma',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'teamMembers',label:'Player 2 Name',type:'text',placeholder:'Your partner\'s full name',required:true,full:true},
+   ]},
+
+  {id:'emoji-tales',cat:'fun',catLabel:'Fun Events',icon:'😂',name:'Emoji Tales',
+   img:'',tagline:'Tell a story in emojis — Emoji Tales at Vyom \'26 (Carpediem)!',
+   desc:'😂 Vyom \'26 — Emoji Tales (Carpediem)\n\nCraft a story, movie plot, or phrase using only emojis — then let others decode it! Creative, funny and challenging.\n\nIndividual. Multiple rounds of emoji encoding and decoding. Fastest and most accurate wins.\n\nStudent Incharge: Rahul Yadav | Contact: 9755563988\nVenue: SC04',
+   date:'March 26–27, 2026',venue:'SC04',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Kavya Reddy',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — IT',required:true},
+   ]},
+
+  {id:'parallel-universe',cat:'fun',catLabel:'Fun Events',icon:'🌌',name:'Parallel Universe (SOMC)',
+   img:'',tagline:'Step into another reality at the Parallel Universe event — Vyom \'26!',
+   desc:'🌌 Vyom \'26 — Parallel Universe (SOMC)\n\nAn immersive, creative event by SOMC where participants engage in alternate reality scenarios, debates, and creative storytelling challenges.\n\nIndividual or team. Multiple activities across two days.\n\nStudent Incharge: Aditi Mittal, Ayushman | Contact: 7869307080 / 6232090319\nVenue: FC Block',
+   date:'March 25–26, 2026',venue:'FC Block',team:'Individual / Team',
+   formFields:[
+     {id:'name',label:'Full Name / Team Lead',type:'text',placeholder:'e.g. Siddharth Roy',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — SOMC',required:true},
+     {id:'extraInfo',label:'Participating As',type:'select',options:['Individual','Team'],required:true},
+   ]},
+
+  {id:'cpl-auction',cat:'fun',catLabel:'Fun Events',icon:'🏏',name:'CPL Auction',
+   img:'',tagline:'Be the team owner — bid, strategize and win the CPL Auction at Vyom \'26!',
+   desc:'🏏 Vyom \'26 — CPL Auction (SOMC)\n\nA Cricket Premier League-style player auction event! Bid on players, build your dream team, and compete to be the best team owner.\n\nIndividual team owners bidding for players. Budgets assigned. Best team composition wins.\n\nStudent Incharge: Amar Kumar, Kanak Verma | Contact: 6203633998 / 9406283644\nVenue: FC01',
+   date:'March 27, 2026',venue:'FC01',team:'Individual (Team Owner)',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Rahul Mehta',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — SOMC',required:true},
+     {id:'extraInfo',label:'Team Name',type:'text',placeholder:'e.g. Bhilai Blazers',required:false},
+   ]},
+
+
+  // ── LITERARY (RADICTION) ──
   {id:'youth-parliament',cat:'literary',catLabel:'Literary',icon:'🏛️',name:'Youth Parliament',
    img:'',tagline:'Debate laws, represent your constituency at Vyom \'26 Youth Parliament!',
-   desc:'🏛️ Vyom \'26 Youth Parliament\n\nExperience the world of democracy and governance. Take on roles as members of parliament, debate bills, represent constituencies and navigate procedural rules.\n\nTeam/individual. Multiple sessions. Judged on knowledge, oratory, reasoning and decorum.\n\nVenue: Auditorium / Seminar Hall',
-   date:'March 23–28, 2026',venue:'Auditorium / Seminar Hall',team:'Individual / Group',
+   desc:'🏛️ Vyom \'26 Youth Parliament (Radiction)\n\nExperience the world of democracy and governance. Take on roles as members of parliament, debate bills, represent constituencies and navigate procedural rules.\n\nTeam/individual. Multiple sessions. Judged on knowledge, oratory, reasoning and decorum.\n\nStudent Incharge: Vimla, Laghvensh | Contact: 9303521298\nVenue: MP Hall',
+   date:'March 23–26, 2026',venue:'MP Hall',team:'Individual / Group',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Siddharth Verma',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1182,8 +1271,8 @@ const EVENTS = [
 
   {id:'debate',cat:'literary',catLabel:'Literary',icon:'💬',name:'Debate',
    img:'',tagline:'Argue, persuade, win — the Debate competition at Vyom \'26!',
-   desc:'💬 Vyom \'26 Debate Competition\n\nStructured debate on current topics. Both sides get equal time to argue their position — the stronger argument wins.\n\nPairs or individual. Topics announced on the spot or with 15 min prep. Judged on logic, evidence, delivery and rebuttal.\n\nVenue: Seminar Hall',
-   date:'March 23–28, 2026',venue:'Seminar Hall',team:'Individual / Pairs',
+   desc:'💬 Vyom \'26 Debate Competition (Radiction)\n\nStructured debate on current topics. Both sides get equal time to argue their position — the stronger argument wins.\n\nPairs or individual. Topics announced on the spot or with 15 min prep. Judged on logic, evidence, delivery and rebuttal.\n\nStudent Incharge: Ayush, Bhoomi | Contact: 8602911654\nVenue: FB19',
+   date:'March 24, 2026',venue:'FB19',team:'Individual / Pairs',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nikita Joshi',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1192,21 +1281,10 @@ const EVENTS = [
      {id:'extraInfo',label:'Participating As',type:'select',options:['Individual','Pair (will register partner separately)'],required:true},
    ]},
 
-  {id:'open-mic',cat:'literary',catLabel:'Literary',icon:'🎙️',name:'Open Mic',
-   img:'',tagline:'Your words, your stage — Open Mic at Vyom \'26!',
-   desc:'🎙️ Vyom \'26 Open Mic\n\nStep up to the mic and share whatever moves you — poetry, spoken word, stand-up comedy, storytelling, rap or prose. No judgment, just expression.\n\nIndividual. 3–5 minute slots. Sign up and perform!\n\nVenue: B-Block Open Stage',
-   date:'March 23–28, 2026',venue:'B-Block Open Stage',team:'Individual',
-   formFields:[
-     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aditya Shukla',required:true},
-     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
-     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
-     {id:'extraInfo',label:'Performance Type',type:'select',options:['Poetry / Shayari','Spoken Word','Stand-up Comedy','Storytelling','Rap','Original Song','Other'],required:true},
-   ]},
-
   {id:'extempore',cat:'literary',catLabel:'Literary',icon:'🗣️',name:'Extempore',
    img:'',tagline:'Think on your feet and speak without preparation at Vyom \'26 Extempore!',
-   desc:'🗣️ Vyom \'26 Extempore Speaking Competition\n\nReceive your topic just 1 minute before you speak — then deliver a confident, structured, 3-minute talk. No notes allowed.\n\nIndividual. Multiple rounds. Judged on fluency, structure, confidence, content and vocabulary.\n\nVenue: Seminar Hall',
-   date:'March 23–28, 2026',venue:'Seminar Hall',team:'Individual',
+   desc:'🗣️ Vyom \'26 Extempore Speaking Competition (Radiction)\n\nReceive your topic just 1 minute before you speak — then deliver a confident, structured, 3-minute talk. No notes allowed.\n\nIndividual. Multiple rounds. Judged on fluency, structure, confidence, content and vocabulary.\n\nStudent Incharge: Mohit, Kanak | Contact: 7488286743\nVenue: FB02',
+   date:'March 24, 2026',venue:'FB02',team:'Individual',
    formFields:[
      {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Meghna Pillai',required:true},
      {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
@@ -1214,6 +1292,30 @@ const EVENTS = [
      {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — MBA 2nd Year',required:true},
      {id:'extraInfo',label:'Preferred Language',type:'select',options:['English','Hindi','Bilingual (Hindi + English)'],required:true},
    ]},
+
+  {id:'open-mic',cat:'literary',catLabel:'Literary',icon:'🎙️',name:'Open Mic',
+   img:'',tagline:'Your words, your stage — Open Mic at Vyom \'26!',
+   desc:'🎙️ Vyom \'26 Open Mic (Radiction)\n\nStep up to the mic and share whatever moves you — poetry, spoken word, stand-up comedy, storytelling, rap or prose. No judgment, just expression.\n\nIndividual. 3–5 minute slots. Sign up and perform!\n\nStudent Incharge: Akriti, Sourav | Contact: 9651900852\nVenue: FB19',
+   date:'March 26, 2026',venue:'FB19',team:'Individual',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Aditya Shukla',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — CSE',required:true},
+     {id:'extraInfo',label:'Performance Type',type:'select',options:['Poetry / Shayari','Spoken Word','Stand-up Comedy','Storytelling','Rap','Original Song','Other'],required:true},
+   ]},
+
+  {id:'un-summit',cat:'literary',catLabel:'Literary',icon:'🌐',name:'UN Summit',
+   img:'',tagline:'Represent nations, debate global issues at Vyom \'26 UN Summit (Carpediem)!',
+   desc:'🌐 Vyom \'26 — UN Summit (Carpediem)\n\nA Model United Nations-style event. Represent a country, debate global resolutions, and negotiate your way to a consensus.\n\nIndividual participants representing nations. Multiple committee sessions. Judged on research, diplomacy, oratory and resolution drafting.\n\nStudent Incharge: Rahul Yadav | Contact: 9755563988\nVenue: MP Hall',
+   date:'March 25, 2026',venue:'MP Hall',team:'Individual (Nation Representative)',
+   formFields:[
+     {id:'name',label:'Full Name',type:'text',placeholder:'e.g. Nidhi Rao',required:true},
+     {id:'phone',label:'Phone Number',type:'tel',placeholder:'10-digit mobile',required:true},
+     {id:'email',label:'Email',type:'email',placeholder:'your@email.com',required:true},
+     {id:'college',label:'College / Branch / Year',type:'text',placeholder:'e.g. RCET — Political Science',required:true},
+     {id:'extraInfo',label:'Preferred Country / Committee',type:'text',placeholder:'e.g. India — Security Council',required:false,hint:'Optional — allocation subject to availability'},
+   ]},
+
 ];
 
 // =============================================================
@@ -1467,17 +1569,19 @@ if(urlHash){const ev=EVENTS.find(e=>e.id===urlHash);if(ev) showDetail(urlHash);}
     {name:'BGMI',arena:'E-Sports',e:'🎮'},{name:'Valorant',arena:'E-Sports',e:'🎯'},
     {name:'Free Fire',arena:'E-Sports',e:'🔥'},{name:'COD Mobile',arena:'E-Sports',e:'🔫'},
     {name:'Code the Future',arena:'Technical',e:'💻'},{name:'MVP in a Day',arena:'Technical',e:'🚀'},
-    {name:'Prompt Arena',arena:'Technical',e:'🤖'},{name:'Digital Escape Room',arena:'Technical',e:'🔐'},
-    {name:'E-Summit',arena:'E-Summit',e:'🚀'},
+    {name:'Prompt Arena',arena:'Technical',e:'🤖'},{name:'Microsoft Hackathon',arena:'Technical',e:'🖥️'},
+    {name:'Shark Tank 2.0',arena:'E-Summit',e:'🦈'},{name:'Innovator\'s Arena',arena:'E-Summit',e:'💡'},
     {name:'Solo Dance',arena:'Cultural',e:'💃'},{name:'Solo Singing',arena:'Cultural',e:'🎤'},
     {name:'Group Dance',arena:'Cultural',e:'👯'},{name:'Flash Mob',arena:'Cultural',e:'⚡'},
-    {name:'Drama / Nukad Natak',arena:'Cultural',e:'🎭'},
+    {name:'Skit / Drama',arena:'Cultural',e:'🎭'},{name:'Mimicry',arena:'Cultural',e:'🎙️'},
     {name:'Photography',arena:'Creative',e:'📸'},{name:'Reel Making',arena:'Creative',e:'🎬'},
     {name:'15 Min Canvas',arena:'Creative',e:'🎨'},{name:'Face Painting',arena:'Creative',e:'🎨'},
+    {name:'Clay-O-Rama',arena:'Creative',e:'🏺'},{name:'Graffiti Wall',arena:'Creative',e:'🖊️'},
     {name:'Tug of War',arena:'Fun Events',e:'🪢'},{name:'Treasure Hunt',arena:'Fun Events',e:'🗺️'},
-    {name:'Red Light Green Light',arena:'Fun Events',e:'🚦'},{name:'Slow Cycle Race',arena:'Fun Events',e:'🚲'},
+    {name:'Quiz',arena:'Fun Events',e:'🧠'},{name:'Whisper Challenge',arena:'Fun Events',e:'🤫'},
+    {name:'CPL Auction',arena:'Fun Events',e:'🏏'},{name:'Parallel Universe',arena:'Fun Events',e:'🌌'},
     {name:'Open Mic',arena:'Literary',e:'🎙️'},{name:'Debate',arena:'Literary',e:'💬'},
-    {name:'Youth Parliament',arena:'Literary',e:'🏛️'},{name:'Extempore',arena:'Literary',e:'🗣️'},
+    {name:'Youth Parliament',arena:'Literary',e:'🏛️'},{name:'UN Summit',arena:'Literary',e:'🌐'},
   ];
   function rand(a){return a[Math.floor(Math.random()*a.length)];}
   function upd(){
