@@ -228,7 +228,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
       <a href="events.html" class="btn-ghost">Explore Events</a>
     </div>
     <div class="cd-wrap">
-      <p class="cd-label">Game Starts In — 23-28 March 2026</p>
+      <p class="cd-label">Game Starts In — 25-29 March 2026</p>
       <div class="countdown">
         <div class="cd-unit"><div class="cd-box"><span class="cd-n" id="cd-d">--</span></div><span class="cd-l">Days</span></div>
         <div class="cd-sep">:</div>
@@ -252,7 +252,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
         <p class="sec-eye">About the Game</p>
         <h2 class="sec-title">What is <span class="accent">VYOM?</span></h2>
         <p class="sec-desc">VYOM '26 is the annual flagship fest of Rungta University — a high-energy arena where innovation, talent, and raw competition collide.</p>
-        <p class="sec-desc" style="margin-top:1rem;">Inspired by the Squid Game universe, the campus transforms into a survival arena where participants must outthink, outperform, and outlast across 6 electrifying days — 23rd to 28th March 2026.</p>
+        <p class="sec-desc" style="margin-top:1rem;">Inspired by the Squid Game universe, the campus transforms into a survival arena where participants must outthink, outperform, and outlast across 6 electrifying days — 25th to 29th March 2026.</p>
         <p class="sec-desc" style="margin-top:1rem;">Technical battles. Cultural showdowns. Sports arenas. E-Sports championships. Creative challenges. Startup simulations. Literary duels.</p>
       </div>
       <div class="reveal about-stats-col">
@@ -360,11 +360,11 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
     <div class="faq-list reveal">
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What is VYOM?<div class="faq-ic">+</div></div>
-        <div class="faq-a">VYOM 2026 is the annual flagship fest of Rungta University, Bhilai. Themed around the Squid Game universe, it features 6 days of technical, cultural, sports, e-sports, fun, creative, entrepreneurship and literary events from March 23 to 28, 2026.</div>
+        <div class="faq-a">VYOM 2026 is the annual flagship fest of Rungta University, Bhilai. Themed around the Squid Game universe, it features 6 days of technical, cultural, sports, e-sports, fun, creative, entrepreneurship and literary events from March 25 to 29, 2026.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">When and where will VYOM take place?<div class="faq-ic">+</div></div>
-        <div class="faq-a">VYOM 2026 runs from 23rd to 28th March 2026 at the Rungta University campus, Bhilai, Chhattisgarh. Different events are spread across multiple venues on campus.</div>
+        <div class="faq-a">VYOM 2026 runs from 25th to 29th March 2026 at the Rungta University campus, Bhilai, Chhattisgarh. Different events are spread across multiple venues on campus.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Who can participate in VYOM?<div class="faq-ic">+</div></div>
@@ -403,7 +403,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
   <div class="footer-grid">
     <div>
       <span class="footer-logo-text">VYOM</span>
-      <span class="footer-year">23 March — 28 March 2026</span>
+      <span class="footer-year">25 March — 29 March 2026</span>
       <p class="footer-about">The annual flagship fest of Rungta University — where innovation, talent, and competition collide in the ultimate Squid Game arena.</p>
       <div class="footer-social">
         <a class="soc-btn" href="https://instagram.com/vyom.rungta" target="_blank" rel="noopener" title="Instagram">📷</a>
@@ -475,7 +475,7 @@ window.addEventListener('scroll',()=>document.getElementById('navbar').classList
 function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
 
 function updateCD(){
-  const d=new Date('2026-03-23T09:00:00')-new Date();
+  const d=new Date('2026-03-25T09:00:00')-new Date();
   if(d<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='00');return;}
   document.getElementById('cd-d').textContent=String(Math.floor(d/86400000)).padStart(2,'0');
   document.getElementById('cd-h').textContent=String(Math.floor(d%86400000/3600000)).padStart(2,'0');
