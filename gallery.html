@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — VYOM 2026</title>
+<link rel="icon" type="image/png" href="https://i.ibb.co/TD3bmT7h/Untitled-design.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff0055;--card:#0c0c0c;--card2:#111;--border:rgba(255,0,85,0.18);--border-w:rgba(255,255,255,0.05);}
+*{margin:0;padding:0;box-sizing:border-box;cursor:none!important;}
+html{scroll-behavior:smooth;}
+body{background:#000;color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+#preloader{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:100000;transition:opacity .8s,visibility .8s;}
+#preloader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.preloader-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.preloader-logo{width:100%;height:100%;object-fit:cover;display:block;}
+#cursor{position:fixed;pointer-events:none;font-size:18px;color:var(--pink);text-shadow:0 0 10px var(--pink);z-index:99999;transform:translate(-50%,-50%);font-family:'Orbitron',monospace;transition:font-size .15s;}
+#navbar{position:fixed;top:0;left:0;right:0;z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:70px;background:rgba(0,0,0,.3);backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.05);transition:all .3s;}
+#navbar.scrolled{background:rgba(0,0,0,.6)!important;}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo-img{height:55px;width:auto;max-width:200px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));}
+.nav-links{display:flex;list-style:none;gap:2rem;}
+.nav-links a{color:#fff;text-decoration:none;font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--pink);}
+.nav-cta{color:#fff;text-decoration:none;font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,0,85,.4);padding:8px 20px;transition:all .3s;}
+.nav-cta:hover{background:var(--pink);color:#fff;border-color:var(--pink);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all .3s;}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+#mobile-menu{position:fixed;top:70px;left:0;right:0;background:#080808;border-bottom:1px solid rgba(255,0,85,.15);z-index:8999;display:flex;flex-direction:column;transform:translateY(-120%);transition:transform .4s cubic-bezier(.4,0,.2,1);padding:1.5rem 2rem;gap:1rem;}
+#mobile-menu.open{transform:translateY(0);}
+#mobile-menu a{color:#ccc;text-decoration:none;font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+#mobile-menu a.active,#mobile-menu a:hover{color:var(--pink);}
+.page-header{padding:140px 3rem 80px;text-align:center;position:relative;overflow:hidden;}
+.page-header-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(255,0,85,.08),transparent 65%);}
+.page-header-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,85,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,0,85,.03) 1px,transparent 1px);background-size:60px 60px;}
+.page-tag{position:relative;z-index:1;font-family:'Orbitron',monospace;font-size:.6rem;color:var(--pink);letter-spacing:6px;text-transform:uppercase;margin-bottom:1rem;}
+.page-title{position:relative;z-index:1;font-family:'Orbitron',monospace;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:#fff;line-height:1;margin-bottom:1.2rem;}
+.page-title span{color:var(--pink);}
+.page-sub{position:relative;z-index:1;font-size:1rem;color:#ccc;letter-spacing:2px;max-width:600px;margin:0 auto;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 3rem;}
+@media(max-width:768px){.wrap{padding:0 1.2rem;}}
+section{padding:5rem 0;}
+.gallery-stats{display:flex;gap:2rem;align-items:center;margin-bottom:2.5rem;flex-wrap:wrap;}
+.gs-item{display:flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;font-size:.58rem;color:#aaa;letter-spacing:2px;}
+.gs-num{color:var(--pink);font-size:.85rem;font-weight:900;}
+.gs-sep{color:#333;}
+.gallery-grid{columns:4;column-gap:12px;}
+@media(max-width:1100px){.gallery-grid{columns:3;}}
+@media(max-width:700px){.gallery-grid{columns:2;}}
+@media(max-width:400px){.gallery-grid{columns:1;}}
+.gal-item{break-inside:avoid;margin-bottom:12px;position:relative;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.04);display:block;cursor:none;}
+.gal-item img{width:100%;display:block;transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s;filter:grayscale(30%) brightness(.85);}
+.gal-item:hover img{transform:scale(1.06);filter:grayscale(0%) brightness(1.05) saturate(1.2);}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 50%,transparent 100%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;}
+.gal-item:hover .gal-overlay{opacity:1;}
+.gal-tag{font-family:'Orbitron',monospace;font-size:.5rem;letter-spacing:3px;color:var(--pink);text-transform:uppercase;margin-bottom:4px;}
+.gal-caption{font-size:.82rem;color:#fff;font-weight:600;line-height:1.3;}
+.gal-border{position:absolute;inset:0;border:2px solid transparent;transition:border-color .4s;pointer-events:none;}
+.gal-item:hover .gal-border{border-color:rgba(255,0,85,.55);}
+.gal-zoom-ico{position:absolute;top:10px;right:10px;width:32px;height:32px;background:rgba(255,0,85,.85);display:flex;align-items:center;justify-content:center;font-size:.9rem;opacity:0;transition:opacity .3s,transform .3s;transform:scale(.8);}
+.gal-item:hover .gal-zoom-ico{opacity:1;transform:scale(1);}
+.sym-divider{display:flex;align-items:center;gap:1rem;padding:0 3rem;margin:0;}
+.sym-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,0,85,.15),transparent);}
+.sym-divider-icons{display:flex;gap:.6rem;color:rgba(255,0,85,.25);font-family:'Orbitron',monospace;font-size:.6rem;}
+#lightbox{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.96);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;}
+#lightbox.open{opacity:1;visibility:visible;}
+.lb-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;}
+.lb-img-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+#lb-img{max-width:88vw;max-height:80vh;display:block;object-fit:contain;border:1px solid rgba(255,0,85,.2);box-shadow:0 0 60px rgba(255,0,85,.15);transition:opacity .25s;}
+#lb-img.loading{opacity:0;}
+.lb-spinner{position:absolute;width:40px;height:40px;border:2px solid rgba(255,0,85,.2);border-top-color:var(--pink);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.lb-close{position:absolute;top:-46px;right:0;background:rgba(255,0,85,.12);border:1px solid rgba(255,0,85,.3);color:#fff;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .2s,transform .2s;cursor:none;}
+.lb-close:hover{background:var(--pink);transform:rotate(90deg);}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,0,85,.25);color:#fff;width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;transition:all .2s;cursor:none;}
+.lb-arrow:hover{background:var(--pink);border-color:var(--pink);}
+.lb-prev{left:-60px;}
+.lb-next{right:-60px;}
+@media(max-width:768px){.lb-prev{left:-46px;}.lb-next{right:-46px;}.lb-arrow{width:38px;height:38px;font-size:1rem;}}
+.lb-meta{margin-top:1rem;text-align:center;}
+.lb-meta-tag{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--pink);letter-spacing:4px;text-transform:uppercase;margin-bottom:4px;}
+.lb-meta-cap{font-size:.9rem;color:#ccc;}
+.lb-counter{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);font-family:'Orbitron',monospace;font-size:.5rem;color:#555;letter-spacing:3px;}
+.hl-header{text-align:center;margin-bottom:3rem;}
+.sec-eye{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--pink);letter-spacing:5px;text-transform:uppercase;margin-bottom:.8rem;}
+.sec-title{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:.8rem;}
+.sec-title .accent{color:var(--pink);}
+.sec-desc{font-size:.95rem;color:#ccc;line-height:1.7;max-width:600px;margin:0 auto;}
+.ph-strip-wrap{width:100%;overflow:hidden;position:relative;margin-bottom:10px;}
+.ph-strip-wrap::before,.ph-strip-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.ph-strip-wrap::before{left:0;background:linear-gradient(to right,#000,transparent);}
+.ph-strip-wrap::after{right:0;background:linear-gradient(to left,#000,transparent);}
+.ph-track{display:flex;gap:10px;width:max-content;}
+.ph-track.row1{animation:phLeft 180s linear infinite;}
+.ph-track.row2{animation:phRight 200s linear infinite;}
+.ph-strip-wrap:hover .ph-track{animation-play-state:paused;}
+@keyframes phLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes phRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.ph-thumb{flex-shrink:0;width:260px;height:180px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.04);cursor:none;}
+.ph-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) brightness(.75);transition:filter .4s,transform .4s;}
+.ph-thumb:hover img{filter:grayscale(0%) brightness(1.05) saturate(1.2);transform:scale(1.04);}
+.ph-thumb::after{content:'';position:absolute;inset:0;border:2px solid transparent;transition:border-color .3s;pointer-events:none;}
+.ph-thumb:hover::after{border-color:rgba(255,0,85,.5);}
+@media(max-width:768px){.ph-thumb{width:180px;height:130px;}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+footer{border-top:1px solid rgba(255,0,85,.07);padding:4rem 3rem 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1280px;margin:0 auto 3rem;}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:500px){.footer-grid{grid-template-columns:1fr;}}
+.footer-logo-text{display:block;font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;color:var(--pink);letter-spacing:4px;margin-bottom:4px;}
+.footer-year{display:block;font-family:'Orbitron',monospace;font-size:.58rem;color:#aaa;letter-spacing:3px;margin-bottom:1rem;}
+.footer-about{font-size:.88rem;color:#aaa;line-height:1.7;margin-bottom:1.5rem;}
+.footer-social{display:flex;gap:.8rem;}
+.soc-btn{width:36px;height:36px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#aaa;text-decoration:none;transition:all .2s;}
+.soc-btn:hover{background:var(--pink);border-color:var(--pink);color:#fff;}
+.footer-col h5{font-family:'Orbitron',monospace;font-size:.62rem;font-weight:700;color:#fff;letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul li a{font-size:.88rem;color:#aaa;text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--pink);}
+.footer-bottom{max-width:1280px;margin:0 auto;padding-top:2rem;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.78rem;color:#555;}
+.footer-sym{font-family:'Orbitron',monospace;font-size:.58rem;color:#333;letter-spacing:3px;}
+body{animation:pageFade .6s ease;}
+@keyframes pageFade{from{opacity:0;transform:scale(1.01);}to{opacity:1;transform:scale(1);}}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://raw.githubusercontent.com/nikush1/public/4e17c2bb5c87ddeed86f17891cd9632e99977121/original-a776538c6d5bedc7eb58c5977b9bd1df.gif" alt="VYOM Loader" class="preloader-logo">
+  </div>
+</div>
+
+<div id="cursor">○</div>
+
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="gallery.html" class="active">Gallery</a>
+  <a href="sponsors.html">Sponsors</a>
+  <a href="brochure.html">Brochure</a>
+  <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a>
+  <a href="events.html">Register</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="sponsors.html">Sponsors</a></li>
+    <li><a href="brochure.html">Brochure</a></li>
+    <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="events.html" class="nav-cta">Register Now</a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div id="lightbox" onclick="lbClickOutside(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <div class="lb-img-wrap">
+      <div class="lb-spinner" id="lb-spinner"></div>
+      <img id="lb-img" src="" alt="" class="loading">
+      <button class="lb-arrow lb-prev" onclick="lbNav(-1)">‹</button>
+      <button class="lb-arrow lb-next" onclick="lbNav(1)">›</button>
+    </div>
+    <div class="lb-meta">
+      <div class="lb-meta-tag" id="lb-tag"></div>
+      <div class="lb-meta-cap" id="lb-cap"></div>
+    </div>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-grid"></div>
+  <div class="page-tag">Captured Moments</div>
+  <h1 class="page-title">VYOM <span>Gallery</span></h1>
+  <p class="page-sub">Every frame tells a story — relive the battles, performances, victories and chaos of VYOM.</p>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="gallery-stats reveal">
+      <div class="gs-item"><span class="gs-num" id="gs-count">60+</span><span>Photos</span></div>
+      <span class="gs-sep">·</span>
+      <div class="gs-item"><span class="gs-num">8</span><span>Categories</span></div>
+      <span class="gs-sep">·</span>
+      <div class="gs-item"><span class="gs-num">6</span><span>Days</span></div>
+      <span class="gs-sep">·</span>
+      <div class="gs-item"><span class="gs-num">60+</span><span>Events</span></div>
+    </div>
+    <div class="gallery-grid reveal" id="gal-grid"></div>
+  </div>
+</section>
+
+<div class="sym-divider"><div class="sym-divider-line"></div><div class="sym-divider-icons"><span>○</span><span>△</span><span>□</span></div><div class="sym-divider-line"></div></div>
+
+<section>
+  <div class="hl-header reveal">
+    <p class="sec-eye">Previous Editions</p>
+    <h2 class="sec-title">Past <span class="accent">Highlights</span></h2>
+    <p class="sec-desc">A living archive of energy, talent and memories from past VYOM editions.</p>
+  </div>
+  <div class="ph-strip-wrap" id="hl-row1"></div>
+  <div class="ph-strip-wrap" style="margin-top:10px;" id="hl-row2"></div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo-text">VYOM</span>
+      <span class="footer-year">23 March — 28 March 2026</span>
+      <p class="footer-about">The annual flagship fest of Rungta University — where innovation, talent, and competition collide in the ultimate Squid Game arena.</p>
+      <div class="footer-social">
+        <a class="soc-btn" href="https://instagram.com/vyom.rungta" target="_blank" rel="noopener" title="Instagram">📷</a>
+        <a class="soc-btn" href="https://youtube.com/@vyomrungta" target="_blank" rel="noopener" title="YouTube">▶️</a>
+        <a class="soc-btn" href="https://linkedin.com/company/vyom-rungta" target="_blank" rel="noopener" title="LinkedIn">🔗</a>
+        <a class="soc-btn" href="https://rungta.ac.in" target="_blank" rel="noopener" title="Official Website">🌐</a>
+        <a class="soc-btn" href="mailto:vyom.s@rungta.ac.in" title="Email">@</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="events.html">Register</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Event Arenas</h5>
+      <ul>
+        <li><a href="events.html?cat=technical">Technical</a></li>
+        <li><a href="events.html?cat=cultural">Cultural</a></li>
+        <li><a href="events.html?cat=sports">Sports</a></li>
+        <li><a href="events.html?cat=esports">E-Sports</a></li>
+        <li><a href="events.html?cat=literary">Literary</a></li>
+        <li><a href="events.html?cat=creative">Creative</a></li>
+        <li><a href="events.html?cat=fun">Fun Games</a></li>
+        <li><a href="events.html?cat=entrepreneurship">E-Summit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:vyom.s@rungta.ac.in">vyom.s@rungta.ac.in</a></li>
+        <li><a href="tel:9798274596">Vipul: 9798274596</a></li>
+        <li><a href="tel:8253075416">Praveen: 8253075416</a></li>
+        <li><a href="tel:9234578690">Aditya: 9234578690</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 VYOM'26 — Rungta University. All rights reserved.</span>
+    <span class="footer-sym">The Game Has Begun ○ △ □</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('preloader').classList.add('hidden'); }, 5500);
+});
+const cursor = document.getElementById('cursor');
+const SYMS = ['○','△','□']; let si = 0;
+document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+setInterval(() => { si = (si+1)%3; cursor.textContent = SYMS[si]; }, 2000);
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', scrollY > 80));
+function toggleNav() { document.getElementById('mobile-menu').classList.toggle('open'); }
+const ro = new IntersectionObserver(entries => entries.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+const PHOTOS = [
+  { src:'https://i.ibb.co/zW0nsxBv/1000331782.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Campus Energy' },
+  { src:'https://i.ibb.co/JwhXsvt0/1000331784.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Crowd & Culture' },
+  { src:'https://i.ibb.co/JWZZPvN0/1000331792.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Moments Captured' },
+  { src:'https://i.ibb.co/KBgXptW/1000331798.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Arena Vibes' },
+  { src:'https://i.ibb.co/G40MxyJH/IMG-1623.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Behind the Scenes' },
+  { src:'https://i.ibb.co/Y4XfGQx8/IMG-1668.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Stage Moments' },
+  { src:'https://i.ibb.co/3mnwnddb/IMG-1673.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Unscripted Joy' },
+  { src:'https://i.ibb.co/qMxcSPWy/IMG-1757.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Performers Spotlight' },
+  { src:'https://i.ibb.co/YTTm6nvb/IMG-1860.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Game Faces' },
+  { src:'https://i.ibb.co/8DJ9hQr2/IMG-2043.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Crowd Goes Wild' },
+  { src:'https://i.ibb.co/20KBCkzT/IMG-2052.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Winners Circle' },
+  { src:'https://i.ibb.co/6cSprD4p/IMG-3150.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Culture Day' },
+  { src:'https://i.ibb.co/c78CNWp/IMG-3136.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Campus Life' },
+  { src:'https://i.ibb.co/CszVZrm9/IMG-3200-1.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Festival Frames' },
+  { src:'https://i.ibb.co/1ffx4WbF/IMG-20250407-WA0013.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Real Moments' },
+  { src:'https://i.ibb.co/kgJS13Z3/IMG-20250407-WA0015.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Energy Levels High' },
+  { src:'https://i.ibb.co/N66LPdmC/IMG-20250407-WA0017.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Squad Goals' },
+  { src:'https://i.ibb.co/Gf7Qzcrk/IMG-20250407-WA0020.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Together We Rise' },
+  { src:'https://i.ibb.co/rGLGdDLR/IMG20250326162130.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Afternoon Sessions' },
+  { src:'https://i.ibb.co/1GhqPBFx/IMG20250407110821.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Morning of the Game' },
+  { src:'https://i.ibb.co/fdPkbPZC/FVD-9623-1.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Professional Capture' },
+  { src:'https://i.ibb.co/JF23XgSr/FVD-9539.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — In Frame' },
+  { src:'https://i.ibb.co/j9tvCdc7/FVD-9529.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Festival Light' },
+  { src:'https://i.ibb.co/j9LbMW2N/FVD-9521.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Peak Hours' },
+  { src:'https://i.ibb.co/GvBTdT27/FVD-9351.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Candid Shots' },
+  { src:'https://i.ibb.co/pv77PLHm/FVD-9346.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Performance Still' },
+  { src:'https://i.ibb.co/39NmvjNv/FVD-9345.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Stage to Screen' },
+  { src:'https://i.ibb.co/hRS1LCrV/FVD-9343-1.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Studio Frames' },
+  { src:'https://i.ibb.co/Dfqkxps4/FVD-9344.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Captured Glory' },
+  { src:'https://i.ibb.co/Vpg2gTyS/DSC00040.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — DSLR Chronicles' },
+  { src:'https://i.ibb.co/MyhFsSN3/DSC00036.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — The Arena' },
+  { src:'https://i.ibb.co/fz4NHByw/DSC00028.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Wide Shot' },
+  { src:'https://i.ibb.co/6J178SXm/DSC00014.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Opening Day' },
+  { src:'https://i.ibb.co/NnWsQT9r/DSC-8619.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Full House' },
+  { src:'https://i.ibb.co/DH7vKdT0/DSC-8552.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Action Freeze' },
+  { src:'https://i.ibb.co/MyPPt2pj/DSC-8551.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Moment in Motion' },
+  { src:'https://i.ibb.co/m5gsnTb2/DSC-8545.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Lens Stories' },
+  { src:'https://i.ibb.co/LhqvqF89/DSC-8362.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Campus Frame' },
+  { src:'https://i.ibb.co/MkbfzdCy/DSC-8317.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — The Crowd' },
+  { src:'https://i.ibb.co/F42Zwd5N/DSC-8307.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Fest Frames' },
+  { src:'https://i.ibb.co/4wg9CGT9/DSC-8306.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Side Stage' },
+  { src:'https://i.ibb.co/jkG28LCV/DSC-8298.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Night Lights' },
+  { src:'https://i.ibb.co/MxY2CVDJ/DSC-8269.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Stage Glow' },
+  { src:'https://i.ibb.co/B5HgsNJD/DSC-8231-1.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Stars of the Show' },
+  { src:'https://i.ibb.co/8Z9TdZY/DSC-8218.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Electric Atmosphere' },
+  { src:'https://i.ibb.co/Gg42kLY/DSC-8141.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Colour & Light' },
+  { src:'https://i.ibb.co/JW5Z1fyC/DSC-8128.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Behind the Lens' },
+  { src:'https://i.ibb.co/0jz0QSLx/DSC-8090.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Raw Energy' },
+  { src:'https://i.ibb.co/yn1sSh2q/DSC-8082.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Real & Unfiltered' },
+  { src:'https://i.ibb.co/xS2VSYRX/DSC-8054.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Golden Hours' },
+  { src:'https://i.ibb.co/HfBTBn9Z/DSC-8036.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Story of a Fest' },
+  { src:'https://i.ibb.co/vCFQyShh/DSC-8023.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Every Frame Counts' },
+  { src:'https://i.ibb.co/60MNTCKZ/DSC-7954.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — The Day Unfolds' },
+  { src:'https://i.ibb.co/F4LY7YxP/DSC-7950.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Laughter & Life' },
+  { src:'https://i.ibb.co/fzPz9xJk/DSC-7939.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Fest Diary' },
+  { src:'https://i.ibb.co/845hCYPP/DSC-7910.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Rungta Remembers' },
+  { src:'https://i.ibb.co/nGzwjHX/DSC-7902.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — Last Day Feels' },
+  { src:'https://i.ibb.co/bjhXhnJc/DSC-7817.jpg', cat:'highlights', tag:'Highlights', cap:'VYOM — End Credits Roll' },
+  { src:'https://i.ibb.co/vx97T1ZB/White-Modern-Mothers-Day-Presentation-43.jpg', cat:'highlights', tag:'Highlights', cap:'Rungta University — Campus' },
+];
+
+let lbItems = [], lbIdx = 0;
+function openLb(items, idx) { lbItems = items; lbIdx = idx; renderLb(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function renderLb() {
+  const item = lbItems[lbIdx];
+  const img = document.getElementById('lb-img'); const spinner = document.getElementById('lb-spinner');
+  img.classList.add('loading'); spinner.style.display = 'block';
+  img.onload = () => { img.classList.remove('loading'); spinner.style.display = 'none'; };
+  img.onerror = () => { img.classList.remove('loading'); spinner.style.display = 'none'; };
+  img.src = item.src; img.alt = item.cap;
+  document.getElementById('lb-tag').textContent = item.tag;
+  document.getElementById('lb-cap').textContent = item.cap;
+  document.getElementById('lb-counter').textContent = `${lbIdx + 1} / ${lbItems.length}`;
+}
+function closeLb() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+function lbNav(dir) { lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length; renderLb(); }
+function lbClickOutside(e) { if (e.target === document.getElementById('lightbox')) closeLb(); }
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft') lbNav(-1);
+});
+let lbTouchX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - lbTouchX; if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1); });
+
+(function renderGallery() {
+  const grid = document.getElementById('gal-grid');
+  document.getElementById('gs-count').textContent = PHOTOS.length + '+';
+  grid.innerHTML = PHOTOS.map((p, i) => `
+    <div class="gal-item">
+      <img src="${p.src}" alt="${p.cap}" loading="lazy" onerror="this.parentElement.style.display='none'">
+      <div class="gal-overlay"><div class="gal-tag">${p.tag}</div><div class="gal-caption">${p.cap}</div></div>
+      <div class="gal-border"></div><div class="gal-zoom-ico">⊕</div>
+    </div>`).join('');
+  grid.querySelectorAll('.gal-item').forEach((el, i) => { el.onclick = () => openLb(PHOTOS, i); });
+})();
+
+(function () {
+  const ALL = PHOTOS.map(p => p.src);
+  function shuffle(arr) { const a = [...arr]; for (let i = a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function buildStrip(urls) { const doubled=[...shuffle(urls),...shuffle(urls)]; return doubled.map(u=>`<div class="ph-thumb"><img src="${u}" alt="VYOM Highlight" loading="lazy"></div>`).join(''); }
+  const r1=document.getElementById('hl-row1'); const r2=document.getElementById('hl-row2');
+  if(r1) r1.innerHTML=`<div class="ph-track row1">${buildStrip(ALL)}</div>`;
+  if(r2) r2.innerHTML=`<div class="ph-track row2">${buildStrip(ALL)}</div>`;
+})();
+</script>
+</body>
+</html>
