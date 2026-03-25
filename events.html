@@ -974,47 +974,26 @@ function openModal(id){
   const ev = EVENTS.find(e=>e.id===id);
   if(!ev) return;
 
-  // All events except Box Cricket → open Google Form directly
-  if(id !== 'box-cricket'){
-    if(ev.formLink){ window.open(ev.formLink, '_blank'); }
+  // Box Cricket → registrations closed
+  if(id === 'box-cricket'){
+    currentEv = ev;
+    document.getElementById('rm-form-view').style.display='none';
+    document.getElementById('rm-success-view').classList.remove('show');
+    const cs = document.getElementById('rm-coming-soon-view');
+    cs.classList.add('show');
+    document.getElementById('rm-cs-evname').textContent = ev.name;
+    document.querySelector('.rm-cs-title').textContent = 'Registrations Closed';
+    document.querySelector('.rm-cs-msg').innerHTML =
+      'Registrations for <span style="color:#fff;font-weight:700;">Box Cricket</span> are now closed. Thank you for your interest!';
+    document.querySelector('.rm-cs-sub').textContent = '⚡ VYOM 2026 — Box Cricket';
+    document.getElementById('reg-modal-overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+    document.getElementById('reg-modal').scrollTop=0;
     return;
   }
 
-  // Box Cricket → custom in-page registration form
-  currentEv = ev;
-  document.getElementById('rm-form-view').style.display='block';
-  document.getElementById('rm-success-view').classList.remove('show');
-  document.getElementById('rm-coming-soon-view').classList.remove('show');
-  document.getElementById('rm-status').className='rm-status';
-  document.getElementById('rm-status').textContent='';
-  const btn=document.getElementById('rm-submit-btn');
-  btn.disabled=false;
-  btn.innerHTML='⚡ <span id="rm-submit-label">Register for '+ev.name+'</span>';
-  document.getElementById('rm-icon').textContent=ev.icon;
-  document.getElementById('rm-name-label').textContent=ev.name+' — '+ev.catLabel;
-  const container=document.getElementById('rm-dynamic-fields');
-  container.innerHTML='<p style="font-size:.78rem;color:#555;font-family:\'Rajdhani\',sans-serif;margin-bottom:1.4rem;">Fields marked <span style=\'color:#ff6688\'>*</span> are required.</p><div class="rm-fields-grid" id="rm-grid"></div>';
-  const grid=document.getElementById('rm-grid');
-  ev.formFields.forEach(f=>{
-    const wrap=document.createElement('div');
-    wrap.className='rm-field'+(f.full?' full':'');
-    const lbl=`<label class="rm-label" for="rf-${f.id}">${f.label}${f.required?'<span> *</span>':''}</label>`;
-    let inp='';
-    if(f.type==='textarea'){
-      inp=`<textarea id="rf-${f.id}" class="rm-textarea" placeholder="${f.placeholder||''}"${f.required?' required':''}></textarea>`;
-    } else if(f.type==='select'){
-      const opts=(f.options||[]).map(o=>`<option value="${o}">${o}</option>`).join('');
-      inp=`<select id="rf-${f.id}" class="rm-select"${f.required?' required':''}><option value="">— Select —</option>${opts}</select>`;
-    } else {
-      inp=`<input id="rf-${f.id}" type="${f.type}" class="rm-input" placeholder="${f.placeholder||''}"${f.required?' required':''}${f.type==='tel'?' maxlength="15"':''}>`;
-    }
-    const hint=f.hint?`<div class="rm-hint">${f.hint}</div>`:'';
-    wrap.innerHTML=lbl+inp+hint;
-    grid.appendChild(wrap);
-  });
-  document.getElementById('reg-modal-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-  document.getElementById('reg-modal').scrollTop=0;
+  // All other events → open Google Form directly
+  if(ev.formLink){ window.open(ev.formLink, '_blank'); }
 }
 
 function closeModal(){
