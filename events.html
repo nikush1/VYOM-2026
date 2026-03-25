@@ -234,9 +234,10 @@ body{background-color:#000;color:#fff;}
 <div id="mobile-menu">
   <a href="index.html">Home</a>
   <a href="events.html" class="active">Events</a>
+  <a href="gallery.html">Gallery</a>
   <a href="sponsors.html">Sponsors</a>
   <a href="brochure.html">Brochure</a>
-  <a href="https://rungta.campusmall.in/">Merchandise</a>
+  <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a>
   <a href="events.html">Register</a>
 </div>
 
@@ -244,12 +245,13 @@ body{background-color:#000;color:#fff;}
   <a href="index.html" class="nav-logo">
     <img src="https://i.ibb.co/TD3bmT7h/Untitled-design.png" alt="VYOM Logo" class="nav-logo-img">
   </a>
-  <ul class="nav-links">
+ <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="sponsors.html">Sponsors</a></li>
     <li><a href="brochure.html">Brochure</a></li>
-    <li><a href="https://rungta.campusmall.in/" target="_blank">Merchandise</a></li>
+    <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
     <a href="events.html" class="nav-cta">Register Now</a>
@@ -278,6 +280,7 @@ body{background-color:#000;color:#fff;}
           <button class="fb" onclick="filterEv('creative',this)">Creative</button>
           <button class="fb" onclick="filterEv('fun',this)">Fun</button>
           <button class="fb" onclick="filterEv('literary',this)">Literary</button>
+          <button class="fb" onclick="filterEv('initiative',this)">Initiatives</button>
         </div>
         <div class="search-wrap">
           <span class="s-icon">🔍</span>
@@ -329,7 +332,7 @@ body{background-color:#000;color:#fff;}
     <div class="footer-grid">
       <div><span class="footer-logo-text">VYOM</span><span class="footer-year">23 March — 28 March 2026</span><p class="footer-about">Annual fest of Rungta Educational Foundation.</p><div class="footer-social"><a class="soc-btn" href="#">IG</a><a class="soc-btn" href="#">@</a></div></div>
       <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="events.html">Events</a></li><li><a href="brochure.html">Brochure</a></li><li><a href="https://rungta.campusmall.in/">Merchandise</a></li></ul></div>
-      <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=literary">Literary</a></li></ul></div>
+      <div class="footer-col"><h5>Arenas</h5><ul><li><a href="events.html?cat=technical">Technical</a></li><li><a href="events.html?cat=cultural">Cultural</a></li><li><a href="events.html?cat=sports">Sports</a></li><li><a href="events.html?cat=esports">E-Sports</a></li><li><a href="events.html?cat=literary">Literary</a></li><li><a href="events.html?cat=initiative">Initiatives</a></li></ul></div>
       <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:9234578690">Aditya Raj: 9234578690</a></li><li><a href="tel:7563016593">Nilmani Singh: 7563016593</a></li><li><a href="tel:6299240873">Raunit Kumar: 6299240873</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span class="footer-copy">© 2026 VYOM'26 — Rungta. All rights reserved.</span><span class="footer-sym">○ △ □</span></div>
@@ -546,6 +549,31 @@ const EVENTS = [
    contacts:[['Azad Agrawal','7750081487'],['Abhay Raj','6203013422']],
    formLink:'https://docs.google.com/forms/d/1It5BRuRA74QlICaYqvGwLf7FMp8sw8KyRiWPqt1aILo/edit?ts=69c01d4f'},
 
+  // ── NEW SPORTS EVENTS ────────────────────────────────────────
+  {id:'discus-throw',cat:'sports',catLabel:'Sports',icon:'🥏',name:'Discus Throw',
+   img:'',
+   tagline:'Unleash your power and perfect your technique at Vyom \'26 Discus Throw!',
+   desc:'🥏 Vyom \'26 Discus Throw\n\nStep into the circle and let it fly! The Discus Throw is a true test of explosive power, technique, and coordination.\n\nSeparate categories for Boys and Girls. Standard athletics rules apply. Each athlete gets multiple throws with the best attempt counted.\n\nVenue: Athletics Ground',
+   date:'March 25–26, 2026',venue:'Athletics Ground',team:'Individual',
+   contacts:[],
+   formLink:''},
+
+  {id:'shot-put',cat:'sports',catLabel:'Sports',icon:'🏋️',name:'Shot Put',
+   img:'',
+   tagline:'Raw power meets perfect form — Shot Put at Vyom \'26!',
+   desc:'🏋️ Vyom \'26 Shot Put\n\nA classic track and field event requiring explosive strength and precision technique. Push the metal ball as far as you can!\n\nSeparate categories for Boys and Girls. Standard IAAF rules apply. Best of three attempts counts.\n\nVenue: Athletics Ground',
+   date:'March 25–26, 2026',venue:'Athletics Ground',team:'Individual',
+   contacts:[],
+   formLink:''},
+
+  {id:'ball-dribbling',cat:'sports',catLabel:'Sports',icon:'⚽',name:'Ball Dribbling',
+   img:'',
+   tagline:'Showcase your footwork and ball control at Vyom \'26 Ball Dribbling!',
+   desc:'⚽ Vyom \'26 Ball Dribbling Challenge\n\nTest your agility, control, and speed through a timed dribbling obstacle course. Whether it\'s football or basketball style, show your ball mastery!\n\nIndividual timed format. Multiple heats with top performers advancing.\n\nVenue: Ground / Court Area',
+   date:'March 23–26, 2026',venue:'Ground / Court Area',team:'Individual',
+   contacts:[],
+   formLink:''},
+
   // ── E-SPORTS ──
   {id:'bgmi',cat:'esports',catLabel:'E-Sports',icon:'🎮',name:'BGMI',
    img:'https://i.ibb.co/k2JF1wGv/BGMI.jpg',
@@ -608,7 +636,7 @@ const EVENTS = [
    img:'https://i.ibb.co/GfXS7Rrb/Mvp-buidling.jpg',
    tagline:'Ship a minimum viable product in one day at Vyom \'26 — MSA Event!',
    desc:'🚀 Vyom \'26 — MVP Building (Microsoft Student Ambassadors)\n\nDesign, build and present a Minimum Viable Product within a single day. Use any technology — Azure, web, AI, mobile.\n\nSponsored by Microsoft Learn Student Ambassadors. Team of 1–4.\n\nVenue: GA20 Microsoft Lab\nTime: 1 PM to 4 PM',
-   date:'March 28, 2026 — 1 PM to 4 PM',venue:'GA20 Microsoft Lab',team:'1–4 Members',
+   date:'March 23, 2026 — 1 PM to 4 PM',venue:'GA20 Microsoft Lab',team:'1–4 Members',
    contacts:[['Rishi Soni','9296161262'],['Akshat Sahu','9303937565']],
    formLink:'https://docs.google.com/forms/d/e/1FAIpQLSc_kPUSj-pmUlSIfXbOlH5zzLEb-ayvDfQvHxscLkIOgUbu8A/viewform?usp=publish-editor'},
 
@@ -616,7 +644,7 @@ const EVENTS = [
    img:'https://i.ibb.co/Mkz71QNp/prompt-arena.jpg',
    tagline:'Master AI prompting and win at Vyom \'26 Prompt Arena — GFG!',
    desc:'🤖 Vyom \'26 — Prompt Arena (GeeksForGeeks)\n\nThe age of AI is here. Craft the perfect prompts to solve real-world problems using LLMs and generative AI tools.\n\nOrganised by GeeksForGeeks. Individual. Multiple rounds.\n\nVenue: SA 08\nTime: 9 AM to 12 PM',
-   date:'March 26, 2026 — 9 AM to 12 PM',venue:'SA-17',team:'Individual',
+   date:'March 25, 2026 — 9 AM to 12 PM',venue:'SA 08',team:'Individual',
    contacts:[['Ashish Raj','9102362667'],['Kumar Divyanshu','8002087006']],
    formLink:'https://docs.google.com/forms/d/e/1FAIpQLSdPJOFcTXeS76sDHXuvQv71ybQR-7c-WYavH-lRHv4Q5fju8A/viewform?usp=publish-editor'},
 
@@ -624,7 +652,7 @@ const EVENTS = [
    img:'https://i.ibb.co/dswDbWFq/75.jpg',
    tagline:'Cloud-powered problem solving at Vyom \'26 — AWS Kiro Quest!',
    desc:'☁️ Vyom \'26 — Kiro Quest (Amazon Web Services)\n\nA cloud-focused technical challenge powered by AWS. Solve problems using AWS services.\n\nOrganised by AWS community. Individual or team of 2.\n\nVenue: SA 06\nTime: 1 PM to 4 PM',
-   date:'March 26, 2026 — 1 PM to 4 PM',venue:'SA-18',team:'1–2 Members',
+   date:'March 25, 2026 — 1 PM to 4 PM',venue:'SA 06',team:'1–2 Members',
    contacts:[['Abhishek Yadav','9340900774'],['Aditya Mohan','6206013946']],
    formLink:'https://docs.google.com/forms/d/e/1FAIpQLSeAIERv1fJS_kAIgL8YijZ5qrm0AoI5t2TvnAIo7ca1D-wJxg/viewform?usp=publish-editor'},
 
@@ -638,7 +666,7 @@ const EVENTS = [
 
   // ── ENTREPRENEURSHIP (RUBI) ──
   {id:'shark-tank',cat:'entrepreneurship',catLabel:'E-Summit',icon:'🦈',name:'Shark Tank 2.0',
-   img:'https://i.ibb.co/cKJ3vBHT/Whats-App-Image-2026-03-25-at-12-41-29-AM.jpg',
+   img:'',
    tagline:'Pitch your startup idea to investors and win big at Vyom \'26 Shark Tank 2.0!',
    desc:'🦈 Vyom \'26 — Shark Tank 2.0 (RUBI)\n\nStep into the tank and pitch your startup idea to a panel of sharks — investors, industry experts, and alumni.\n\nIndividual or team. Prepared pitches. Judged on idea viability, pitch quality, financials, and Q&A.\n\nVenue: B Block Auditorium',
    date:'March 24, 2026',venue:'B Block Auditorium',team:'Individual / Team',
@@ -678,11 +706,19 @@ const EVENTS = [
    contacts:[['Md. Jeeshan','6266018657'],['Sara Fatima','6266018657']],
    formLink:'https://docs.google.com/forms/d/1uOs87t4tXmnlHWpG8o4QgChNykLAfxrT0AHcZpXDr40/edit?ts=69c101e3'},
 
-  {id:'instrumental',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Instruments Competition',
+  {id:'instrumental-solo',cat:'cultural',catLabel:'Cultural',icon:'🎸',name:'Instruments Competition (Solo)',
    img:'https://i.ibb.co/VpvYw95M/solo-instrumental.jpg',
-   tagline:'Let your instrument speak at Vyom \'26 — any instrument welcome!',
-   desc:'🥁 Vyom \'26 Instruments Competition\n\nAny instrument welcome — Drums, Guitar, Tabla, Flute, Violin, Keyboard, Sitar and more. Perform a solo or duet piece.\n\nJudged on technique, rhythm, emotion and stage presence. Duration: 3–5 minutes.\n\nVenue: B Block Open Stage',
-   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Solo / Duet',
+   tagline:'Let your instrument speak at Vyom \'26 — Solo Instruments Competition!',
+   desc:'🎸 Vyom \'26 Instruments Competition — Solo (RAG)\n\nAny instrument welcome — Guitar, Tabla, Flute, Violin, Keyboard, Sitar, Harmonium, Bansuri and more. Perform a solo piece and let your music do the talking.\n\nJudged on technique, rhythm, emotion and stage presence. Duration: 3–5 minutes.\n\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Solo',
+   contacts:[['Ayush Raj Saini','8092286605'],['G. Pawan','6204202567']],
+   formLink:''},
+
+  {id:'instrumental-group',cat:'cultural',catLabel:'Cultural',icon:'🥁',name:'Instruments Competition (Group)',
+   img:'https://i.ibb.co/VpvYw95M/solo-instrumental.jpg',
+   tagline:'Jam together and create magic at Vyom \'26 — Group Instruments Competition!',
+   desc:'🥁 Vyom \'26 Instruments Competition — Group (RAG)\n\nBring your band! Any combination of instruments — rock, fusion, classical ensemble, folk band, jazz. Collaborate and create an unforgettable performance.\n\nMin 2, max 6 members. Any genre. Duration: 5–8 minutes.\n\nJudged on ensemble harmony, technique, arrangement, and stage presence.\n\nVenue: B Block Open Stage',
+   date:'March 25–26, 2026',venue:'B Block Open Stage',team:'Group (2–6 Members)',
    contacts:[['Ayush Raj Saini','8092286605'],['G. Pawan','6204202567']],
    formLink:''},
 
@@ -710,8 +746,22 @@ const EVENTS = [
    contacts:[['Pushpendra Sahu','7000708835'],['Shruti Dubey','7000708835']],
    formLink:''},
 
+  {id:'beyond-the-diaries',cat:'cultural',catLabel:'Cultural',icon:'📔',name:'Beyond the Diaries',
+   img:'https://i.ibb.co/1Y5ZNDfh/beyond-the-diaries.jpg',
+   tagline:'Express your story through performance — Beyond the Diaries at Vyom \'26 (Radiance)!',
+   desc:'📔 Vyom \'26 — Beyond the Diaries (Radiance)\n\nA unique performing arts event where participants bring personal stories, emotions, and experiences to the stage. Poetry, monologue, dance — any form of expression.\n\nIndividual or duo. 3–6 minutes. Judged on authenticity, emotion, and presentation.\n\nVenue: Auditorium / Block Stage',
+   date:'March 23–25, 2026',venue:'Auditorium / Block Stage',team:'Individual / Duo',
+   contacts:[['Anamika Mourya','7722930776'],['Nisha Prasad','7470678192']],
+   formLink:'https://docs.google.com/forms/d/e/1FAIpQLSceO-BWz5R4r1MOt4LAvohwZx6uBZtV93aKlXyKqGQl75zahA/viewform?usp=publish-editor'},
 
-  
+  {id:'hair-styling',cat:'cultural',catLabel:'Cultural',icon:'✂️',name:'Hair Styling',
+   img:'https://i.ibb.co/scyhkZ1/hair-styling-competition.jpg',
+   tagline:'Style, creativity and flair — Hair Styling Competition at Vyom \'26 (Radiance)!',
+   desc:'✂️ Vyom \'26 Hair Styling Competition (Radiance)\n\nShowcase your creative hair styling skills on a model. Themes can be inspired by culture, fantasy, fashion, or fusion.\n\nIndividual stylist working on a volunteer model. Judged on creativity, technique, and final look.\n\nVenue: B Block Porch',
+   date:'March 23–25, 2026',venue:'B Block Porch',team:'Individual (Stylist)',
+   contacts:[['Apeksha Thawkar','9373800686'],['Divya Sahu','9039345548']],
+   formLink:'https://docs.google.com/forms/d/e/1FAIpQLSceO-BWz5R4r1MOt4LAvohwZx6uBZtV93aKlXyKqGQl75zahA/viewform'},
+
   // ── CREATIVE / ART (RAG) ──
   {id:'canvas-15min',cat:'creative',catLabel:'Creative',icon:'🎨',name:'15 Min Canvas',
    img:'https://i.ibb.co/qMBnCtqx/15-min-canvas.jpg',
@@ -809,24 +859,13 @@ const EVENTS = [
    contacts:[['Bhoomika Naidu','6203955524'],['Eklavya Pandey','6203955524']],
    formLink:'https://docs.google.com/forms/d/1PLlQOKc5NIr1o7xSJ4u8_lQjD0Mqnjz83_I3Z0h8ENE/edit?ts=69c00d8e'},
 
-
-   {id:'beyond-the-diaries',cat:'cultural',catLabel:'Cultural',icon:'📔',name:'Beyond the Diaries',
-   img:'https://i.ibb.co/1Y5ZNDfh/beyond-the-diaries.jpg',
-   tagline:'Express your story through performance — Beyond the Diaries at Vyom \'26 (Radiance)!',
-   desc:'📔 Vyom \'26 — Beyond the Diaries (Radiance)\n\nA unique performing arts event where participants bring personal stories, emotions, and experiences to the stage. Poetry, monologue, dance — any form of expression.\n\nIndividual or duo. 3–6 minutes. Judged on authenticity, emotion, and presentation.\n\nVenue: Auditorium / Block Stage',
-   date:'March 23–25, 2026',venue:'Auditorium / Block Stage',team:'Individual / Duo',
-   contacts:[['Anamika Mourya','7722930776'],['Nisha Prasad','7470678192']],
-   formLink:'https://docs.google.com/forms/d/e/1FAIpQLSceO-BWz5R4r1MOt4LAvohwZx6uBZtV93aKlXyKqGQl75zahA/viewform?usp=publish-editor'},
-
-  {id:'hair-styling',cat:'cultural',catLabel:'Cultural',icon:'✂️',name:'Hair Styling',
-   img:'https://i.ibb.co/scyhkZ1/hair-styling-competition.jpg',
-   tagline:'Style, creativity and flair — Hair Styling Competition at Vyom \'26 (Radiance)!',
-   desc:'✂️ Vyom \'26 Hair Styling Competition (Radiance)\n\nShowcase your creative hair styling skills on a model. Themes can be inspired by culture, fantasy, fashion, or fusion.\n\nIndividual stylist working on a volunteer model. Judged on creativity, technique, and final look.\n\nVenue: B Block Porch',
-   date:'March 23–25, 2026',venue:'B Block Porch',team:'Individual (Stylist)',
-   contacts:[['Apeksha Thawkar','9373800686'],['Divya Sahu','9039345548']],
-   formLink:'https://docs.google.com/forms/d/e/1FAIpQLSceO-BWz5R4r1MOt4LAvohwZx6uBZtV93aKlXyKqGQl75zahA/viewform'},
-
-
+  {id:'digital-magazine',cat:'creative',catLabel:'Creative',icon:'📰',name:'Digital Magazine Launch',
+   img:'',
+   tagline:'Design, publish and launch your very own digital magazine at Vyom \'26!',
+   desc:'📰 Vyom \'26 — Digital Magazine Launch\n\nConceive, design and present a fully digital magazine in one creative session. Cover everything from layout and typography to content curation and visual storytelling.\n\nTeam or individual. Judged on design quality, content originality, and overall presentation.\n\nVenue: To Be Announced',
+   date:'March 23–28, 2026',venue:'To Be Announced',team:'Individual / Team',
+   contacts:[],
+   formLink:''},
 
   // ── FUN EVENTS ──
   {id:'tug-of-war',cat:'fun',catLabel:'Fun Events',icon:'🪢',name:'Tug of War',
@@ -861,9 +900,6 @@ const EVENTS = [
    contacts:[],
    formLink:''},
 
-
-
-
   {id:'slow-cycle-race',cat:'fun',catLabel:'Fun Events',icon:'🚲',name:'Slow Cycle Race',
    img:'https://i.ibb.co/r2Xz00vm/slow-cycle-race.jpg',
    tagline:'Last to cross wins — the slowest cyclist takes glory at Vyom \'26!',
@@ -871,8 +907,6 @@ const EVENTS = [
    date:'March 26, 2026',venue:'Road in Front of Basketball Court',team:'Individual',
    contacts:[],
    formLink:''},
-
-  
 
   {id:'punching-demons',cat:'fun',catLabel:'Fun Events',icon:'🥊',name:'Punching Your Demons',
    img:'https://i.ibb.co/9kWvfMSz/punch-your-demons.jpg',
@@ -962,6 +996,55 @@ const EVENTS = [
    date:'March 25, 2026',venue:'MP Hall / SB03 Seminar Hall',team:'Individual (Nation Representative)',
    contacts:[['Rahul Yadav','9755563988'],['Varun Rana','9755563988']],
    formLink:'https://docs.google.com/forms/d/1mJ3370hSJA0sg5_I-yzWTFt_6f-Ff6Z5b8AhIxRDvXE/edit?ts=69bffb7e'},
+
+  // ── INITIATIVES ─────────────────────────────────────────────
+  {id:'bring-smile-box',cat:'initiative',catLabel:'Initiative',icon:'😊',name:'Bring Smile Box',
+   img:'',
+   tagline:'Spread joy and kindness — contribute to the Bring Smile Box at Vyom \'26!',
+   desc:'😊 Vyom \'26 — Bring Smile Box\n\nA heartwarming community initiative where participants contribute items — stationery, books, clothes, or small gifts — to bring smiles to those in need.\n\nOpen to everyone. No competition — just compassion. Drop your contributions at the Smile Box and be part of something bigger than a trophy.\n\nVenue: Campus Collection Points',
+   date:'March 23–28, 2026',venue:'Campus Collection Points',team:'Open to All',
+   contacts:[],
+   formLink:''},
+
+  {id:'familiarization-tour',cat:'initiative',catLabel:'Initiative',icon:'🗺️',name:'Vyom Familiarization Tour',
+   img:'',
+   tagline:'A special guided campus tour for non-teaching staff at Vyom \'26!',
+   desc:'🗺️ Vyom \'26 — Familiarization Tour for Non-Teaching Staff\n\nA thoughtfully organized guided tour of the campus and VYOM 2026 event venues specially designed for non-teaching staff members.\n\nHelp our support staff experience the energy and festivities of VYOM 2026 firsthand. An inclusive initiative to celebrate every member of the Rungta family.\n\nVenue: Entire Campus',
+   date:'March 23–28, 2026',venue:'Entire Campus',team:'Non-Teaching Staff',
+   contacts:[],
+   formLink:''},
+
+  {id:'voter-id-registration',cat:'initiative',catLabel:'Initiative',icon:'🗳️',name:'Voter ID Registration',
+   img:'',
+   tagline:'Register to vote and exercise your democratic right at Vyom \'26!',
+   desc:'🗳️ Vyom \'26 — Voter ID Registration Drive\n\nA civic awareness initiative helping eligible students and staff register for Voter ID cards. Democracy starts with participation!\n\nFill out your forms, submit documents, and take your first step as an active citizen. Support team available to assist.\n\nVenue: Campus Registration Desk',
+   date:'March 23–28, 2026',venue:'Campus Registration Desk',team:'Open to All',
+   contacts:[],
+   formLink:''},
+
+  {id:'digital-literacy-workshop',cat:'initiative',catLabel:'Initiative',icon:'💻',name:'Digital Literacy Workshop',
+   img:'',
+   tagline:'Empowering non-teaching staff with essential digital skills at Vyom \'26!',
+   desc:'💻 Vyom \'26 — Digital Literacy Workshop for Non-Teaching Staff\n\nA practical, hands-on workshop designed to empower non-teaching staff with essential digital skills — smartphones, email, UPI payments, government portals, and basic computer operations.\n\nInteractive sessions with patient instructors. No prior digital knowledge required. Certificates provided upon completion.\n\nVenue: Computer Lab / Digital Classroom',
+   date:'March 23–28, 2026',venue:'Computer Lab / Digital Classroom',team:'Non-Teaching Staff',
+   contacts:[],
+   formLink:''},
+
+  {id:'clean-campus',cat:'initiative',catLabel:'Initiative',icon:'🌿',name:'Clean Campus Drive',
+   img:'',
+   tagline:'Let\'s keep Rungta beautiful — join the Clean Campus Drive at Vyom \'26!',
+   desc:'🌿 Vyom \'26 — Clean Campus Drive\n\nA collective responsibility initiative where students, staff, and faculty come together to keep the campus clean and green during the festival.\n\nVolunteer for cleanliness drives, waste segregation, and eco-friendly festival practices. Be the change. Lead by example.\n\nVenue: Entire Campus',
+   date:'March 23–28, 2026',venue:'Entire Campus',team:'Open to All',
+   contacts:[],
+   formLink:''},
+
+  {id:'backlog-clearance',cat:'initiative',catLabel:'Initiative',icon:'📚',name:'Student\'s Backlog Clearance Support',
+   img:'',
+   tagline:'Academic support sessions to help students clear backlogs at Vyom \'26!',
+   desc:'📚 Vyom \'26 — Student\'s Backlog Clearance Support\n\nA dedicated academic support initiative helping students who are struggling with backlogs. Connect with mentors, senior students, and faculty volunteers for guided study sessions and tips.\n\nSubject-wise sessions. Free to attend. Bring your doubts, leave with clarity.\n\nVenue: Academic Block / Classrooms',
+   date:'March 23–28, 2026',venue:'Academic Block / Classrooms',team:'Open to All Students',
+   contacts:[],
+   formLink:''},
 
 ];
 
@@ -1196,6 +1279,9 @@ if(urlHash){const ev=EVENTS.find(e=>e.id===urlHash);if(ev) showDetail(urlHash);}
     {name:'Box Cricket',arena:'Sports',e:'🏏'},{name:'Chess',arena:'Sports',e:'♟️'},
     {name:'Volleyball',arena:'Sports',e:'🏐'},{name:'Basketball',arena:'Sports',e:'🏀'},
     {name:'Badminton',arena:'Sports',e:'🏸'},{name:'Kabaddi',arena:'Sports',e:'🤼'},
+    {name:'Discus Throw',arena:'Sports',e:'🥏'},{name:'Shot Put',arena:'Sports',e:'🏋️'},
+    {name:'Ball Dribbling',arena:'Sports',e:'⚽'},{name:'Arm Wrestling',arena:'Sports',e:'💪'},
+    {name:'Table Tennis',arena:'Sports',e:'🏓'},{name:'Kho Kho',arena:'Sports',e:'🏃'},
     {name:'BGMI',arena:'E-Sports',e:'🎮'},{name:'Valorant',arena:'E-Sports',e:'🎯'},
     {name:'Free Fire',arena:'E-Sports',e:'🔥'},{name:'COD Mobile',arena:'E-Sports',e:'🔫'},
     {name:'Strike World',arena:'E-Sports',e:'⚔️'},{name:'Chess (E-Sports)',arena:'E-Sports',e:'♟️'},
@@ -1203,16 +1289,20 @@ if(urlHash){const ev=EVENTS.find(e=>e.id===urlHash);if(ev) showDetail(urlHash);}
     {name:'Kiro Quest',arena:'Technical',e:'☁️'},{name:'Google Hackathon',arena:'Technical',e:'🖥️'},
     {name:'Shark Tank 2.0',arena:'E-Summit',e:'🦈'},
     {name:'Solo Dance',arena:'Cultural',e:'💃'},{name:'Solo Singing',arena:'Cultural',e:'🎤'},
-    {name:'Group Dance',arena:'Cultural',e:'👯'},{name:'Flash Mob',arena:'Cultural',e:'⚡'},
-    {name:'Skit / Drama',arena:'Cultural',e:'🎭'},{name:'Mimicry',arena:'Cultural',e:'🎙️'},
+    {name:'Group Dance',arena:'Cultural',e:'👯'},{name:'Instruments (Solo)',arena:'Cultural',e:'🎸'},
+    {name:'Instruments (Group)',arena:'Cultural',e:'🥁'},{name:'Skit / Drama',arena:'Cultural',e:'🎭'},
+    {name:'Mimicry',arena:'Cultural',e:'🎙️'},
     {name:'Photography',arena:'Creative',e:'📸'},{name:'Reel Making',arena:'Creative',e:'🎬'},
     {name:'15 Min Canvas',arena:'Creative',e:'🎨'},{name:'Face Painting',arena:'Creative',e:'🎨'},
     {name:'Clay-O-Rama',arena:'Creative',e:'🏺'},{name:'Graffiti Wall',arena:'Creative',e:'🖊️'},
-    {name:'Tug of War',arena:'Fun Events',e:'🪢'},{name:'Treasure Hunt',arena:'Fun Events',e:'🗺️'},
-    {name:'Quiz',arena:'Fun Events',e:'🧠'},{name:'Whisper Challenge',arena:'Fun Events',e:'🤫'},
-    {name:'CPL Auction',arena:'Fun Events',e:'🏏'},{name:'Parallel Universe',arena:'Fun Events',e:'🌌'},
+    {name:'Digital Magazine',arena:'Creative',e:'📰'},
+    {name:'Tug of War',arena:'Fun Events',e:'🪢'},{name:'Quiz',arena:'Fun Events',e:'🧠'},
+    {name:'Whisper Challenge',arena:'Fun Events',e:'🤫'},{name:'CPL Auction',arena:'Fun Events',e:'🏏'},
+    {name:'Parallel Universe',arena:'Fun Events',e:'🌌'},
     {name:'Open Mic',arena:'Literary',e:'🎙️'},{name:'Debate',arena:'Literary',e:'💬'},
     {name:'Youth Parliament',arena:'Literary',e:'🏛️'},{name:'UN Summit',arena:'Literary',e:'🌐'},
+    {name:'Bring Smile Box',arena:'Initiative',e:'😊'},{name:'Voter ID Registration',arena:'Initiative',e:'🗳️'},
+    {name:'Digital Literacy Workshop',arena:'Initiative',e:'💻'},
   ];
   function rand(a){return a[Math.floor(Math.random()*a.length)];}
   function upd(){
