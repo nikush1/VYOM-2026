@@ -13,7 +13,6 @@
 #preloader.hidden{opacity:0;visibility:hidden;}
 .preloader-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .preloader-logo{width:100%;height:100%;object-fit:cover;display:block;}
-
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:5rem 2rem 4rem;background-image:url('https://i.ibb.co/HLYb90TH/Untitled-design-12.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;}
 #hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.85)),radial-gradient(circle at center,rgba(255,0,85,0.15),transparent 70%);z-index:0;}
 #hero > *:not(.h-grid):not(.h-radial):not(.h-scan):not(.h-sym){position:relative;z-index:2;}
@@ -53,7 +52,6 @@
 @keyframes scrollMove{0%{transform:translateY(0);opacity:0.3}50%{transform:translateY(10px);opacity:1}100%{transform:translateY(0);opacity:0.3}}
 .scroll-txt{font-family:'Orbitron',monospace;font-size:0.48rem;color:#aaa;letter-spacing:4px;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:2.5rem;}}
 .about-stats-col{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
@@ -61,7 +59,6 @@
 .stat-box:hover{background:var(--card2);}
 .stat-n{font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;color:var(--pink);text-shadow:0 0 20px rgba(255,0,85,0.35);display:block;line-height:1;}
 .stat-l{font-size:0.7rem;color:#aaa;letter-spacing:3px;text-transform:uppercase;margin-top:6px;display:block;}
-
 .highlights-section{padding:80px 0;overflow:hidden;}
 .highlights-header{text-align:center;padding:0 5% 50px;}
 .highlights-header .sec-eye{justify-content:center;}
@@ -81,16 +78,13 @@
 .ph-item::after{content:'';position:absolute;inset:0;border:2px solid transparent;border-radius:12px;transition:border-color 0.4s;pointer-events:none;}
 .ph-item:hover::after{border-color:rgba(255,0,85,0.6);}
 @media(max-width:768px){.ph-item{width:200px;height:145px;}}
-
 .events-bg{background:#0b0b0b;border-top:1px solid rgba(255,0,85,0.07);border-bottom:1px solid rgba(255,0,85,0.07);}
-
 .rungta-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
 .rungta-img-wrap{position:relative;}
 .rungta-img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--border);display:block;filter:grayscale(20%) contrast(1.1);transition:transform 0.3s ease,box-shadow 0.3s ease,filter 0.3s ease;}
 .rungta-img:hover{transform:scale(1.02);box-shadow:0 0 25px rgba(255,0,85,0.6);filter:brightness(1.1) grayscale(0%) contrast(1.2);}
 .rungta-badge{position:absolute;top:-12px;right:-12px;background:var(--pink);color:#fff;font-family:'Orbitron',monospace;font-size:0.62rem;font-weight:700;letter-spacing:3px;padding:8px 18px;text-transform:uppercase;}
 .rungta-quote{background:var(--card);border-left:3px solid var(--pink);padding:1.5rem;margin-top:2rem;font-size:0.95rem;color:#ccc;line-height:1.7;font-style:italic;}
-
 .faq-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,0,85,0.06);border:1px solid rgba(255,0,85,0.06);margin-top:3rem;}
 .faq-item{background:var(--card);}
 .faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2rem;cursor:pointer;transition:background 0.2s;font-family:'Orbitron',monospace;font-size:0.68rem;font-weight:700;color:#ccc;letter-spacing:2px;text-transform:uppercase;gap:1rem;}
@@ -99,7 +93,6 @@
 .faq-q.open .faq-ic{background:var(--pink);color:#fff;border-color:var(--pink);transform:rotate(45deg);}
 .faq-a{max-height:0;overflow:hidden;padding:0 2rem;font-size:0.92rem;color:#aaa;line-height:1.75;transition:max-height 0.4s ease,padding 0.4s ease;}
 .faq-a.open{max-height:300px;padding:0 2rem 1.5rem;}
-
 .final-cta-sec{text-align:center;padding:8rem 2rem;position:relative;overflow:hidden;}
 .final-cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(255,0,85,0.06) 0%,transparent 60%);}
 .fc-content{position:relative;z-index:1;max-width:680px;margin:0 auto;}
@@ -109,9 +102,7 @@
 .fc-title span{color:var(--pink);display:block;}
 .fc-sub{font-size:1rem;color:#aaa;margin-bottom:3rem;letter-spacing:2px;}
 .fc-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-
 @media(max-width:768px){.about-grid,.rungta-grid{grid-template-columns:1fr;gap:2.5rem}}
-
 .nav-logo{display:flex;align-items:center;text-decoration:none;}
 .nav-logo-img{height:55px;width:auto;max-width:200px;object-fit:contain;}
 @media(max-width:768px){.nav-logo-img{height:45px;max-width:160px;}}
@@ -122,10 +113,8 @@
 #navbar .nav-links a:hover,#navbar .nav-cta:hover{color:var(--pink);}
 #navbar .hamburger span{background:#fff;}
 .nav-logo-img{filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));}
-
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);}
 .reveal.visible{opacity:1;transform:translateY(0);}
-
 body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 @keyframes pageFade{from{opacity:0;transform:scale(1.02);}to{opacity:1;transform:scale(1);}}
 .sec-desc{color:#ccc!important;}
@@ -137,8 +126,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 .rungta-quote{color:#ddd!important;}
 .footer-about,.footer-col ul li a,.footer-copy,.footer-sym{color:#aaa!important;}
 .footer-col ul li a:hover{color:var(--pink)!important;}
-
-#reg-notification{position:fixed;bottom:20px;left:20px;background:rgba(20,20,20,0.4);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-left:4px solid var(--pink);border-radius:4px;padding:12px 18px;box-shadow:0 0 20px rgba(255,0,85,0.3);z-index:9999;font-family:'Rajdhani',sans-serif;color:#fff;max-width:280px;transition:transform 0.3s ease,opacity 0.3s ease;border:1px solid rgba(255,255,255,0.1);border-left:4px solid var(--pink);pointer-events:none;}
+#reg-notification{position:fixed;bottom:20px;left:20px;background:rgba(20,20,20,0.4);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-left:4px solid var(--pink);border-radius:4px;padding:12px 18px;box-shadow:0 0 20px rgba(255,0,85,0.3);z-index:9999;font-family:'Rajdhani',sans-serif;color:#fff;max-width:280px;transition:transform 0.3s ease,opacity 0.3s ease;border:1px solid rgba(255,255,255,0.1);pointer-events:none;}
 .notif-content{display:flex;align-items:center;gap:10px;}
 .notif-icon{color:var(--pink);font-size:1.2rem;animation:pulse 2s infinite;}
 .notif-text{font-size:0.85rem;line-height:1.4;}
@@ -146,8 +134,6 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 .notif-event{font-weight:600;color:#fff;}
 .notif-arena{display:inline-block;background:rgba(255,0,85,0.2);padding:2px 8px;border-radius:20px;font-size:0.7rem;margin-top:4px;color:#ccc;}
 @keyframes pulse{0%,100%{opacity:0.8;}50%{opacity:1;text-shadow:0 0 8px var(--pink);}}
-@media(max-width:600px){#reg-notification{max-width:220px;font-size:0.75rem;bottom:10px;left:10px;}}
-
 .arena-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
 @media(max-width:700px){.arena-grid-3{grid-template-columns:1fr;}}
 .arena-card-img{display:flex;flex-direction:column;background:#0c0c0c;border:1px solid rgba(255,255,255,0.05);overflow:hidden;text-decoration:none;cursor:pointer;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;}
@@ -163,18 +149,15 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 .aci-cta{font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--pink);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid rgba(255,0,85,0.12);transition:gap 0.2s;}
 .aci-cta::after{content:'→';}
 .arena-card-img:hover .aci-cta{gap:14px;}
-
 .btn-pink{background:var(--pink);border:none;padding:14px 32px;font-family:'Orbitron',monospace;letter-spacing:2px;transition:all .3s ease;box-shadow:0 0 15px rgba(255,0,85,0.4);}
 .btn-pink:hover{transform:scale(1.06);box-shadow:0 0 12px #ff0055,0 0 32px #ff0055,0 0 60px rgba(255,0,85,0.6);}
 .btn-ghost{border:1px solid rgba(255,255,255,0.3);padding:14px 32px;font-family:'Orbitron',monospace;letter-spacing:2px;transition:all .3s ease;background:transparent;color:#fff;}
 .btn-ghost:hover{background:rgba(255,0,85,0.15);border-color:var(--pink);box-shadow:0 0 20px rgba(255,0,85,0.4);}
-
 #cursor{position:fixed;pointer-events:none;font-size:18px;color:var(--pink);text-shadow:0 0 10px var(--pink);z-index:9999;}
 </style>
 </head>
 <body>
 
-<!-- ===== PRELOADER (GIF) ===== -->
 <div id="preloader">
   <div class="preloader-content">
     <img src="https://raw.githubusercontent.com/nikush1/public/4e17c2bb5c87ddeed86f17891cd9632e99977121/original-a776538c6d5bedc7eb58c5977b9bd1df.gif" alt="VYOM Loader" class="preloader-logo">
@@ -186,6 +169,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 <div id="mobile-menu">
   <a href="index.html" class="active">Home</a>
   <a href="events.html">Events</a>
+  <a href="gallery.html">Gallery</a>
   <a href="sponsors.html">Sponsors</a>
   <a href="brochure.html">Brochure</a>
   <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a>
@@ -199,6 +183,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="sponsors.html">Sponsors</a></li>
     <li><a href="brochure.html">Brochure</a></li>
     <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
@@ -286,7 +271,6 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
       <h2 class="sec-title" style="text-align:center;">Strange <span class="accent">Encounters</span></h2>
       <p class="sec-desc" style="max-width:680px;margin:0 auto;">Step into the Squid Game Arena — from mind-bending technical challenges to supernatural performances and thrilling sports competitions across 8 event categories.</p>
     </div>
-
     <div class="arena-grid-3 reveal">
       <a href="events.html?cat=technical" class="arena-card-img">
         <div class="aci-photo">
@@ -299,7 +283,6 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
           <div class="aci-cta">Explore Events</div>
         </div>
       </a>
-
       <a href="events.html?cat=cultural" class="arena-card-img">
         <div class="aci-photo">
           <img src="https://i.ibb.co/C3Xxrj8X/5.jpg" alt="Cultural" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -311,7 +294,6 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
           <div class="aci-cta">Explore Events</div>
         </div>
       </a>
-
       <a href="events.html?cat=sports" class="arena-card-img">
         <div class="aci-photo">
           <img src="https://i.ibb.co/Kz6Nv47C/4.jpg" alt="Sports" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -324,7 +306,6 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
         </div>
       </a>
     </div>
-
     <div style="text-align:center;margin-top:2.5rem;" class="reveal">
       <a href="events.html" class="btn-pink">View All 60+ Events</a>
     </div>
@@ -358,30 +339,12 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
       <p class="sec-desc" style="max-width:600px;margin:0 auto;">Find answers to common questions about VYOM 2026. If you don't see your question here, feel free to contact us.</p>
     </div>
     <div class="faq-list reveal">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">What is VYOM?<div class="faq-ic">+</div></div>
-        <div class="faq-a">VYOM 2026 is the annual flagship fest of Rungta University, Bhilai. Themed around the Squid Game universe, it features 6 days of technical, cultural, sports, e-sports, fun, creative, entrepreneurship and literary events from March 25 to 29, 2026.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">When and where will VYOM take place?<div class="faq-ic">+</div></div>
-        <div class="faq-a">VYOM 2026 runs from 25th to 29th March 2026 at the Rungta University campus, Bhilai, Chhattisgarh. Different events are spread across multiple venues on campus.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Who can participate in VYOM?<div class="faq-ic">+</div></div>
-        <div class="faq-a">VYOM is open to all students of Rungta Institutions. Students from partner colleges may also participate in select open events. Check individual event pages for eligibility details.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">How can I register for VYOM?<div class="faq-ic">+</div></div>
-        <div class="faq-a">Click the Register Now button on this page or visit the Events page. Select your event, fill in your details, and you'll receive confirmation upon successful registration.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Can I form a team with students from different colleges?<div class="faq-ic">+</div></div>
-        <div class="faq-a">For most team events, all members should be from the same institution. Some events allow cross-college teams — refer to the individual event rules in the brochure for specific details.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">How can I purchase official merchandise?<div class="faq-ic">+</div></div>
-        <div class="faq-a">Official VYOM 2026 merchandise is available on-site during the fest at the merchandise counter, and via the Merchandise page on this website. Limited quantities available.</div>
-      </div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is VYOM?<div class="faq-ic">+</div></div><div class="faq-a">VYOM 2026 is the annual flagship fest of Rungta University, Bhilai. Themed around the Squid Game universe, it features 6 days of technical, cultural, sports, e-sports, fun, creative, entrepreneurship and literary events from March 25 to 29, 2026.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">When and where will VYOM take place?<div class="faq-ic">+</div></div><div class="faq-a">VYOM 2026 runs from 25th to 29th March 2026 at the Rungta University campus, Bhilai, Chhattisgarh.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Who can participate in VYOM?<div class="faq-ic">+</div></div><div class="faq-a">VYOM is open to all students of Rungta Institutions. Students from partner colleges may also participate in select open events.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How can I register for VYOM?<div class="faq-ic">+</div></div><div class="faq-a">Click the Register Now button on this page or visit the Events page. Select your event, fill in your details, and you'll receive confirmation upon successful registration.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I form a team with students from different colleges?<div class="faq-ic">+</div></div><div class="faq-a">For most team events, all members should be from the same institution. Some events allow cross-college teams — refer to the individual event rules in the brochure for specific details.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How can I purchase official merchandise?<div class="faq-ic">+</div></div><div class="faq-a">Official VYOM 2026 merchandise is available via <a href="https://rungta.campusmall.in/" target="_blank" rel="noopener" style="color:var(--pink);">rungta.campusmall.in</a> and on-site during the fest.</div></div>
     </div>
   </div>
 </section>
@@ -417,6 +380,7 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
       <h5>Quick Links</h5>
       <ul>
         <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="brochure.html">Brochure</a></li>
         <li><a href="https://rungta.campusmall.in/" target="_blank" rel="noopener">Merchandise</a></li>
         <li><a href="sponsors.html">Sponsors</a></li>
@@ -463,17 +427,13 @@ body{background-color:#000;color:#fff;animation:pageFade 1s ease;}
 </div>
 
 <script>
-window.addEventListener('load',function(){
-  setTimeout(function(){document.getElementById('preloader').classList.add('hidden');},5500);
-});
-
+window.addEventListener('load',function(){setTimeout(function(){document.getElementById('preloader').classList.add('hidden');},5500);});
 const cursor=document.getElementById('cursor');
 const syms=['○','△','□'];let si=0;
 document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
 setInterval(()=>{si=(si+1)%3;cursor.textContent=syms[si];},2000);
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>80));
 function toggleNav(){document.getElementById('mobile-menu').classList.toggle('open');}
-
 function updateCD(){
   const d=new Date('2026-03-25T09:00:00')-new Date();
   if(d<=0){['d','h','m','s'].forEach(k=>document.getElementById('cd-'+k).textContent='00');return;}
@@ -483,178 +443,32 @@ function updateCD(){
   document.getElementById('cd-s').textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');
 }
 updateCD();setInterval(updateCD,1000);
-
-function toggleFaq(q){
-  const a=q.nextElementSibling,open=a.classList.contains('open');
-  document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));
-  document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open'));
-  if(!open){a.classList.add('open');q.classList.add('open');}
-}
-
+function toggleFaq(q){const a=q.nextElementSibling,open=a.classList.contains('open');document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open'));if(!open){a.classList.add('open');q.classList.add('open');}}
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-// ===== PARTICLE ANIMATION =====
 (function(){
-  const canvas=document.getElementById('particle-canvas');
-  if(!canvas) return;
-  const ctx=canvas.getContext('2d');
-  let width,height,particles=[];
+  const canvas=document.getElementById('particle-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');let width,height,particles=[];
   const SYMBOLS=['○','△','□'];
-  function initParticles(){
-    particles=[];
-    for(let i=0;i<80;i++){
-      particles.push({x:Math.random()*width,y:Math.random()*height,size:Math.random()*3+1.5,speedX:(Math.random()-0.5)*0.3,speedY:(Math.random()-0.5)*0.3,opacity:Math.random()*0.3+0.1,symbol:SYMBOLS[Math.floor(Math.random()*SYMBOLS.length)],useSymbol:Math.random()>0.7});
-    }
-  }
+  function initParticles(){particles=[];for(let i=0;i<80;i++){particles.push({x:Math.random()*width,y:Math.random()*height,size:Math.random()*3+1.5,speedX:(Math.random()-0.5)*0.3,speedY:(Math.random()-0.5)*0.3,opacity:Math.random()*0.3+0.1,symbol:SYMBOLS[Math.floor(Math.random()*SYMBOLS.length)],useSymbol:Math.random()>0.7});}}
   function resizeCanvas(){width=window.innerWidth;height=window.innerHeight;canvas.width=width;canvas.height=height;initParticles();}
-  function drawParticles(){
-    ctx.clearRect(0,0,width,height);
-    ctx.shadowColor='#FF0055';ctx.shadowBlur=18;
-    particles.forEach(p=>{
-      p.x+=p.speedX;p.y+=p.speedY;
-      if(p.x<0)p.x=width;if(p.x>width)p.x=0;
-      if(p.y<0)p.y=height;if(p.y>height)p.y=0;
-      if(p.useSymbol){
-        ctx.font=`${p.size*5}px 'Orbitron',monospace`;
-        ctx.fillStyle=`rgba(255,0,85,${p.opacity})`;ctx.shadowBlur=12;
-        ctx.fillText(p.symbol,p.x,p.y);
-      } else {
-        ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fillStyle=`rgba(255,0,85,${p.opacity})`;ctx.shadowBlur=10;ctx.fill();
-      }
-    });
-    requestAnimationFrame(drawParticles);
-  }
-  window.addEventListener('resize',resizeCanvas);
-  resizeCanvas();drawParticles();
+  function drawParticles(){ctx.clearRect(0,0,width,height);ctx.shadowColor='#FF0055';ctx.shadowBlur=18;particles.forEach(p=>{p.x+=p.speedX;p.y+=p.speedY;if(p.x<0)p.x=width;if(p.x>width)p.x=0;if(p.y<0)p.y=height;if(p.y>height)p.y=0;if(p.useSymbol){ctx.font=`${p.size*5}px 'Orbitron',monospace`;ctx.fillStyle=`rgba(255,0,85,${p.opacity})`;ctx.shadowBlur=12;ctx.fillText(p.symbol,p.x,p.y);}else{ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,0,85,${p.opacity})`;ctx.shadowBlur=10;ctx.fill();}});requestAnimationFrame(drawParticles);}
+  window.addEventListener('resize',resizeCanvas);resizeCanvas();drawParticles();
 })();
-
-// ===== FLOATING NOTIFICATION =====
 (function(){
-  const notifName=document.getElementById('notif-name');
-  const notifEvent=document.getElementById('notif-event');
-  const notifArena=document.getElementById('notif-arena');
-
-  const names=['Aarav','Vihaan','Vivaan','Ananya','Diya','Advik','Kabir','Reyansh','Aadhya','Anvi','Sai','Arjun','Ishaan','Myra','Aaradhya','Aryan','Rudra','Pari','Anaya','Krishna','Shaurya','Tanvi','Atharv','Kiaan','Ayaan','Pihu','Ira','Yash','Sia','Dhruv','Rohan','Meera','Riya','Kavya','Aditya','Nitya','Anushka','Ved','Jhanvi','Arnav','Anika','Sarthak','Aarna','Samarth','Aarush','Shreya','Prisha'];
-
-  const events=[
-    {name:'Box Cricket',arena:'Sports',e:'🏏'},
-    {name:'Carrom',arena:'Sports',e:'🎯'},
-    {name:'Chess',arena:'Sports',e:'♟️'},
-    {name:'Volleyball',arena:'Sports',e:'🏐'},
-    {name:'Basketball (3×3 / 5×5)',arena:'Sports',e:'🏀'},
-    {name:'100m Sprint',arena:'Sports',e:'🏃'},
-    {name:'400m Run',arena:'Sports',e:'🏃'},
-    {name:'Relay Race',arena:'Sports',e:'🏃'},
-    {name:'Kabaddi',arena:'Sports',e:'🤼'},
-    {name:'Kho Kho',arena:'Sports',e:'🏃'},
-    {name:'Table Tennis',arena:'Sports',e:'🏓'},
-    {name:'Shot Put',arena:'Sports',e:'🏋️'},
-    {name:'Arm Wrestling',arena:'Sports',e:'💪'},
-    {name:'Badminton',arena:'Sports',e:'🏸'},
-    {name:'BGMI',arena:'E-Sports',e:'🎮'},
-    {name:'Valorant',arena:'E-Sports',e:'🎯'},
-    {name:'Free Fire',arena:'E-Sports',e:'🔥'},
-    {name:'Call of Duty Mobile',arena:'E-Sports',e:'🔫'},
-    {name:'Stumble Guys',arena:'E-Sports',e:'🎪'},
-    {name:'Strike World',arena:'E-Sports',e:'⚔️'},
-    {name:'Chess (Online)',arena:'E-Sports',e:'♟️'},
-    {name:'Code the Future',arena:'Technical',e:'💻'},
-    {name:'MVP in a Day',arena:'Technical',e:'🚀'},
-    {name:'Digital Escape Room',arena:'Technical',e:'🔐'},
-    {name:'Kiro Quest (AWS)',arena:'Technical',e:'☁️'},
-    {name:'Tech Time Travel',arena:'Technical',e:'⏳'},
-    {name:'Prompt Arena (GFG)',arena:'Technical',e:'🤖'},
-    {name:'E-Summit',arena:'E-Summit',e:'🚀'},
-    {name:'Solo Dance',arena:'Cultural',e:'💃'},
-    {name:'Solo Singing',arena:'Cultural',e:'🎤'},
-    {name:'Group Dance',arena:'Cultural',e:'👯'},
-    {name:'Group Singing',arena:'Cultural',e:'🎶'},
-    {name:'Dance Face Battle',arena:'Cultural',e:'🕺'},
-    {name:'Flash Mob',arena:'Cultural',e:'⚡'},
-    {name:'Cultural Ramp Walk',arena:'Cultural',e:'👑'},
-    {name:'Drama / Nukad Natak',arena:'Cultural',e:'🎭'},
-    {name:'Drum / Instrumental',arena:'Cultural',e:'🎸'},
-    {name:'15 Min Canvas',arena:'Creative',e:'🎨'},
-    {name:'Cloth Painting',arena:'Creative',e:'👕'},
-    {name:'Spin & Sketch',arena:'Creative',e:'🌀'},
-    {name:'3D Art using Clay',arena:'Creative',e:'🏺'},
-    {name:'Live Painting',arena:'Creative',e:'🖌️'},
-    {name:'Eco Paper Bag Making',arena:'Creative',e:'🌿'},
-    {name:'Face Painting',arena:'Creative',e:'🎨'},
-    {name:'Reel Making',arena:'Creative',e:'🎬'},
-    {name:'Dalgona Art',arena:'Creative',e:'🕯️'},
-    {name:'Photography',arena:'Creative',e:'📸'},
-    {name:'Hopscotch (with Brick)',arena:'Fun Events',e:'🎪'},
-    {name:'Tug of War',arena:'Fun Events',e:'🪢'},
-    {name:'Push-up Competition',arena:'Fun Events',e:'💪'},
-    {name:'Bar Hanging',arena:'Fun Events',e:'🏋️'},
-    {name:'Treasure Hunt',arena:'Fun Events',e:'🗺️'},
-    {name:'Sack Race',arena:'Fun Events',e:'🏃'},
-    {name:'Ball Dribbling',arena:'Fun Events',e:'⚽'},
-    {name:'Slow Cycle Race',arena:'Fun Events',e:'🚲'},
-    {name:'Red Light Green Light',arena:'Fun Events',e:'🚦'},
-    {name:'Youth Parliament',arena:'Literary',e:'🏛️'},
-    {name:'Debate',arena:'Literary',e:'💬'},
-    {name:'Open Mic',arena:'Literary',e:'🎙️'},
-    {name:'Extempore',arena:'Literary',e:'🗣️'},
-  ];
-
+  const names=['Aarav','Vihaan','Vivaan','Ananya','Diya','Advik','Kabir','Reyansh','Aadhya','Anvi','Sai','Arjun','Ishaan','Myra','Aryan','Rudra','Pari','Krishna','Shaurya','Tanvi','Ayaan','Pihu','Yash','Sia','Dhruv','Rohan','Meera','Riya','Kavya','Aditya'];
+  const events=[{name:'Box Cricket',arena:'Sports',e:'🏏'},{name:'BGMI',arena:'E-Sports',e:'🎮'},{name:'Solo Dance',arena:'Cultural',e:'💃'},{name:'MVP in a Day',arena:'Technical',e:'🚀'},{name:'Shark Tank 2.0',arena:'E-Summit',e:'🦈'},{name:'Debate',arena:'Literary',e:'💬'},{name:'Photography',arena:'Creative',e:'📸'},{name:'Tug of War',arena:'Fun Events',e:'🪢'}];
   function rand(a){return a[Math.floor(Math.random()*a.length)];}
-  function updateNotification(){
-    const n=rand(names),ev=rand(events);
-    notifName.textContent=n;
-    notifEvent.textContent=ev.arena;
-    notifArena.innerHTML=`${ev.e} ${ev.name}`;
-  }
-  setInterval(updateNotification,4000);
-  updateNotification();
+  function upd(){const n=rand(names),ev=rand(events);document.getElementById('notif-name').textContent=n;document.getElementById('notif-event').textContent=ev.arena;document.getElementById('notif-arena').innerHTML=ev.e+' '+ev.name;}
+  setInterval(upd,4000);upd();
 })();
-
-// ===== PAST HIGHLIGHTS =====
 (function(){
-  const allImages=[
-    "https://i.ibb.co/XZj2T1VY/Untitled-design-8.jpg","https://i.ibb.co/zW0nsxBv/1000331782.jpg",
-    "https://i.ibb.co/JwhXsvt0/1000331784.jpg","https://i.ibb.co/JWZZPvN0/1000331792.jpg",
-    "https://i.ibb.co/KBgXptW/1000331798.jpg","https://i.ibb.co/G40MxyJH/IMG-1623.jpg",
-    "https://i.ibb.co/Y4XfGQx8/IMG-1668.jpg","https://i.ibb.co/3mnwnddb/IMG-1673.jpg",
-    "https://i.ibb.co/qMxcSPWy/IMG-1757.jpg","https://i.ibb.co/YTTm6nvb/IMG-1860.jpg",
-    "https://i.ibb.co/8DJ9hQr2/IMG-2043.jpg","https://i.ibb.co/20KBCkzT/IMG-2052.jpg",
-    "https://i.ibb.co/6cSprD4p/IMG-3150.jpg","https://i.ibb.co/c78CNWp/IMG-3136.jpg",
-    "https://i.ibb.co/CszVZrm9/IMG-3200-1.jpg","https://i.ibb.co/1ffx4WbF/IMG-20250407-WA0013.jpg",
-    "https://i.ibb.co/kgJS13Z3/IMG-20250407-WA0015.jpg","https://i.ibb.co/N66LPdmC/IMG-20250407-WA0017.jpg",
-    "https://i.ibb.co/Gf7Qzcrk/IMG-20250407-WA0020.jpg","https://i.ibb.co/rGLGdDLR/IMG20250326162130.jpg",
-    "https://i.ibb.co/1GhqPBFx/IMG20250407110821.jpg","https://i.ibb.co/fdPkbPZC/FVD-9623-1.jpg",
-    "https://i.ibb.co/JF23XgSr/FVD-9539.jpg","https://i.ibb.co/j9tvCdc7/FVD-9529.jpg",
-    "https://i.ibb.co/j9LbMW2N/FVD-9521.jpg","https://i.ibb.co/GvBTdT27/FVD-9351.jpg",
-    "https://i.ibb.co/pv77PLHm/FVD-9346.jpg","https://i.ibb.co/39NmvjNv/FVD-9345.jpg",
-    "https://i.ibb.co/hRS1LCrV/FVD-9343-1.jpg","https://i.ibb.co/Dfqkxps4/FVD-9344.jpg",
-    "https://i.ibb.co/Vpg2gTyS/DSC00040.jpg","https://i.ibb.co/MyhFsSN3/DSC00036.jpg",
-    "https://i.ibb.co/fz4NHByw/DSC00028.jpg","https://i.ibb.co/6J178SXm/DSC00014.jpg",
-    "https://i.ibb.co/NnWsQT9r/DSC-8619.jpg","https://i.ibb.co/DH7vKdT0/DSC-8552.jpg",
-    "https://i.ibb.co/MyPPt2pj/DSC-8551.jpg","https://i.ibb.co/m5gsnTb2/DSC-8545.jpg",
-    "https://i.ibb.co/LhqvqF89/DSC-8362.jpg","https://i.ibb.co/MkbfzdCy/DSC-8317.jpg",
-    "https://i.ibb.co/F42Zwd5N/DSC-8307.jpg","https://i.ibb.co/4wg9CGT9/DSC-8306.jpg",
-    "https://i.ibb.co/jkG28LCV/DSC-8298.jpg","https://i.ibb.co/MxY2CVDJ/DSC-8269.jpg",
-    "https://i.ibb.co/B5HgsNJD/DSC-8231-1.jpg","https://i.ibb.co/8Z9TdZY/DSC-8218.jpg",
-    "https://i.ibb.co/Gg42kLY/DSC-8141.jpg","https://i.ibb.co/JW5Z1fyC/DSC-8128.jpg",
-    "https://i.ibb.co/0jz0QSLx/DSC-8090.jpg","https://i.ibb.co/yn1sSh2q/DSC-8082.jpg",
-    "https://i.ibb.co/xS2VSYRX/DSC-8054.jpg","https://i.ibb.co/HfBTBn9Z/DSC-8036.jpg",
-    "https://i.ibb.co/vCFQyShh/DSC-8023.jpg","https://i.ibb.co/60MNTCKZ/DSC-7954.jpg",
-    "https://i.ibb.co/F4LY7YxP/DSC-7950.jpg","https://i.ibb.co/fzPz9xJk/DSC-7939.jpg",
-    "https://i.ibb.co/845hCYPP/DSC-7910.jpg","https://i.ibb.co/nGzwjHX/DSC-7902.jpg",
-    "https://i.ibb.co/bjhXhnJc/DSC-7817.jpg"
-  ];
+  const allImages=["https://i.ibb.co/XZj2T1VY/Untitled-design-8.jpg","https://i.ibb.co/zW0nsxBv/1000331782.jpg","https://i.ibb.co/JwhXsvt0/1000331784.jpg","https://i.ibb.co/JWZZPvN0/1000331792.jpg","https://i.ibb.co/KBgXptW/1000331798.jpg","https://i.ibb.co/G40MxyJH/IMG-1623.jpg","https://i.ibb.co/Y4XfGQx8/IMG-1668.jpg","https://i.ibb.co/3mnwnddb/IMG-1673.jpg","https://i.ibb.co/qMxcSPWy/IMG-1757.jpg","https://i.ibb.co/YTTm6nvb/IMG-1860.jpg","https://i.ibb.co/8DJ9hQr2/IMG-2043.jpg","https://i.ibb.co/20KBCkzT/IMG-2052.jpg","https://i.ibb.co/6cSprD4p/IMG-3150.jpg","https://i.ibb.co/c78CNWp/IMG-3136.jpg","https://i.ibb.co/CszVZrm9/IMG-3200-1.jpg","https://i.ibb.co/fdPkbPZC/FVD-9623-1.jpg","https://i.ibb.co/GvBTdT27/FVD-9351.jpg","https://i.ibb.co/Vpg2gTyS/DSC00040.jpg","https://i.ibb.co/NnWsQT9r/DSC-8619.jpg","https://i.ibb.co/DH7vKdT0/DSC-8552.jpg","https://i.ibb.co/m5gsnTb2/DSC-8545.jpg","https://i.ibb.co/B5HgsNJD/DSC-8231-1.jpg","https://i.ibb.co/8Z9TdZY/DSC-8218.jpg","https://i.ibb.co/0jz0QSLx/DSC-8090.jpg","https://i.ibb.co/HfBTBn9Z/DSC-8036.jpg","https://i.ibb.co/60MNTCKZ/DSC-7954.jpg","https://i.ibb.co/845hCYPP/DSC-7910.jpg","https://i.ibb.co/bjhXhnJc/DSC-7817.jpg"];
   function shuffleArray(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
-  function generateRowHTML(imageArray){
-    const doubled=[...shuffleArray([...imageArray]),...shuffleArray([...imageArray])];
-    return doubled.map(url=>`<div class="ph-item"><img src="${url}" alt="VYOM Highlights" loading="lazy"></div>`).join('');
-  }
-  const r1=document.getElementById('past-highlights-row1');
-  const r2=document.getElementById('past-highlights-row2');
-  if(r1) r1.innerHTML=`<div class="ph-track row1">${generateRowHTML(allImages)}</div>`;
-  if(r2) r2.innerHTML=`<div class="ph-track row2">${generateRowHTML(allImages)}</div>`;
+  function generateRowHTML(imageArray){const doubled=[...shuffleArray([...imageArray]),...shuffleArray([...imageArray])];return doubled.map(url=>`<div class="ph-item"><img src="${url}" alt="VYOM Highlights" loading="lazy"></div>`).join('');}
+  const r1=document.getElementById('past-highlights-row1');const r2=document.getElementById('past-highlights-row2');
+  if(r1)r1.innerHTML=`<div class="ph-track row1">${generateRowHTML(allImages)}</div>`;
+  if(r2)r2.innerHTML=`<div class="ph-track row2">${generateRowHTML(allImages)}</div>`;
 })();
 </script>
 </body>
